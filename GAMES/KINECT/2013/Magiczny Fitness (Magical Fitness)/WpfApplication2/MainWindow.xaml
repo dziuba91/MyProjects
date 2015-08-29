@@ -1,0 +1,8 @@
+﻿<Window x:Class="WpfApplication2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="600" Width="800" Loaded="Window_Loaded" Name="win1" KeyDown="win1_KeyDown" Closed="win1_Closed" WindowStartupLocation="CenterScreen">
+    <Canvas Height="565" Name="canvas1" Width="774" Background="#FF009DFF">
+        <Image Canvas.Left="83" Canvas.Top="136" Height="305" Name="image1" Source="/WpfApplication2;component/obrazy/MF_logo.png" Stretch="Fill" Width="601" />
+    </Canvas>
+</Window>

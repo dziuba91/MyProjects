@@ -1,0 +1,18 @@
+﻿<Window x:Class="WpfApplication2.PrezentacjaCwiczenia"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PrezentacjaCwiczenia" Height="600" Width="800" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+    <Canvas Height="560" Name="canvas1" Width="776" Background="#FF009DFF">
+        <MediaElement Canvas.Left="569" Canvas.Top="0" Height="14" Name="mediaElement2" Width="160" />
+        <GroupBox Canvas.Left="569" Canvas.Top="12" Header="Opis ćwiczenia" Height="471" Name="groupBox1" Width="195" FontSize="16" FontWeight="SemiBold" Foreground="White">
+            <TextBlock Height="417" Name="textBlock1" Text="" FontSize="14" TextWrapping="Wrap" />
+        </GroupBox>
+        <MediaElement Canvas.Left="0" Canvas.Top="22" Height="499" LoadedBehavior="Manual" Name="mediaElement1" UnloadedBehavior="Close" Width="563" />
+        <Button Background="#FF00D900" BorderBrush="{x:Null}" Content="Dalej" Name="button1" FontSize="18" FontWeight="SemiBold" Foreground="White" Click="button1_Click" Canvas.Left="569" Canvas.Top="488" Width="195" Height="60" />
+        <Border BorderBrush="White" BorderThickness="5" Height="60" Name="border2" Width="195" Canvas.Left="569" Canvas.Top="488"></Border>
+        <Border BorderBrush="White" BorderThickness="7" Height="60" Name="border1" Width="195" CornerRadius="10" Canvas.Left="569" Canvas.Top="488" />
+        <ProgressBar Canvas.Left="94" Canvas.Top="534" Height="10" Name="progressBar1" Visibility="Hidden" Width="45" />
+        <Border BorderBrush="#FFE51515" BorderThickness="8" Canvas.Left="55" Canvas.Top="527" CornerRadius="40" Height="21" Name="border_kursor_1" Opacity="1" Visibility="Hidden" Width="30" />
+        <Border BorderBrush="Black" BorderThickness="1" Canvas.Left="55" Canvas.Top="527" CornerRadius="40" Height="21" Name="border_kursor_2" Visibility="Hidden" Width="30" />
+    </Canvas>
+</Window>
