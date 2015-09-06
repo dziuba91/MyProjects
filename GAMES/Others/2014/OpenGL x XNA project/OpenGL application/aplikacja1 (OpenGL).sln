@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aplikacja1 (OpenGL)", "aplikacja1 (OpenGL)\aplikacja1 (OpenGL).vcxproj", "{621A4863-A8B1-4361-A57B-0518CFD6AACB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{621A4863-A8B1-4361-A57B-0518CFD6AACB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{621A4863-A8B1-4361-A57B-0518CFD6AACB}.Debug|Win32.Build.0 = Debug|Win32
+		{621A4863-A8B1-4361-A57B-0518CFD6AACB}.Release|Win32.ActiveCfg = Release|Win32
+		{621A4863-A8B1-4361-A57B-0518CFD6AACB}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
