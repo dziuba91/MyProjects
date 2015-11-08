@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#15015015" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/imageView1"
+        android:layout_marginLeft="14dp" >
+
+        <Button
+            android:id="@+id/button_good"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:text="Button"
+            android:textStyle="bold"
+            android:padding="0dp"
+            android:layout_gravity="center"
+            android:includeFontPadding="false"
+        	android:layout_margin="0.0dp"
+            android:textSize="22dp" />
+
+        <Button
+            android:id="@+id/button_wrong"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:text="Button"
+            android:textStyle="bold"
+            android:padding="0dp"
+            android:layout_gravity="center"
+            android:includeFontPadding="false"
+        	android:layout_margin="0.0dp"
+            android:textSize="22dp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_marginTop="2dp"
+        android:layout_alignLeft="@+id/linearLayout1"
+        android:layout_alignRight="@+id/sText"
+        android:layout_below="@+id/linearLayout1" >
+
+        <TextView
+            android:id="@+id/mainText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Medium Text
+ssss"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/sText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/linearLayout1"
+        android:layout_marginRight="14dp"
+        android:layout_marginTop="7dp"
+        android:text="TextView" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_below="@+id/scrollView1"
+        android:layout_centerHorizontal="true" >
+
+        <Button
+            android:id="@+id/b1"
+            android:layout_marginRight="18dp"
+            android:textSize="35dp"
+            android:layout_height="60dp"
+            android:layout_width="100dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="0dp"
+            android:layout_gravity="center"
+            android:includeFontPadding="false"
+            android:text="行" />
+
+        <Button
+            android:id="@+id/b2"
+            android:layout_marginLeft="18dp"
+            android:textSize="35dp"
+            android:layout_height="60dp"
+            android:layout_width="100dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="0dp"
+            android:layout_gravity="center"
+            android:includeFontPadding="false"
+            android:text="言" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/title1" />
+
+    <LinearLayout
+        android:id="@+id/LinearLayout01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_alignLeft="@+id/linearLayout2"
+        android:layout_below="@+id/linearLayout2" >
+
+        <Button
+            android:id="@+id/b3"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="18dp"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="行"
+            android:textSize="35dp"
+            android:includeFontPadding="false"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/b4"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="18dp"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="言"
+            android:textSize="35dp"
+            android:includeFontPadding="false"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LinearLayout02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_alignLeft="@+id/LinearLayout01"
+        android:layout_below="@+id/LinearLayout01" >
+
+        <Button
+            android:id="@+id/b5"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="18dp"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="行"
+            android:textSize="35dp"
+            android:includeFontPadding="false"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/b6"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="18dp"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="言"
+            android:textSize="35dp"
+            android:includeFontPadding="false"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</RelativeLayout>
