@@ -5,38 +5,28 @@
 #include <gl\glu.h>			// Header File For The GLu32 Library
 #include <gl\glaux.h>		// Header File For The Glaux Library
 #include <gl\glut.h>
+#include <math.h>
+#include <stdio.h>
 #include "fps.h"
+#include "time_counter.h"
 
-class T5
+class TestParametrsDraw
 {
 	FPS * fps1;
+	TimeCounter * time1;
 
 private:
-	bool ustawParametry;
-
-	float max;
-	float maxPrzedzial;
-	
-	float przesun;
-
-	int tryb5; 
-
-	bool showAxisValue;
+	float oddalenie0;
+	float maxWindow;
 
 public:
-	T5(FPS *);
+	TestParametrsDraw(FPS * fps1, TimeCounter * time1);
 
 private:
-	int InitGL5(GLvoid);
+	int InitGL0(GLvoid);
 
-	void drawString (void *, char *, float, float, float);
-
-	float skaluj (float liczba, float max);
-
-	void set_max();
+	void drawString0 (void * font, char * s, float x, float y, float z);
 
 public:
-	int DrawGLScene5();
-
-	void keyboard5(bool *keys);
+	int DrawGLScene(int tryb, bool timePause);
 };

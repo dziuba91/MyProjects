@@ -61,7 +61,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="draw_cube.cpp" />
+    <ClCompile Include="fps.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="t1.cpp" />
+    <ClCompile Include="t2.cpp" />
+    <ClCompile Include="t3.cpp" />
+    <ClCompile Include="t4.cpp" />
+    <ClCompile Include="t44.cpp" />
+    <ClCompile Include="t5.cpp" />
+    <ClCompile Include="test_parameters_draw.cpp" />
+    <ClCompile Include="time_counter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="draw_cube.h" />
@@ -72,8 +82,8 @@
     <ClInclude Include="t4.h" />
     <ClInclude Include="t44.h" />
     <ClInclude Include="t5.h" />
-    <ClInclude Include="test_parametrs_draw.h" />
-    <ClInclude Include="timeCounter.h" />
+    <ClInclude Include="test_parameters_draw.h" />
+    <ClInclude Include="time_counter.h" />
     <ClInclude Include="WINDOW_prop.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -39,6 +39,36 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="t1.cpp">
+      <Filter>Source Files\Tryby\tryb1</Filter>
+    </ClCompile>
+    <ClCompile Include="t2.cpp">
+      <Filter>Source Files\Tryby\tryb2</Filter>
+    </ClCompile>
+    <ClCompile Include="draw_cube.cpp">
+      <Filter>Source Files\Ogolne</Filter>
+    </ClCompile>
+    <ClCompile Include="t3.cpp">
+      <Filter>Source Files\Tryby\tryb3</Filter>
+    </ClCompile>
+    <ClCompile Include="t4.cpp">
+      <Filter>Source Files\Tryby\tryb4</Filter>
+    </ClCompile>
+    <ClCompile Include="t44.cpp">
+      <Filter>Source Files\Tryby\tryb4</Filter>
+    </ClCompile>
+    <ClCompile Include="t5.cpp">
+      <Filter>Source Files\Tryby\tryb5</Filter>
+    </ClCompile>
+    <ClCompile Include="fps.cpp">
+      <Filter>Source Files\Ogolne</Filter>
+    </ClCompile>
+    <ClCompile Include="test_parameters_draw.cpp">
+      <Filter>Source Files\Ogolne</Filter>
+    </ClCompile>
+    <ClCompile Include="time_counter.cpp">
+      <Filter>Source Files\Ogolne</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="t1.h">
@@ -46,9 +76,6 @@
     </ClInclude>
     <ClInclude Include="t5.h">
       <Filter>Source Files\Tryby\tryb5</Filter>
-    </ClInclude>
-    <ClInclude Include="test_parametrs_draw.h">
-      <Filter>Source Files\Ogolne</Filter>
     </ClInclude>
     <ClInclude Include="t2.h">
       <Filter>Source Files\Tryby\tryb2</Filter>
@@ -68,10 +95,13 @@
     <ClInclude Include="t3.h">
       <Filter>Source Files\Tryby\tryb3</Filter>
     </ClInclude>
-    <ClInclude Include="timeCounter.h">
+    <ClInclude Include="WINDOW_prop.h">
       <Filter>Source Files\Ogolne</Filter>
     </ClInclude>
-    <ClInclude Include="WINDOW_prop.h">
+    <ClInclude Include="test_parameters_draw.h">
+      <Filter>Source Files\Ogolne</Filter>
+    </ClInclude>
+    <ClInclude Include="time_counter.h">
       <Filter>Source Files\Ogolne</Filter>
     </ClInclude>
   </ItemGroup>

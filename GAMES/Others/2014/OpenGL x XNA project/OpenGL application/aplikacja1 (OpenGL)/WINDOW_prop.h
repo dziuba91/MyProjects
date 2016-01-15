@@ -7,11 +7,11 @@
 #include <gl\glaux.h>		// Header File For The Glaux Library
 #include <gl\glut.h>
 
+HDC hDC=NULL;         // Prywatny kontekst u¿¹dzenia GDI
+HGLRC hRC=NULL;         // Kontekst rysuj¹cy
+HWND hWnd=NULL;         // Uchwyt naszego okna
 
-HDC			hDC=NULL;         // Prywatny kontekst u¿¹dzenia GDI
-HGLRC		hRC=NULL;         // Kontekst rysuj¹cy
-HWND		hWnd=NULL;         // Uchwyt naszego okna
-HINSTANCE	hInstance;         // Instancja aplikacji
+HINSTANCE hInstance;         // Instancja aplikacji
 
 int windowHeight= 640;
 int windowWidth= 640;
@@ -20,8 +20,7 @@ bool keys[256];         // Tablica klawiszy - wciœniêty czy nie
 bool active=TRUE;         // Flaga - czy okno jest aktywne?
 bool fullscreen=TRUE;         // Uruchom aplikacje na pe³nym ekranie
 
-
-LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
+LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 
 GLvoid ReSizeGLScene(GLsizei width, GLsizei height)		// Resize And Initialize The GL Window
 {
@@ -50,15 +49,6 @@ int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 	glEnable(GL_DEPTH_TEST);							// Enables Depth Testing
 	glDepthFunc(GL_LEQUAL);								// The Type Of Depth Testing To Do
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);	// Really Nice Perspective Calculations
-	
-	//glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
-	//glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
-	//glLightfv(GL_LIGHT0, GL_POSITION, position);
-	//glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
-
-	//glEnable(GL_LIGHTING);
-	//glEnable(GL_LIGHT0); 
-	//glDisable(GL_LIGHT0);
 	
 	return TRUE;										// Initialization Went OK
 }
@@ -110,7 +100,6 @@ GLvoid KillGLWindow(GLvoid)								// Properly Kill The Window
  *	height			- Height Of The GL Window Or Fullscreen Mode			*
  *	bits			- Number Of Bits To Use For Color (8/16/24/32)			*
  *	fullscreenflag	- Use Fullscreen Mode (TRUE) Or Windowed Mode (FALSE)	*/
- 
 BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscreenflag)
 {
 	GLuint		PixelFormat;			// Holds The Results After Searching For A Match

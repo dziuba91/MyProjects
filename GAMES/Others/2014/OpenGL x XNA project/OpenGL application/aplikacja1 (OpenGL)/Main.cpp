@@ -1,10 +1,9 @@
 /*
 // **** //
  *		Autor:				Dziuba Tomasz
- *		Data wykonania:		09.03.2014
+ *		Data wykonania:		09.03.2014 (aktualizacja: 2015)
 // **** //
 */
-
 
 #include <windows.h>		// Header File For Windows
 #include <gl\gl.h>			// Header File For The OpenGL32 Library
@@ -13,17 +12,10 @@
 #include <gl\glut.h>
 #include <stdio.h>
 
-int tryb = 1; //tryby poruszania siê
-
-bool timePause = false;
-
 #include "fps.h"
-#include "timeCounter.h"
-#include "test_parametrs_draw.h"
+#include "time_counter.h"
+#include "test_parameters_draw.h"
 
-#include "draw_cube.h"
-
-#include "t0.h"
 #include "t1.h"
 #include "t2.h"
 #include "t4.h"
@@ -31,25 +23,28 @@ bool timePause = false;
 #include "t3.h"
 #include "t5.h"
 
-#include "WINDOW_prop.h"
-
+#include "WINDOW_prop.h" // window settings code
 
 bool wait = FALSE;
-//GLfloat speed1 = 0.5f;
-
 bool trybCube = true;
+
+FPS fps1;
+TimeCounter time1;
 
 T1 t1;
 T2 t2;
 T3 t3;
 T4 t4;
 T44 t44;
-T5 t5;
+T5 t5(&fps1);
 
-TestParametrsDraw PARAM_DRAW;
-
+TestParametrsDraw PARAM_DRAW(&fps1, &time1);
 
 int numberOfQuotes = 0;
+
+int tryb = 1; //tryby poruszania siê
+bool timePause = false;
+
 /*
 GLfloat material1[]={0.0, 0.0, 0.8, 0.0};			//NIEBIESKI
 GLfloat material3[]={0.8, 0.0, 0.0, 0.0};			//ZIELONY
@@ -62,8 +57,6 @@ GLfloat diffuse[]={0.0, 0.0, 0.0, 0.5};
 GLfloat position[]={15.0, 30.0, 0.0, 3.0}; 
 GLfloat specular[]={0.0, 0.0, 0.0, 0.5};         // Wartoœci œwiat³a rozproszonego 
 */
-						
-
 
 int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 					HINSTANCE	hPrevInstance,		// Previous Instance
@@ -107,28 +100,6 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				{
 					done=TRUE;						// ESC Signalled A Quit
 				}
-				/*
-				else if (keys[VK_RIGHT] && wait == FALSE)     //kontrolki do testowania
-				{
-					tryb=1;
-				//	speed1 = 0.5f;
-				}
-				else if (keys[VK_LEFT] && wait == FALSE)
-				{
-					tryb=2;
-				//	speed1 = 0.5f;
-				}
-				else if (keys[VK_UP] && wait == FALSE)
-				{
-					tryb=3;
-				//	speed1 = 0.5f;
-				}
-				else if (keys[VK_DOWN] && wait == FALSE)
-				{
-					tryb=4;			
-				//	speed1 = 0.5f;
-				}
-				*/
 				else if (keys['0'] && wait == FALSE)
 				{
 					tryb=0;
@@ -136,7 +107,6 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				else if (keys['1'] && wait == FALSE)
 				{
 					tryb = 1;
-					//InitGL1();
 				}
 				else if (keys['2'] && wait == FALSE)
 				{
@@ -153,26 +123,10 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				else if (keys['5'] && wait == FALSE)
 				{
 					tryb = 5;
-					//InitGL5();
 				}
 				else if (keys['6'] && wait == FALSE)
 				{
 					tryb = 6;
-					//InitGL5();
-				}
-				/*
-				else if (keys['6'] && wait == FALSE)
-				{
-					tryb = 6;
-					InitGL5();
-				}*/
-				else if (keys[VK_SPACE] && wait == FALSE && tryb == 4)
-				{
-					if (trybCube) trybCube = false;
-					else trybCube = true;
-
-					wait = TRUE;
-					//speed1-=0.0000001f;
 				}
 				else if (keys[VK_SPACE] && wait == FALSE && tryb == 4)
 				{
@@ -180,7 +134,13 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 					else trybCube = true;
 
 					wait = TRUE;
-					//speed1-=0.0000001f;
+				}
+				else if (keys[VK_SPACE] && wait == FALSE && tryb == 4)
+				{
+					if (trybCube) trybCube = false;
+					else trybCube = true;
+
+					wait = TRUE;
 				}
 				else if (keys[VK_CONTROL] && wait == FALSE)
 				{
@@ -188,21 +148,20 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 					else timePause = true;
 
 					wait = TRUE;
-					//speed1-=0.0000001f;
 				}
 				else if (keys['O'] && tryb == 4 && wait == FALSE)
 				{
-					if (sim == FALSE) sim = TRUE;
-					else sim = FALSE;
+					if (t4.sim == FALSE) t4.sim = TRUE;
+					else t4.sim = FALSE;
 
 					wait = TRUE;
 				}
 				else
 				{
 					if ( wait == TRUE && (GetTickCount() - time >= 200) ) { wait = FALSE; }
-					countFPS(GetTickCount(), tryb);
+					fps1.countFPS(GetTickCount(), tryb);
 					
-					PARAM_DRAW.DrawGLScene();
+					PARAM_DRAW.DrawGLScene(tryb, timePause);
 
 					int startT = GetTickCount();
 
@@ -238,8 +197,6 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 							t44.DrawGLScene44();
 						}
 					}
-					//else if (tryb == 5)
-						//DrawGLScene55();					// Draw The Scene
 					else if (tryb == 5)
 					{
 						t5.keyboard5(keys);
@@ -250,7 +207,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 
 					if (!timePause)
 					{
-						countTIME(GetTickCount(), stopT- startT, tryb);
+						time1.countTIME(GetTickCount(), stopT- startT, tryb);
 					}
 
 					SwapBuffers(hDC);				// Swap Buffers (Double Buffering)
