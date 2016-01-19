@@ -23,7 +23,7 @@ main ()
 
     for (;Z>0;Z--)
     {
-		for (int i = 0; i < 6; i++) cin >> CUBE[i];
+	for (int i = 0; i < 6; i++) cin >> CUBE[i];
 
         cin >> X1;
         cin >> Y1;
@@ -38,7 +38,7 @@ main ()
         if (Y1<4) move(UP, CUBE, 0, X1, Y1);
         
         cout << MIN << endl;
-	}
+    }
     
     return EXIT_SUCCESS;
 }
