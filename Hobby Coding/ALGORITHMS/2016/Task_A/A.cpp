@@ -15,9 +15,9 @@ void set_next_moves(Direction d, int * cube, int sum, int x1, int y1);
 
 main ()
 {
-	int Z;
-	int X1, Y1;
-	int CUBE[6];
+    int Z;
+    int X1, Y1;
+    int CUBE[6];
     
     cin >> Z;
 
