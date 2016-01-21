@@ -17,32 +17,32 @@ void wyswietl();
 
 int main ()
 {
-    char sprawdz = ' ';
-    poczatek= NULL;
+	char sprawdz = ' ';
+	poczatek= NULL;
 
-    while(sprawdz!='q')
-    {
-        system("cls");
-	    cout << "WCISNIJ:" << endl;
-	    cout << "a - Utworz kolejke priorytetow (punkt a)" <<endl;
-	    cout << "b - Dodac element (punkt b)" <<endl;
-	    cout << "c - Usun element minimalny (punkt c)" << endl;
-	    cout << "d - Ilosc elementow (punkt d)" << endl;
-        cout << "w - Wyswietl liste" <<endl;
-	    cout << "q - EXIT" <<endl;
+	while(sprawdz!='q')
+	{
+		system("cls");
+		cout << "WCISNIJ:" << endl;
+		cout << "a - Utworz kolejke priorytetow (punkt a)" <<endl;
+		cout << "b - Dodac element (punkt b)" <<endl;
+		cout << "c - Usun element minimalny (punkt c)" << endl;
+		cout << "d - Ilosc elementow (punkt d)" << endl;
+		cout << "w - Wyswietl liste" <<endl;
+		cout << "q - EXIT" <<endl;
 
-        cin >> sprawdz;
+		cin >> sprawdz;
 
-	    if      (sprawdz=='a') utworz_kolejke_priorytetowa();
-        else if (sprawdz=='b') wprowadz_element();
-	    else if (sprawdz=='c') usun_element();
-	    else if (sprawdz=='d') ilosc_elementow();
-	    else if (sprawdz=='w') wyswietl();              
-    }
+		if      (sprawdz=='a') utworz_kolejke_priorytetowa();
+		else if (sprawdz=='b') wprowadz_element();
+		else if (sprawdz=='c') usun_element();
+		else if (sprawdz=='d') ilosc_elementow();
+		else if (sprawdz=='w') wyswietl();              
+	}
     
 	cout << endl;
-    system("PAUSE");
-    return EXIT_SUCCESS;
+	system("PAUSE");
+	return EXIT_SUCCESS;
 }
 
 void utworz_kolejke_priorytetowa() 
@@ -80,7 +80,7 @@ void utworz_kolejke_priorytetowa()
 				{
 					p->next= i;
 					
-                    if(i== poczatek)  //ustawiamy informacje o elemencie do poprzednika
+					if(i== poczatek)  //ustawiamy informacje o elemencie do poprzednika
 						poczatek= p;
 					else
 						poprzedni->next= p;
@@ -114,7 +114,7 @@ void wprowadz_element() //dodawanie elementu na poczatek listy
 
 	if (poczatek==NULL)
 	{
-	    poczatek= p;
+		poczatek= p;
 	}
 	else
 	{
@@ -124,10 +124,10 @@ void wprowadz_element() //dodawanie elementu na poczatek listy
 			{
 				p->next= i;
 				if(i== poczatek)  //ustawiamy informacje o elemencie do poprzednika
-                    poczatek= p;
+					poczatek= p;
 				else
 					poprzedni->next= p;
-					
+
 				break;
 			}
 

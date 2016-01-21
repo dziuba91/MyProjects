@@ -20,38 +20,38 @@ void wyswietl();
 
 int main ()
 {
-    char sprawdz = ' ';
-    poczatek= NULL;
+	char sprawdz = ' ';
+	poczatek= NULL;
 
-    while(sprawdz!='q')
-    {
-        system("cls");
-	    cout << "WCISNIJ:" << endl;
-	    cout << "a - Utworz liste (punkt a)" <<endl;
-	    cout << "b - Dodac element (dodatkowe)" <<endl;
-	    cout << "c - Dodaj elemnt przed zadanym (punkt b)" << endl;
-	    cout << "d - Dodaj element po zadanym (punkt c)" << endl;
-	    cout << "e - Usun zadany element (punkt d)" << endl;
-	    cout << "f - Znajdz element (punkt e)" << endl;
-	    cout << "g - Ilosc elementow (punkt f)" << endl;
-        cout << "w - Wyswietl liste" <<endl;
-	    cout << "q - EXIT" <<endl;
+	while(sprawdz!='q')
+	{
+		system("cls");
+		cout << "WCISNIJ:" << endl;
+		cout << "a - Utworz liste (punkt a)" <<endl;
+		cout << "b - Dodac element (dodatkowe)" <<endl;
+		cout << "c - Dodaj elemnt przed zadanym (punkt b)" << endl;
+		cout << "d - Dodaj element po zadanym (punkt c)" << endl;
+		cout << "e - Usun zadany element (punkt d)" << endl;
+		cout << "f - Znajdz element (punkt e)" << endl;
+		cout << "g - Ilosc elementow (punkt f)" << endl;
+		cout << "w - Wyswietl liste" <<endl;
+		cout << "q - EXIT" <<endl;
 
-        cin >> sprawdz;
+		cin >> sprawdz;
 
-	    if      (sprawdz=='a') utworz_liste();
-        else if (sprawdz=='b') wprowadz_element();
-	    else if (sprawdz=='c') dadaj_element_przed_zadanym();
-	    else if (sprawdz=='d') dadaj_element_po_zadanym();
-	    else if (sprawdz=='e') usun_element();
-	    else if (sprawdz=='f') znajdz_element();
-	    else if (sprawdz=='g') ilosc_elementow();
-	    else if (sprawdz=='w') wyswietl();             
-    }
+		if      (sprawdz=='a') utworz_liste();
+		else if (sprawdz=='b') wprowadz_element();
+		else if (sprawdz=='c') dadaj_element_przed_zadanym();
+		else if (sprawdz=='d') dadaj_element_po_zadanym();
+		else if (sprawdz=='e') usun_element();
+		else if (sprawdz=='f') znajdz_element();
+		else if (sprawdz=='g') ilosc_elementow();
+		else if (sprawdz=='w') wyswietl();             
+	}
     
 	cout << endl;
-    system("PAUSE");
-    return EXIT_SUCCESS;
+	system("PAUSE");
+	return EXIT_SUCCESS;
 }
 
 void utworz_liste() 
@@ -108,11 +108,11 @@ void dadaj_element_przed_zadanym()
 			cin >> liczba;
 			if (poprzedni== NULL)  //gdy pierwszy element listy 
 			{
-			    p->dana= liczba;
-                p->next= poczatek;
-                poczatek= p;
-			    break;
-            }
+				p->dana= liczba;
+				p->next= poczatek;
+				poczatek= p;
+				break;
+			}
 			else
 			{
 				poprzedni->next= p;
@@ -175,12 +175,12 @@ void usun_element()
 		{
 			if (poprzedni== NULL)	//gdy jestesmy na poczatku listy
 			{
-                p=i;
-			    i= i->next;
-                poczatek= i;
-			    delete p;
+				p=i;
+				i= i->next;
+				poczatek= i;
+				delete p;
 			    
-			    sprawdz=1;
+				sprawdz=1;
 			}
 			else
 			{
@@ -201,8 +201,8 @@ void usun_element()
 
 	if(sprawdz== 0)
 	{
-        cout << "Podales elemnt ktorego nie ma na liscie!";
-	    getch();
+		cout << "Podales elemnt ktorego nie ma na liscie!";
+		getch();
 	}
 }
 

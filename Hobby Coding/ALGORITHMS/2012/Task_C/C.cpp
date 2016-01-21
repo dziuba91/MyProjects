@@ -97,75 +97,62 @@ int main ()
 		testy--;
 	}
 
-while (kolejka.pusty()== 0)
-{
-	tab= kolejka.poczatek->tab;
-	n= kolejka.poczatek->n;
-	suma= kolejka.poczatek->suma;
-	max= kolejka.poczatek->max;
+	while (kolejka.pusty()== 0)
+	{
+		tab= kolejka.poczatek->tab;
+		n= kolejka.poczatek->n;
+		suma= kolejka.poczatek->suma;
+		max= kolejka.poczatek->max;
 
-	//
-	pol= suma/2;
+		//
+		pol= suma/2;
 
-	if (max> pol) 
-	{
-		cout << suma- ((suma- max)*2);
-	}
-	else
-	if (max== pol)
-	{
-		cout << suma- (max*2);
-	}
-	else
-	if (max< pol)
-	{
-		A= new int* [pol+1];
-		for (i = 0; i < pol+1; i++) 
+		if (max> pol) cout << suma- ((suma- max)*2);
+		else if (max== pol) cout << suma- (max*2);
+		else if (max< pol)
 		{
-			A[i] = new int[n+1];
-		}
+			A= new int* [pol+1];
+			for (i = 0; i < pol+1; i++)
+				A[i] = new int[n+1];
 
-		for (int i=1; i< pol+1; i++)
-		{
-			if (i<tab[1]) A[i][1]=0;
-			else A[i][1]= tab[1];
-		}
-
-		for (int i=2; i< n+1; i++)
-			for (int x=1; x< pol+1; x++)
+			for (int i=1; i< pol+1; i++)
 			{
-				int c=0;
-				if (x- tab[i]>0)
-				{
-					c=A[x-tab[i]][i-1]+tab[i];
-				}
-
-				if (A[x][i-1]>= c)
-				{
-					A[x][i]= A[x][i-1];
-				}
-				else
-				{
-					A[x][i]= A[x-tab[i]][i-1]+tab[i];
-				}
+				if (i<tab[1]) A[i][1]=0;
+				else A[i][1]= tab[1];
 			}
-			
-		cout << suma- (A[pol][n]*2);
 
-		for (i = 0; i < pol+1; i++) 
-		{
-			delete [] A[i];
-		}
+			for (int i=2; i< n+1; i++)
+				for (int x=1; x< pol+1; x++)
+				{
+					int c=0;
+					if (x- tab[i]>0)
+					{
+						c=A[x-tab[i]][i-1]+tab[i];
+					}
+
+					if (A[x][i-1]>= c)
+					{
+						A[x][i]= A[x][i-1];
+					}
+					else
+					{
+						A[x][i]= A[x-tab[i]][i-1]+tab[i];
+					}
+				}
+			
+			cout << suma- (A[pol][n]*2);
+
+			for (i = 0; i < pol+1; i++)
+				delete [] A[i];
+				
 			delete [] A;
-	}
-			delete [] tab;
-			kolejka.usun();
+		}
+		delete [] tab;
+		kolejka.usun();
 			
-			if (kolejka.pusty()==0)
-			{
-				cout << endl;
-			}
-}
+		if (kolejka.pusty()==0)
+			cout << endl;
+	}
 
     return EXIT_SUCCESS;
 }

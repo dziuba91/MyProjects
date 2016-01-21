@@ -86,61 +86,61 @@ int main ()
 	}
 	//
 
-while (kolejka.pusty()== 0)
-{
-	L= kolejka.poczatek->L;
-	U= kolejka.poczatek->U;
-
-	if (U<2)
+	while (kolejka.pusty()== 0)
 	{
-		cout << L << " " << U << " " << x << " " << y;
-	}
-	else
-	{
-		tab= new bool [U+1];
+		L= kolejka.poczatek->L;
+		U= kolejka.poczatek->U;
 
-		for (i=2; i<=U; i++)
+		if (U<2)
 		{
-			tab[i]= false;
+			cout << L << " " << U << " " << x << " " << y;
 		}
-
-		for (i=2; i*i<=U; i++)
+		else
 		{
-			if (tab[i]== true) continue;
+			tab= new bool [U+1];
 
-			for (j=2*i; j<=U; j+=i) 
+			for (i=2; i<=U; i++)
 			{
-				if (tab[j]== false && j>=L)
+				tab[i]= false;
+			}
+
+			for (i=2; i*i<=U; i++)
+			{
+				if (tab[i]== true) continue;
+
+				for (j=2*i; j<=U; j+=i)
 				{
-					NP++;
-					tab[j]= true;
-				}		
+					if (tab[j]== false && j>=L)
+					{
+						NP++;
+						tab[j]= true;
+					}		
+				}
 			}
-		}
 
-		if (L>=2)	
-		{
-			nie_pierwsze=NP;
-			A= L;
-			if(L==2) y=1;
-		}
-		else	
-		{
-			nie_pierwsze=2-L+NP;
-			A= 2;
-			y=1;
-		}
-	
-		x= U-L+1-nie_pierwsze;
-
-		for (i= U; i>=2; i--)
-		{
-			if (tab[i]== false)
+			if (L>=2)	
 			{
-				tmp= i;
-				break;
+				nie_pierwsze=NP;
+				A= L;
+				if(L==2) y=1;
 			}
-		}
+			else	
+			{
+				nie_pierwsze=2-L+NP;
+				A= 2;
+				y=1;
+			}
+	
+			x= U-L+1-nie_pierwsze;
+
+			for (i= U; i>=2; i--)
+			{
+				if (tab[i]== false)
+				{
+					tmp= i;
+					break;
+				}
+			}
 
 			for (i=(int)sqrt(tmp); i>=1; i--)
 			{
@@ -148,26 +148,24 @@ while (kolejka.pusty()== 0)
 				{
 					if (i*i+j*j>=A && i*i+j*j<=tmp && tab[i*i +j*j]==false)
 					{
-								y++;
+						y++;
 					}
 				}
 			}
 		
-		cout << L << " " << U << " " << x << " " << y;
+			cout << L << " " << U << " " << x << " " << y;
 
+			NP= 0;
+			delete [] tab;
+		}
 
-		NP= 0;
-		delete [] tab;
-	}
-
-	kolejka.usun();
-	x= 0;
-	y= 0;
+		kolejka.usun();
+		x= 0;
+		y= 0;
 		
 		if(kolejka.pusty()==0)
-		{
 			cout << endl;
-		}
-}
+	}
+	
     return EXIT_SUCCESS;
 }

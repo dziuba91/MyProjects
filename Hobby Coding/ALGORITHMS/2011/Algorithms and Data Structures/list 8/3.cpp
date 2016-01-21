@@ -18,42 +18,42 @@ void wyswietl();
 
 int main ()
 {
-    char sprawdz = ' ';
-    poczatek= NULL;
+	char sprawdz = ' ';
+	poczatek= NULL;
 	koniec= NULL;
 
-    while(sprawdz!='q')
-    {
-        system("cls");
-	    cout << "WCISNIJ:" << endl;
-	    cout << "a - Dodac element na koniec" <<endl;
-	    cout << "b - Usun pierwszy element(punkt b)" << endl;
-	    cout << "c - Ilosc elementow (punkt c)" << endl;
-	    cout << "d - Czy kolejka pusta? (punkt d)" << endl;
-	    cout << "e - Znajdz element (punkt e)" << endl;
-        cout << "w - Wyswietl kolejke" <<endl;
-	    cout << "q - EXIT" <<endl;
+	while(sprawdz!='q')
+	{
+		system("cls");
+		cout << "WCISNIJ:" << endl;
+		cout << "a - Dodac element na koniec" <<endl;
+		cout << "b - Usun pierwszy element(punkt b)" << endl;
+		cout << "c - Ilosc elementow (punkt c)" << endl;
+		cout << "d - Czy kolejka pusta? (punkt d)" << endl;
+		cout << "e - Znajdz element (punkt e)" << endl;
+		cout << "w - Wyswietl kolejke" <<endl;
+		cout << "q - EXIT" <<endl;
 
-        cin >> sprawdz;
+		cin >> sprawdz;
 
-        if      (sprawdz=='a') wprowadz_element();
-	    else if (sprawdz=='b') usun_element();
-        else if (sprawdz=='c') ilosc_elementow();
-	    else if (sprawdz=='d') {
-                                  if (czy_pusta())
-									  cout << "TAK";
-								  else 
-                                      cout << "NIE";
+		if      (sprawdz=='a') wprowadz_element();
+		else if (sprawdz=='b') usun_element();
+		else if (sprawdz=='c') ilosc_elementow();
+		else if (sprawdz=='d') {
+									if (czy_pusta())
+										cout << "TAK";
+									else 
+										cout << "NIE";
                                       
-								  getch();
+									getch();
                                }
-        else if (sprawdz=='e') znajdz_element();
-	    else if (sprawdz=='w') wyswietl();
+		else if (sprawdz=='e') znajdz_element();
+		else if (sprawdz=='w') wyswietl();
     }
     
 	cout << endl;
-    system("PAUSE");
-    return EXIT_SUCCESS;
+	system("PAUSE");
+	return EXIT_SUCCESS;
 }
 
 bool czy_pusta()

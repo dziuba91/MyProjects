@@ -13,11 +13,12 @@ void wyswietl();
 
 int main ()
 {
-    int n, k, licznik=1;
+	int n, k, licznik=1;
 	poczatek=NULL;
 	
 	cout << "Podaj ilosc elementow listy= ";
 	cin >> n;
+	
 	utworz_liste(n);
 	wyswietl();
 
@@ -39,34 +40,34 @@ int main ()
 
 	for (LISTA *i= poczatek; ;)
 	{
-	    if (i==i->next)
-	    {
+		if (i==i->next)
+		{
 			cout << "Pozosta³y element:" << endl;
-		    cout << i->dana << endl;
+			cout << i->dana << endl;
 			break;
-	    }
+		}
 
-        if (licznik==k)
-        {
+		if (licznik==k)
+		{
 			cout << i->dana << endl;
 			p=i;
 			i= i->next;
 			poprzedni->next= i;
 			delete p;
-			
+
 			licznik= 1;
-        }
-        else 
-        {
+		}
+		else 
+		{
 			licznik++;
 			poprzedni= i;
 			i= i->next;
-        }
-    }
+		}
+	}
 
 	cout << endl;
-    system("PAUSE");
-    return EXIT_SUCCESS;
+	system("PAUSE");
+	return EXIT_SUCCESS;
 }
 
 void utworz_liste(int n) //dodawanie elementu na poczatek listy
