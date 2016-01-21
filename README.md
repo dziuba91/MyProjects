@@ -1,4 +1,4 @@
 # MyProjects
 
 * Author: Tomasz Dziuba
-* Contact Information: kira.dziuba333@gmail.com
+* Contact Information: tomasz.dziuba91@gmail.com
