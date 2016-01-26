@@ -6,7 +6,7 @@
 
 
 ```
-  Author: Tomasz Dziuba
-  LinkedIn Profile: linkedin.com/in/dziuba91
-  Contact Information: tomasz.dziuba91@gmail.com
+  * Author: Tomasz Dziuba
+  * LinkedIn Profile: linkedin.com/in/dziuba91
+  * Contact Information: tomasz.dziuba91@gmail.com
 ```
