@@ -1,0 +1,29 @@
+
+
+<service name="e1401209_assignment8_42" scope="application">
+
+	<description>
+
+		Customer POJO Service
+
+    </description>
+
+	<messageReceivers>
+
+		<messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out"
+
+			class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+
+		<messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out"
+
+			class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+
+	</messageReceivers>
+
+	<parameter name="ServiceClass">
+
+		ws.customer.service.CustomerService
+
+    </parameter>
+
+</service>

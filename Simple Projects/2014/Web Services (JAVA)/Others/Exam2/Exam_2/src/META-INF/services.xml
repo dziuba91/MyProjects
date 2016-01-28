@@ -1,0 +1,36 @@
+
+<service name="e1401209_exam2_6">
+
+<description>
+
+	The AXIOM greeting service.
+
+</description>
+
+	<parameter name="ServiceClass">
+
+		greet.service.SOAPGreetService
+
+</parameter>
+
+	<operation name="executeQuery">
+
+		<!-- Remember to define the class attribute -->
+
+		<messageReceiver
+		
+			class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver" />
+			
+	</operation>
+	
+	<operation name="executeInsertQuery">
+
+		<!-- Remember to define the class attribute -->
+
+		<messageReceiver
+		
+			class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver" />
+			
+	</operation>
+
+</service>

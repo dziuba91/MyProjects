@@ -1,0 +1,26 @@
+
+<service name="e1401209_as10_1_3">
+
+<description>
+
+	The AXIOM greeting service.
+
+</description>
+
+	<parameter name="ServiceClass">
+
+		greet.service.SOAPGreetService
+
+</parameter>
+
+	<operation name="prime_numbers">
+
+		<!-- Remember to define the class attribute -->
+
+		<messageReceiver
+		
+			class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver" />
+			
+	</operation>
+
+</service>

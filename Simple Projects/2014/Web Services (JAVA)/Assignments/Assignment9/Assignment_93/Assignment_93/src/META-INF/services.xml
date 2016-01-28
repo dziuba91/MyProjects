@@ -1,0 +1,26 @@
+
+<service name="e1401209_as10_3_2">
+
+<description>
+
+	The AXIOM greeting service.
+
+</description>
+
+	<parameter name="ServiceClass">
+
+		greet.service.SOAPGreetService
+
+</parameter>
+
+	<operation name="OMCustomerMaxPurchase">
+
+		<!-- Remember to define the class attribute -->
+
+		<messageReceiver
+		
+			class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver" />
+			
+	</operation>
+
+</service>
