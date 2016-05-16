@@ -26,7 +26,7 @@ public class VocabularySelectedGameLayoutActivity extends VocabularyGameLayoutAc
     {
         int max_tab = 0;
         if (VOC != null) max_tab += VOC.length;
-        if (VOC_additionalList != null) max_tab += VOC_additionalList_acceptedIndexes[VOC_additionalList_acceptedIndexes.length-1].ID;
+        if (VOC_additionalList_acceptedIndexes != null) max_tab += VOC_additionalList_acceptedIndexes[VOC_additionalList_acceptedIndexes.length-1].ID;
         
         for (int i = 0; i < 6; i++)
         {
