@@ -75,7 +75,7 @@ public class SettingsMenuLayoutActivity extends FragmentActivity{
 
 			@Override
 			public void onClick(View arg0) {
-        		
+				
 				startActivityForResult(new Intent(SettingsMenuLayoutActivity.this, SettingsVocabularyLayoutActivity.class).putExtra("voc_data", VOC)
 						.putExtra("vocper_data", perm).putExtra("vocsel_data", VOC_sel), EDIT_RESPONSE);
 			}
@@ -93,33 +93,33 @@ public class SettingsMenuLayoutActivity extends FragmentActivity{
 	}
 	
 	public void openLayoutActivity()
-    {
-        setLayoutContent();
-    }
+	{
+		setLayoutContent();
+	}
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	     if (requestCode == EDIT_RESPONSE) {
-	         if (resultCode == RESULT_OK) {
+		if (requestCode == EDIT_RESPONSE) {
+			if (resultCode == RESULT_OK) {
 
-	        	 Object [] array = (Object[]) data.getSerializableExtra("vocsel_data");
-	        	 this.VOC_sel = Arrays.copyOf(array, array.length, Boolean[].class);
-	     			
-	        	 array = (Object[]) data.getSerializableExtra("vocper_data");
-	        	 this.perm = Arrays.copyOf(array, array.length, Boolean[].class);
-	     			
-	        	 SAVE = true;
-	         }
-	     }
-	     if (requestCode == EDIT_RESPONSE_EXTENDED) {
-	    	 if (resultCode == RESULT_OK) {
-	    		 
-	    		 this.VOC_additionalList = (VocabularyList_array) data.getSerializableExtra("voc_data");
-	    		 this.VOC_additional = VOC_additionalList.get();
-	    		 
-	    		 this.SAVE = true;
-	    	 }
-	     }
+				Object [] array = (Object[]) data.getSerializableExtra("vocsel_data");
+				this.VOC_sel = Arrays.copyOf(array, array.length, Boolean[].class);
+					
+				array = (Object[]) data.getSerializableExtra("vocper_data");
+				this.perm = Arrays.copyOf(array, array.length, Boolean[].class);
+					
+				SAVE = true;
+			}
+		}
+		if (requestCode == EDIT_RESPONSE_EXTENDED) {
+			if (resultCode == RESULT_OK) {
+				 
+				this.VOC_additionalList = (VocabularyList_array) data.getSerializableExtra("voc_data");
+				this.VOC_additional = VOC_additionalList.get();
+				 
+				this.SAVE = true;
+			}
+		}
 	}
 	
 	@Override
@@ -135,47 +135,47 @@ public class SettingsMenuLayoutActivity extends FragmentActivity{
 			setResult(RESULT_OK, intent);
 		}
 		
-	    super.onBackPressed();
+		super.onBackPressed();
 	}
 	
 	@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-       
-    	getMenuInflater().inflate(R.menu.menu_settings, menu);
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+	   
+		getMenuInflater().inflate(R.menu.menu_settings, menu);
 
-        return true;
-    }
+		return true;
+	}
 	
 	@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-    	
-    	switch (item.getItemId()) {
-        	case R.id.action_showDialog:
-        		Bundle args = new Bundle();
-        		args.putSerializable("key", AddDelListFragment.TypeOfOperation.ADD);
-        		
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection
+		
+		switch (item.getItemId()) {
+			case R.id.action_showDialog:
+				Bundle args = new Bundle();
+				args.putSerializable("key", AddDelListFragment.TypeOfOperation.ADD);
+				
 				FragmentManager fm = getSupportFragmentManager();
-        		AddDelListFragment dialogFragment = new AddDelListFragment ();
-        		dialogFragment.setArguments(args);
-        		dialogFragment.show(fm, "New");
-        		return true;
-        		
-        	case R.id.action_deleteDialog:
-        		Bundle args1 = new Bundle();
-        		args1.putSerializable("key", AddDelListFragment.TypeOfOperation.DEL);
-        		
+				AddDelListFragment dialogFragment = new AddDelListFragment ();
+				dialogFragment.setArguments(args);
+				dialogFragment.show(fm, "New");
+				return true;
+				
+			case R.id.action_deleteDialog:
+				Bundle args1 = new Bundle();
+				args1.putSerializable("key", AddDelListFragment.TypeOfOperation.DEL);
+				
 				FragmentManager fm1 = getSupportFragmentManager();
-        		AddDelListFragment dialogFragment1 = new AddDelListFragment ();
-        		dialogFragment1.setArguments(args1);
-        		dialogFragment1.show(fm1, "Delete");
-        		return true;
-        		
-        	default:
-        		return super.onOptionsItemSelected(item);
-    	}
-    }
+				AddDelListFragment dialogFragment1 = new AddDelListFragment ();
+				dialogFragment1.setArguments(args1);
+				dialogFragment1.show(fm1, "Delete");
+				return true;
+				
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
 	
 	public void createNewLayoutItem(String value) // Adds new button (for new additional vocabulary list)
 	{
@@ -189,7 +189,7 @@ public class SettingsMenuLayoutActivity extends FragmentActivity{
 
 			@Override
 			public void onClick(View arg0) {
-        		
+				
 				startActivityForResult(new Intent(SettingsMenuLayoutActivity.this, SettingsVocabularyLayoutActivity_extended.class).putExtra("voclist_data", VOC_additionalList)
 						.putExtra("index_data", findList(((Button)arg0).getText().toString())), EDIT_RESPONSE_EXTENDED);
 			}

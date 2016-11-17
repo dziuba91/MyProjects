@@ -31,8 +31,8 @@ public class KanjiGameLayoutActivity extends Activity {
 	
 	int bG_id = 0;
 	int bR_id = 0;
-    
-    public Boolean goodAnswer = false;
+	
+	public Boolean goodAnswer = false;
 	
 	Button btn1 = null;
 	Button btn2 = null;
@@ -47,8 +47,8 @@ public class KanjiGameLayoutActivity extends Activity {
 	TextView text = null;
 	TextView scoreText = null;
 	
-    Random random = new Random();
-    
+	Random random = new Random();
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -159,89 +159,89 @@ public class KanjiGameLayoutActivity extends Activity {
 		btn5.setText(KANJI[kanjiIndex[4]].sign);
 		btn6.setText(KANJI[kanjiIndex[5]].sign);
 		
-        text.setText(KANJI[CorectKanji].meaning + "\n" + KANJI[CorectKanji].reading);
+		text.setText(KANJI[CorectKanji].meaning + "\n" + KANJI[CorectKanji].reading);
 
-        scoreText.setText(score + "/" + round);
+		scoreText.setText(score + "/" + round);
 	}
 	
 	public void openLayoutActivity()
-    {
-        setLayoutContent();
-        setGameRound();
+	{
+		setLayoutContent();
+		setGameRound();
 
 		bG.setVisibility(View.INVISIBLE);
 		bR.setVisibility(View.INVISIBLE);
-    }
+	}
 
-    public void correctAnswer(int index)
-    {
-        bR.setVisibility(View.INVISIBLE);
+	public void correctAnswer(int index)
+	{
+		bR.setVisibility(View.INVISIBLE);
 
-        bG.setVisibility(View.VISIBLE);
-        bG.setBackgroundColor(Color.GREEN);
-        bG.setText("    " + KANJI[index].sign + "    ");
-        bG_id = index;
-    }
+		bG.setVisibility(View.VISIBLE);
+		bG.setBackgroundColor(Color.GREEN);
+		bG.setText("	" + KANJI[index].sign + "	 ");
+		bG_id = index;
+	}
 
-    public void incorrectAnswer(int indexG, int indexR)
-    {
-        bR.setVisibility(View.VISIBLE);
-        bR.setBackgroundColor(Color.RED);
-        bR.setText("    " + KANJI[indexR].sign + "    ");
-        bR_id = indexR;
+	public void incorrectAnswer(int indexG, int indexR)
+	{
+		bR.setVisibility(View.VISIBLE);
+		bR.setBackgroundColor(Color.RED);
+		bR.setText("	" + KANJI[indexR].sign + "	  ");
+		bR_id = indexR;
 
-        bG.setVisibility(View.VISIBLE);;
-        bG.setBackgroundColor(Color.GREEN);
-        bG.setText("    " + KANJI[indexG].sign + "    ");
-        bG_id = indexG;
-    }
-    
-    public void onClickAction(int index)
-    {
-    	if (CorectKanjiIndex == index)
-        {
-            score++;
-            correctAnswer(CorectKanji);
+		bG.setVisibility(View.VISIBLE);;
+		bG.setBackgroundColor(Color.GREEN);
+		bG.setText("	" + KANJI[indexG].sign + "	  ");
+		bG_id = indexG;
+	}
+	
+	public void onClickAction(int index)
+	{
+		if (CorectKanjiIndex == index)
+		{
+			score++;
+			correctAnswer(CorectKanji);
 
-            goodAnswer = true;
-        }
-        else
-        {
-            incorrectAnswer(CorectKanji, kanjiIndex[index]);
+			goodAnswer = true;
+		}
+		else
+		{
+			incorrectAnswer(CorectKanji, kanjiIndex[index]);
 
-            goodAnswer = false;
-        }
+			goodAnswer = false;
+		}
 
-        round++;
-        setGameRound();	
-    }
-    
-    public void setGameRound()
-    {
-        int max_tab = KANJI.length;
-        
-        for (int i = 0; i < 6; i++)
-        {
-            int number = random.nextInt(max_tab);
+		round++;
+		setGameRound();	
+	}
+	
+	public void setGameRound()
+	{
+		int max_tab = KANJI.length;
+		
+		for (int i = 0; i < 6; i++)
+		{
+			int number = random.nextInt(max_tab);
 
-          check:
-            for (int j = 0; j < i; j++)
-            {
-                if (kanjiIndex[j] == number || number == CorectKanji)
-                {
-                    number++;
-                    if (number == max_tab) number = 0;
-                    
-                    break check;
-                }
-            }
+		  check:
+			for (int j = 0; j < i; j++)
+			{
+				if (kanjiIndex[j] == number || number == CorectKanji)
+				{
+					number++;
+					if (number == max_tab) number = 0;
+					
+					break check;
+				}
+			}
 
-            kanjiIndex[i] = number;
-        }
+			kanjiIndex[i] = number;
+		}
 
-        CorectKanjiIndex = random.nextInt(6);
-        CorectKanji = kanjiIndex[CorectKanjiIndex];
+		CorectKanjiIndex = random.nextInt(6);
+		CorectKanji = kanjiIndex[CorectKanjiIndex];
 
-        setLayoutData();
-    }
+		setLayoutData();
+	}
 }

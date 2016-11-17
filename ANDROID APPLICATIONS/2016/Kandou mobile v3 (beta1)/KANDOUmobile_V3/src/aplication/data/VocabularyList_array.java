@@ -8,18 +8,18 @@ public class VocabularyList_array implements Serializable { // for managing arra
 
 	private VocabularyList [] VOC_list = null;
 	
-    public VocabularyList_array(VocabularyList [] VOC_list)
-    {
-        this.VOC_list = VOC_list;
-    }
-    
-    public VocabularyList [] get()
-    {
+	public VocabularyList_array(VocabularyList [] VOC_list)
+	{
+		this.VOC_list = VOC_list;
+	}
+	
+	public VocabularyList [] get()
+	{
 		return VOC_list;
 	}
-    
-    public void set(VocabularyList [] Arr)
-    {
-    	this.VOC_list = Arr;
-    }
+	
+	public void set(VocabularyList [] Arr)
+	{
+		this.VOC_list = Arr;
+	}
 }

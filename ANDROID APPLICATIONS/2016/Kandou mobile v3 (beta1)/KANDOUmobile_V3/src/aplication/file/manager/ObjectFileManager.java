@@ -15,7 +15,7 @@ import aplication.data.VocabularyList_array;
 public class ObjectFileManager { // read from (save to) file (all methods)
 	
 	public void saveObjectArray(String object1, String path)
-    {
+	{
 		byte [] arr = object1.getBytes();
 		
 		try {
@@ -32,10 +32,10 @@ public class ObjectFileManager { // read from (save to) file (all methods)
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    }
+	}
 	
 	public Boolean [] readObjectFromFile_Boolean(String path)
-    {
+	{
 		byte [] array = null;
 		
 		try {
@@ -69,10 +69,10 @@ public class ObjectFileManager { // read from (save to) file (all methods)
 		for (int i=0; i < ret2.length; i++) ret3[i] = Boolean.parseBoolean(ret2[i]);
 		
 		return ret3;
-    }
+	}
 	
 	public VocabularyList_array readObjectFromFile(String path)
-    {
+	{
 		VocabularyList_array getClass = null;
 		
 		try {
@@ -98,10 +98,10 @@ public class ObjectFileManager { // read from (save to) file (all methods)
 		}
 		
 		return getClass;
-    }
+	}
 	
 	public void saveObject(VocabularyList_array object1, String path)
-    {
+	{
 		try {
 			FileOutputStream fileOutputStream = new FileOutputStream(pathBuilder(path));
 			
@@ -118,13 +118,13 @@ public class ObjectFileManager { // read from (save to) file (all methods)
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    }
+	}
 	
 	private String pathBuilder(String path)
 	{
 		String sdCardPath = Environment.getExternalStorageDirectory().getPath();
-        File f1 = new File(sdCardPath + "/KandouData_V3/" + path);
-        
+		File f1 = new File(sdCardPath + "/KandouData_V3/" + path);
+		
 		return f1.getPath();
 	}
 }

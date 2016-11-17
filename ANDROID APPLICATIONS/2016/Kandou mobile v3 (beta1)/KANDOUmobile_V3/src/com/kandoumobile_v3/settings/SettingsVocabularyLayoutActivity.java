@@ -48,11 +48,11 @@ public class SettingsVocabularyLayoutActivity extends Activity {
 	ObjectFileManager ofm = new ObjectFileManager();
 
 	public enum Direction {
-	    NEXT, PREVIOUS, NONE
+		NEXT, PREVIOUS, NONE
 	}
 	
 	public enum ItemAction {
-	    SELLECT_ALL, UNCHECK_ALL
+		SELLECT_ALL, UNCHECK_ALL
 	}
 	
 	@Override
@@ -76,23 +76,23 @@ public class SettingsVocabularyLayoutActivity extends Activity {
 	private void save()
 	{
 		String s = "";
-    	for (int i=0; i<perm.length; i++) 
-    	{
-    		s += perm[i].toString();
-    		if (i < perm.length-1) s += "-";
-    	}
-    	
-    	ofm.saveObjectArray(s, "V_per.dat");
-    	
-    	//
-    	s = "";
-    	for (int i=0; i<VOC_sel.length; i++) 
-    	{
-    		s += VOC_sel[i].toString();
-    		if (i < VOC_sel.length-1) s += "-";
-    	}
-    	
-    	ofm.saveObjectArray(s, "V_sel.dat");
+		for (int i=0; i<perm.length; i++) 
+		{
+			s += perm[i].toString();
+			if (i < perm.length-1) s += "-";
+		}
+		
+		ofm.saveObjectArray(s, "V_per.dat");
+		
+		//
+		s = "";
+		for (int i=0; i<VOC_sel.length; i++) 
+		{
+			s += VOC_sel[i].toString();
+			if (i < VOC_sel.length-1) s += "-";
+		}
+		
+		ofm.saveObjectArray(s, "V_sel.dat");
 	}
 	
 	public void setMenuAction(ItemAction ia)
@@ -165,15 +165,15 @@ public class SettingsVocabularyLayoutActivity extends Activity {
 		else
 			cb = new CheckBox[100];
 		
-        for (int i = 0; i < cb.length; i++)
-        {
-            cb[i] = new CheckBox(this);
-            cb[i].setText(VOC[i].reading + " - " + VOC[i].signs + " (" + VOC[i].meaning + ")");
-            cb[i].setChecked(perm[i]);
-            cb[i].setId(i);
-            index = cb[i].getId();
+		for (int i = 0; i < cb.length; i++)
+		{
+			cb[i] = new CheckBox(this);
+			cb[i].setText(VOC[i].reading + " - " + VOC[i].signs + " (" + VOC[i].meaning + ")");
+			cb[i].setChecked(perm[i]);
+			cb[i].setId(i);
+			index = cb[i].getId();
 
-            cb[i].setOnCheckedChangeListener(new OnCheckedChangeListener(){
+			cb[i].setOnCheckedChangeListener(new OnCheckedChangeListener(){
 
 				@Override
 				public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
@@ -182,30 +182,30 @@ public class SettingsVocabularyLayoutActivity extends Activity {
 					{
 						perm[arg0.getId() + (site*100)] = arg1;
 						if (!arg1) VOC_sel[arg0.getId() + (site*100)] = false;
-    				
+					
 						b_save.setVisibility(View.VISIBLE);
 						
 						checkedAllAction = false;
 					}
 			}});
-            
-            cb[i].setOnClickListener(new OnClickListener(){
+			
+			cb[i].setOnClickListener(new OnClickListener(){
 
-    			@Override
-    			public void onClick(View arg0) {
-    				
-    				perm[arg0.getId() + (site*100)] = !perm[arg0.getId() + (site*100)];
-    				if (!perm[arg0.getId() + (site*100)]) VOC_sel[arg0.getId() + (site*100)] = false;
-    				
+				@Override
+				public void onClick(View arg0) {
+					
+					perm[arg0.getId() + (site*100)] = !perm[arg0.getId() + (site*100)];
+					if (!perm[arg0.getId() + (site*100)]) VOC_sel[arg0.getId() + (site*100)] = false;
+					
 					b_save.setVisibility(View.VISIBLE);
-    			}
-    		});
-            
-            list.addView(cb[i]);
-        }
-        
-        text = (TextView)findViewById(R.id.text_score);
-        text.setText((site+1) + "/" + (site_max));
+				}
+			});
+			
+			list.addView(cb[i]);
+		}
+		
+		text = (TextView)findViewById(R.id.text_score);
+		text.setText((site+1) + "/" + (site_max));
 	}
 	
 	public void setCurrentPositionOnList(Direction D)
@@ -240,11 +240,11 @@ public class SettingsVocabularyLayoutActivity extends Activity {
 				cb[i].setVisibility(View.GONE);
 		}
 		
-        text.setText((site+1) + "/" + (site_max));
+		text.setText((site+1) + "/" + (site_max));
 	}
 	
 	public void openLayoutActivity(KanjiComposition [] voc, Boolean [] p)
-    {
+	{
 		this.VOC = voc;
 		this.site_max = VOC.length/100;
 		if ((VOC.length - (site_max * 100)) > 0) this.site_max++;
@@ -255,34 +255,34 @@ public class SettingsVocabularyLayoutActivity extends Activity {
 
 		this.ACTIVE = true;
 		
-        setLayoutContent();
-        setCurrentPositionOnList(Direction.NONE);
-    }
+		setLayoutContent();
+		setCurrentPositionOnList(Direction.NONE);
+	}
 	
 	@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-       
-    	getMenuInflater().inflate(R.menu.settings_vocabulary_list1, menu);
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+	   
+		getMenuInflater().inflate(R.menu.settings_vocabulary_list1, menu);
 
-        return true;
-    }
+		return true;
+	}
 	
 	@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-    	
-    	switch (item.getItemId()) {
-        	case R.id.action_sellectAll:
-        		setMenuAction(ItemAction.SELLECT_ALL);
-        		return true;
-        	case R.id.action_uncheckAll:
-        		setMenuAction(ItemAction.UNCHECK_ALL);
-        		return true;
-        	default:
-        		return super.onOptionsItemSelected(item);
-    	}
-    }
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection
+		
+		switch (item.getItemId()) {
+			case R.id.action_sellectAll:
+				setMenuAction(ItemAction.SELLECT_ALL);
+				return true;
+			case R.id.action_uncheckAll:
+				setMenuAction(ItemAction.UNCHECK_ALL);
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
 	
 	@Override
 	public void onBackPressed() {
@@ -294,6 +294,6 @@ public class SettingsVocabularyLayoutActivity extends Activity {
 			setResult(RESULT_OK, intent);
 		}
 		
-	    super.onBackPressed();
+		super.onBackPressed();
 	}
 }

@@ -57,7 +57,7 @@ public class VocabularySelectedInfoLayoutActivity extends Activity {
 	int MAX_INDEX = 0;
 	
 	public enum Direction {
-	    NEXT, PREVIOUS, NONE
+		NEXT, PREVIOUS, NONE
 	}
 	
 	@Override
@@ -203,7 +203,7 @@ public class VocabularySelectedInfoLayoutActivity extends Activity {
 	}
 	
 	public void openLayoutActivity(int index)
-    {
+	{
 		VOC_testIndexes = ext.createSelectedIndexes();
 		if (VOC_testIndexes != null)
 			MAX_INDEX = VOC_testIndexes.length;
@@ -211,35 +211,35 @@ public class VocabularySelectedInfoLayoutActivity extends Activity {
 		//
 		this.INDEX = index;
 		
-        setLayoutContent();
-        setLayoutData();
-        
-        if (((VOC != null) && (VOC.length > 0)) || ((VOC_additionalList_acceptedIndexes != null) && (VOC_additionalList_acceptedIndexes.length > 0)) || (VOC_testIndexes == null)) 
-        	setCurrentPositionOnList(Direction.NONE);
-    }
+		setLayoutContent();
+		setLayoutData();
+		
+		if (((VOC != null) && (VOC.length > 0)) || ((VOC_additionalList_acceptedIndexes != null) && (VOC_additionalList_acceptedIndexes.length > 0)) || (VOC_testIndexes == null)) 
+			setCurrentPositionOnList(Direction.NONE);
+	}
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	    if (requestCode == EDIT_RESPONSE) {
-	    	if (resultCode == RESULT_OK) {
+		if (requestCode == EDIT_RESPONSE) {
+			if (resultCode == RESULT_OK) {
 
-	    		Object [] array = (Object[]) data.getSerializableExtra("vocsel_data");
-	    		if (array == null) this.VOC_selected = null;
-	    		else this.VOC_selected = Arrays.copyOf(array, array.length, Boolean[].class);
-	     			
-	    		array = (Object[]) data.getSerializableExtra("vocdesc_data");
-	    		if (array == null) this.VOC_description = null;
-	    		else this.VOC_description = Arrays.copyOf(array, array.length, SelectiveData[].class);
-	    		
-	    		this.VOC_additionalList = (VocabularyList_array) data.getSerializableExtra("vocadd_data");
-	     		
-	    		ext.actualizePermissionArray(VOC_selected, VOC_additionalList);
-	    		
-	    		openLayoutActivity(0);
-	     			
-	    		SAVE = true;
-	    	}
-	    }
+				Object [] array = (Object[]) data.getSerializableExtra("vocsel_data");
+				if (array == null) this.VOC_selected = null;
+				else this.VOC_selected = Arrays.copyOf(array, array.length, Boolean[].class);
+					
+				array = (Object[]) data.getSerializableExtra("vocdesc_data");
+				if (array == null) this.VOC_description = null;
+				else this.VOC_description = Arrays.copyOf(array, array.length, SelectiveData[].class);
+				
+				this.VOC_additionalList = (VocabularyList_array) data.getSerializableExtra("vocadd_data");
+				
+				ext.actualizePermissionArray(VOC_selected, VOC_additionalList);
+				
+				openLayoutActivity(0);
+					
+				SAVE = true;
+			}
+		}
 	}
 	
 	@Override
@@ -253,25 +253,25 @@ public class VocabularySelectedInfoLayoutActivity extends Activity {
 			setResult(RESULT_OK, intent);
 		}
 		
-	    super.onBackPressed();
+		super.onBackPressed();
 	}
 	
 	@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-       
-    	getMenuInflater().inflate(R.menu.selected_list_submenu, menu);
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+	   
+		getMenuInflater().inflate(R.menu.selected_list_submenu, menu);
 
-        return true;
-    }
+		return true;
+	}
 	
 	@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-    	
-    	switch (item.getItemId()) {
-        	case R.id.action_clear:
-        		ext.uncheckAllPermission();
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection
+		
+		switch (item.getItemId()) {
+			case R.id.action_clear:
+				ext.uncheckAllPermission();
 				ext.save();
 				
 				VOC = ext.getStaticListArray_Data();
@@ -283,10 +283,10 @@ public class VocabularySelectedInfoLayoutActivity extends Activity {
 				
 				SAVE = true;
 				
-        		return true;
-        		
-        	default:
-        		return super.onOptionsItemSelected(item);
-    	}
-    }
+				return true;
+				
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
 }

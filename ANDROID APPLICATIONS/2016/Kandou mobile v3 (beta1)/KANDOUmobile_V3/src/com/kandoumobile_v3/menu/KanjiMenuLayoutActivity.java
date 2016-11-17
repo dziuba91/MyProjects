@@ -52,8 +52,8 @@ public class KanjiMenuLayoutActivity extends Activity {
 						arr.add(KANJI[i].submissions[j]);
 		
 		SUB = new KanjiComposition[arr.size()];
-        for (int i=0;i<arr.size();i++)
-        	SUB[i] = arr.get(i);
+		for (int i=0;i<arr.size();i++)
+			SUB[i] = arr.get(i);
 	}
 	
 	public void setLayoutContent()
@@ -100,9 +100,9 @@ public class KanjiMenuLayoutActivity extends Activity {
 	}
 	
 	public void openLayoutActivity(KanjiDataType [] kanji)
-    {
+	{
 		getSub();
 		
-        setLayoutContent();
-    }
+		setLayoutContent();
+	}
 }

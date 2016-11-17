@@ -119,27 +119,27 @@ public class VocabularyMenuLayoutActivity extends Activity{
 	}
 	
 	public void openLayoutActivity()
-    {
-        setLayoutContent();
-    }
+	{
+		setLayoutContent();
+	}
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == EDIT_RESPONSE) {
-	         if (resultCode == RESULT_OK) {
+			 if (resultCode == RESULT_OK) {
 
-	        	Object [] array = (Object[]) data.getSerializableExtra("vocsel_data");
-	        	this.VOC_selected = Arrays.copyOf(array, array.length, Boolean[].class);
-	     			
-	        	array = (Object[]) data.getSerializableExtra("vocdesc_data");
-	        	if (array == null) this.VOC_description = null;
-	        	else this.VOC_description = Arrays.copyOf(array, array.length, SelectiveData[].class);
+				Object [] array = (Object[]) data.getSerializableExtra("vocsel_data");
+				this.VOC_selected = Arrays.copyOf(array, array.length, Boolean[].class);
+					
+				array = (Object[]) data.getSerializableExtra("vocdesc_data");
+				if (array == null) this.VOC_description = null;
+				else this.VOC_description = Arrays.copyOf(array, array.length, SelectiveData[].class);
 
-	     		this.VOC_additionalList = (VocabularyList_array) data.getSerializableExtra("vocadd_data");
-	     				
-	        	SAVE = true;
-	        }
-	    }
+				this.VOC_additionalList = (VocabularyList_array) data.getSerializableExtra("vocadd_data");
+						
+				SAVE = true;
+			}
+		}
 	}
 	
 	@Override
@@ -153,6 +153,6 @@ public class VocabularyMenuLayoutActivity extends Activity{
 			setResult(RESULT_OK, intent);
 		}
 		
-	    super.onBackPressed();
+		super.onBackPressed();
 	}
 }

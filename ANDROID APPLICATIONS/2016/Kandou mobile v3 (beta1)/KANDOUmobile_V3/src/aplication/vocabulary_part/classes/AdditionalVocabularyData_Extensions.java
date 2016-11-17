@@ -110,15 +110,15 @@ public class AdditionalVocabularyData_Extensions {
 		ObjectFileManager ofm = new ObjectFileManager();
 		
 		String s = "";
-    	for (int i=0; i<VOC_selected.length; i++) 
-    	{
-    		s += VOC_selected[i].toString();
-    		if (i < VOC_selected.length-1) s += "-";
-    	}
-    	
-    	ofm.saveObjectArray(s, "V_sel.dat");
-    	ofm.saveObject(this.VOC_additionalList, "V_addList.dat");
-    	
+		for (int i=0; i<VOC_selected.length; i++) 
+		{
+			s += VOC_selected[i].toString();
+			if (i < VOC_selected.length-1) s += "-";
+		}
+		
+		ofm.saveObjectArray(s, "V_sel.dat");
+		ofm.saveObject(this.VOC_additionalList, "V_addList.dat");
+		
 		SAVE = true;
 	}
 	

@@ -54,15 +54,15 @@ public class SettingsVocabularyLayoutActivity_extended extends FragmentActivity 
 	ObjectFileManager ofm = new ObjectFileManager();
 
 	public enum Direction {
-	    NEXT, PREVIOUS, NONE
+		NEXT, PREVIOUS, NONE
 	}
 	
 	public enum ItemAction {
-	    SELLECT_ALL, UNCHECK_ALL
+		SELLECT_ALL, UNCHECK_ALL
 	}
 	
 	private enum WindowStatus {
-	    EMPTY, NORMAL
+		EMPTY, NORMAL
 	}
 	
 	@Override
@@ -94,7 +94,7 @@ public class SettingsVocabularyLayoutActivity_extended extends FragmentActivity 
 			else
 			{
 				Toast toast = Toast.makeText(this, "Brak rekordów do zaznaczenia! Lista pusta.", Toast.LENGTH_LONG);
-    			toast.show();
+				toast.show();
 			}
 		}
 		
@@ -111,7 +111,7 @@ public class SettingsVocabularyLayoutActivity_extended extends FragmentActivity 
 			else
 			{
 				Toast toast = Toast.makeText(this, "Brak rekordów do odznaczenia! Lista pusta.", Toast.LENGTH_LONG);
-    			toast.show();
+				toast.show();
 			}
 		}
 	}
@@ -196,7 +196,7 @@ public class SettingsVocabularyLayoutActivity_extended extends FragmentActivity 
 				cb.get(i).setText(VOC_extended[i].reading + " - " + VOC_extended[i].signs + " (" + VOC_extended[i].meaning + ")");
 				cb.get(i).setChecked(VOC_extended[i].activity);
 			}
-        
+		
 			text = (TextView)findViewById(R.id.text_score);
 			text.setVisibility(View.VISIBLE);
 			text.setText((site+1) + "/" + (site_max));
@@ -224,7 +224,7 @@ public class SettingsVocabularyLayoutActivity_extended extends FragmentActivity 
 					checkedAllAction = false;
 				}
 			}});
-    
+	
 		cb.get(i).setOnClickListener(new OnClickListener(){
 
 			@Override
@@ -242,21 +242,21 @@ public class SettingsVocabularyLayoutActivity_extended extends FragmentActivity 
 			public boolean onLongClick(final View arg0) {
 				
 				new AlertDialog.Builder(arg0.getContext())
-			    .setTitle("Usuwanie...")
-			    .setMessage("Czy napewno chcesz usun¹æ element: " + ((Button)arg0).getText() + " ?")
-			    .setPositiveButton("TAK", new DialogInterface.OnClickListener() {
-			        public void onClick(DialogInterface dialog, int which) { 
-			            // continue with delete
-			        	deleteVocabulary(((CheckBox)arg0).getId());
-			        }
-			     })
-			    .setNegativeButton("NIE", new DialogInterface.OnClickListener() {
-			        public void onClick(DialogInterface dialog, int which) { 
-			            // do nothing
-			        }
-			     })
-			    .setIcon(android.R.drawable.ic_dialog_alert)
-			     .show();
+				.setTitle("Usuwanie...")
+				.setMessage("Czy napewno chcesz usun¹æ element: " + ((Button)arg0).getText() + " ?")
+				.setPositiveButton("TAK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) { 
+						// continue with delete
+						deleteVocabulary(((CheckBox)arg0).getId());
+					}
+				 })
+				.setNegativeButton("NIE", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) { 
+						// do nothing
+					}
+				 })
+				.setIcon(android.R.drawable.ic_dialog_alert)
+				 .show();
 				
 				return false;
 		}});
@@ -319,7 +319,7 @@ public class SettingsVocabularyLayoutActivity_extended extends FragmentActivity 
 	}
 	
 	public void openLayoutActivity(KanjiComposition_extended [] voc)
-    {
+	{
 		if (voc != null)
 		{
 			this.site_max = VOC_extended.length/100;
@@ -334,37 +334,37 @@ public class SettingsVocabularyLayoutActivity_extended extends FragmentActivity 
 		}
 
 		//setCurrentPositionOnList(Direction.NONE);
-    }
+	}
 	
 	@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-       
-    	getMenuInflater().inflate(R.menu.settings_vocabulary_extended_list1, menu);
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+	   
+		getMenuInflater().inflate(R.menu.settings_vocabulary_extended_list1, menu);
 
-        return true;
-    }
+		return true;
+	}
 	
 	@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-    	
-    	switch (item.getItemId()) {
-        	case R.id.action_sellectAll:
-        		setMenuAction(ItemAction.SELLECT_ALL);
-        		return true;
-        	case R.id.action_uncheckAll:
-        		setMenuAction(ItemAction.UNCHECK_ALL);
-        		return true;
-        	case R.id.action_addNew:
-        		FragmentManager fm = getSupportFragmentManager();
-        		AddNewVocabularyFragment dialogFragment = new AddNewVocabularyFragment ();
-        		dialogFragment.show(fm, "New");
-        		return true;
-        	default:
-        		return super.onOptionsItemSelected(item);
-    	}
-    }
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection
+		
+		switch (item.getItemId()) {
+			case R.id.action_sellectAll:
+				setMenuAction(ItemAction.SELLECT_ALL);
+				return true;
+			case R.id.action_uncheckAll:
+				setMenuAction(ItemAction.UNCHECK_ALL);
+				return true;
+			case R.id.action_addNew:
+				FragmentManager fm = getSupportFragmentManager();
+				AddNewVocabularyFragment dialogFragment = new AddNewVocabularyFragment ();
+				dialogFragment.show(fm, "New");
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
 	
 	@Override
 	public void onBackPressed() {
@@ -375,7 +375,7 @@ public class SettingsVocabularyLayoutActivity_extended extends FragmentActivity 
 			setResult(RESULT_OK, intent);
 		}
 		
-	    super.onBackPressed();
+		super.onBackPressed();
 	}
 	
 	public void addNewVocabulary(String signs, String meaning, String reading) //actualize data objects (after adding vocabulary)

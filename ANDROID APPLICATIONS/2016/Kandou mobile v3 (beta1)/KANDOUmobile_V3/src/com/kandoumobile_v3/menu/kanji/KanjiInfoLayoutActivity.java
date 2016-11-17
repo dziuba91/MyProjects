@@ -29,7 +29,7 @@ public class KanjiInfoLayoutActivity extends Activity{
 	int INDEX;
 	
 	public enum Direction {
-	    NEXT, PREVIOUS, NONE
+		NEXT, PREVIOUS, NONE
 	}
 	
 	
@@ -117,9 +117,9 @@ public class KanjiInfoLayoutActivity extends Activity{
 	}
 	
 	public void openLayoutActivity()
-    {
-        setLayoutContent();
-        setLayoutData();
-        setCurrentPositionOnList(Direction.NONE);
-    }
+	{
+		setLayoutContent();
+		setLayoutData();
+		setCurrentPositionOnList(Direction.NONE);
+	}
 }

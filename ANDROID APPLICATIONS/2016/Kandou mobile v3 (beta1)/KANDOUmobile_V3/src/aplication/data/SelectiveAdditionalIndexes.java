@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 @SuppressWarnings("serial")
-public class SelectiveAdditionalIndexes  implements Serializable{ // vocabulary additional list -> indexes of data to game (for faster access); actualize in MainActivity
+public class SelectiveAdditionalIndexes	 implements Serializable{ // vocabulary additional list -> indexes of data to game (for faster access); actualize in MainActivity
 
 	public int ID;
 	public ArrayList<Integer> indexes = null;

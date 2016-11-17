@@ -40,8 +40,8 @@ public class VocabularyGameLayoutActivity extends Activity{
 	
 	int bG_id = 0;
 	int bR_id = 0;
-    
-    public Boolean goodAnswer = false;
+	
+	public Boolean goodAnswer = false;
 	
 	Button btn1 = null;
 	Button btn2 = null;
@@ -59,13 +59,13 @@ public class VocabularyGameLayoutActivity extends Activity{
 	
 	public Boolean SAVE = false;
 	
-    Random random = new Random();
-    
-    public enum Mode {
-	    JAP_POL, POL_JAP
+	Random random = new Random();
+	
+	public enum Mode {
+		JAP_POL, POL_JAP
 	}
-    
-    Mode mode = null;
+	
+	Mode mode = null;
 
 	VocabularyList_array VOC_additionalList = null;
 	SelectiveAdditionalIndexes [] VOC_additionalList_acceptedIndexes = null;
@@ -265,111 +265,111 @@ public class VocabularyGameLayoutActivity extends Activity{
 			text1.setText(ext.getDataByIndex(CorectVoc).meaning);
 		}
 
-        scoreText.setText(score + "/" + round);
+		scoreText.setText(score + "/" + round);
 	}
 	
 	public void openLayoutActivity()
-    {
-        setLayoutContent();
-        setGameRound();
+	{
+		setLayoutContent();
+		setGameRound();
 
 		bG.setVisibility(View.INVISIBLE);
 		bR.setVisibility(View.INVISIBLE);
-    }
-    
-    public void correctAnswer(int index)
-    {
-        bR.setVisibility(View.INVISIBLE);
+	}
+	
+	public void correctAnswer(int index)
+	{
+		bR.setVisibility(View.INVISIBLE);
 
-        bG.setVisibility(View.VISIBLE);
-        bG.setBackgroundColor(Color.GREEN);
-        bG.setText("  " + ext.getDataByIndex(index).reading + "  ");
-        bG_id = index;
-    }
+		bG.setVisibility(View.VISIBLE);
+		bG.setBackgroundColor(Color.GREEN);
+		bG.setText("  " + ext.getDataByIndex(index).reading + "	 ");
+		bG_id = index;
+	}
 
-    public void incorrectAnswer(int indexG, int indexR)
-    {
-        bR.setVisibility(View.VISIBLE);
-        bR.setBackgroundColor(Color.RED);
-        bR.setText("  " + ext.getDataByIndex(indexR).reading + "  ");
-        bR_id = indexR;
+	public void incorrectAnswer(int indexG, int indexR)
+	{
+		bR.setVisibility(View.VISIBLE);
+		bR.setBackgroundColor(Color.RED);
+		bR.setText("  " + ext.getDataByIndex(indexR).reading + "  ");
+		bR_id = indexR;
 
-        bG.setVisibility(View.VISIBLE);;
-        bG.setBackgroundColor(Color.GREEN);
-        bG.setText("  " + ext.getDataByIndex(indexG).reading + "  ");
-        bG_id = indexG;
-    }
-    
-    public void onClickAction(int index)
-    {
-    	if (CorectVocIndex == index)
-        {
-            score++;
-            correctAnswer(CorectVoc);
+		bG.setVisibility(View.VISIBLE);;
+		bG.setBackgroundColor(Color.GREEN);
+		bG.setText("  " + ext.getDataByIndex(indexG).reading + "  ");
+		bG_id = indexG;
+	}
+	
+	public void onClickAction(int index)
+	{
+		if (CorectVocIndex == index)
+		{
+			score++;
+			correctAnswer(CorectVoc);
 
-            goodAnswer = true;
-        }
-        else
-        {
-            incorrectAnswer(CorectVoc, vocIndex[index]);
+			goodAnswer = true;
+		}
+		else
+		{
+			incorrectAnswer(CorectVoc, vocIndex[index]);
 
-            goodAnswer = false;
-        }
+			goodAnswer = false;
+		}
 
-        round++;
-        setGameRound();	
-    }
-    
-    public void setGameRound()
-    {
-        int max_tab = 0;
-        if (VOC!=null) max_tab += VOC.length;
-        if (VOC_additionalList_acceptedIndexes!=null)
-        	max_tab +=  VOC_additionalList_acceptedIndexes[VOC_additionalList_acceptedIndexes.length-1].ID;
-        
-        for (int i = 0; i < 6; i++)
-        {
-            int number = random.nextInt(max_tab);
+		round++;
+		setGameRound();	
+	}
+	
+	public void setGameRound()
+	{
+		int max_tab = 0;
+		if (VOC!=null) max_tab += VOC.length;
+		if (VOC_additionalList_acceptedIndexes!=null)
+			max_tab +=	VOC_additionalList_acceptedIndexes[VOC_additionalList_acceptedIndexes.length-1].ID;
+		
+		for (int i = 0; i < 6; i++)
+		{
+			int number = random.nextInt(max_tab);
 
-          check:
-            for (int j = 0; j < i; j++)
-            {
-                if (vocIndex[j] == number || number == CorectVoc)
-                {
-                    number++;
-                    if (number == max_tab) number = 0;
-                    
-                    break check;
-                }
-            }
+		  check:
+			for (int j = 0; j < i; j++)
+			{
+				if (vocIndex[j] == number || number == CorectVoc)
+				{
+					number++;
+					if (number == max_tab) number = 0;
+					
+					break check;
+				}
+			}
 
-            vocIndex[i] = number;
-        }
+			vocIndex[i] = number;
+		}
 
-        CorectVocIndex = random.nextInt(6);
-        CorectVoc = vocIndex[CorectVocIndex];
+		CorectVocIndex = random.nextInt(6);
+		CorectVoc = vocIndex[CorectVocIndex];
 
-        setLayoutData();
-    }
-    
-    @Override
+		setLayoutData();
+	}
+	
+	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	    if (requestCode == EDIT_RESPONSE) {
-	        if (resultCode == RESULT_OK) {
+		if (requestCode == EDIT_RESPONSE) {
+			if (resultCode == RESULT_OK) {
 
-	        	Object [] array = (Object[]) data.getSerializableExtra("vocsel_data");
-	        	if (array == null) this.VOC_selected = null;
-	        	else this.VOC_selected = Arrays.copyOf(array, array.length, Boolean[].class);
-	     			
-	     		array = (Object[]) data.getSerializableExtra("vocdesc_data");
-	     		if (array == null) this.VOC_description = null;
-	     		else this.VOC_description = Arrays.copyOf(array, array.length, SelectiveData[].class);
-	     		
-	     		this.VOC_additionalList = (VocabularyList_array) data.getSerializableExtra("vocadd_data");
-	     		
-	     		SAVE = true;
-	        }
-	    }
+				Object [] array = (Object[]) data.getSerializableExtra("vocsel_data");
+				if (array == null) this.VOC_selected = null;
+				else this.VOC_selected = Arrays.copyOf(array, array.length, Boolean[].class);
+					
+				array = (Object[]) data.getSerializableExtra("vocdesc_data");
+				if (array == null) this.VOC_description = null;
+				else this.VOC_description = Arrays.copyOf(array, array.length, SelectiveData[].class);
+				
+				this.VOC_additionalList = (VocabularyList_array) data.getSerializableExtra("vocadd_data");
+				
+				SAVE = true;
+			}
+		}
 	}
 	
 	@Override
@@ -383,6 +383,6 @@ public class VocabularyGameLayoutActivity extends Activity{
 			setResult(RESULT_OK, intent);
 		}
 		
-	    super.onBackPressed();
+		super.onBackPressed();
 	}
 }

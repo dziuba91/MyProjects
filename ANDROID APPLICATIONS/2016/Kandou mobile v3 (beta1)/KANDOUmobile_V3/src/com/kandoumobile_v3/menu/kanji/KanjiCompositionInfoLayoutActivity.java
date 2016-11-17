@@ -30,7 +30,7 @@ public class KanjiCompositionInfoLayoutActivity extends Activity {
 	int INDEX;
 	
 	public enum Direction {
-	    NEXT, PREVIOUS, NONE
+		NEXT, PREVIOUS, NONE
 	}
 	
 	
@@ -135,12 +135,12 @@ public class KanjiCompositionInfoLayoutActivity extends Activity {
 	}
 	
 	public void openLayoutActivity(KanjiComposition [] sub, int index)
-    {
+	{
 		this.SUB = sub;
 		this.INDEX = index;
 		
-        setLayoutContent();
-        setLayoutData();
-        setCurrentPositionOnList(Direction.NONE);
-    }
+		setLayoutContent();
+		setLayoutData();
+		setCurrentPositionOnList(Direction.NONE);
+	}
 }

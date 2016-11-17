@@ -47,7 +47,7 @@ public class VocabularyInfoLayoutActivity extends Activity {
 	int max_tab = 0;
 	
 	public enum Direction {
-	    NEXT, PREVIOUS, NONE
+		NEXT, PREVIOUS, NONE
 	}
 	
 	@Override
@@ -191,17 +191,17 @@ public class VocabularyInfoLayoutActivity extends Activity {
 	}
 	
 	public void openLayoutActivity(int index)
-    {
-	    if (VOC!=null) max_tab += VOC.length;
-	    if (VOC_additionalList_acceptedIndexes!=null)
-	    	max_tab +=  VOC_additionalList_acceptedIndexes[VOC_additionalList_acceptedIndexes.length-1].ID;
-	        
+	{
+		if (VOC!=null) max_tab += VOC.length;
+		if (VOC_additionalList_acceptedIndexes!=null)
+			max_tab +=	VOC_additionalList_acceptedIndexes[VOC_additionalList_acceptedIndexes.length-1].ID;
+			
 		this.INDEX = index;
 		
-        setLayoutContent();
-        setLayoutData();
-        setCurrentPositionOnList(Direction.NONE);
-    }
+		setLayoutContent();
+		setLayoutData();
+		setCurrentPositionOnList(Direction.NONE);
+	}
 	
 	@Override
 	public void onBackPressed() {
@@ -214,6 +214,6 @@ public class VocabularyInfoLayoutActivity extends Activity {
 			setResult(RESULT_OK, intent);
 		}
 		
-	    super.onBackPressed();
+		super.onBackPressed();
 	}
 }
