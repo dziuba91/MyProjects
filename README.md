@@ -1,6 +1,6 @@
 # MyProjects
 
-#### Additional Game Projects Video Presentation:
+#### My Game Projects Video Presentation:
 * [Kandou (漢道) - 2014](https://youtu.be/eCymqHEm27M)
 * [П-RACI - 2015](https://youtu.be/DU33DdBVa4U)
 
