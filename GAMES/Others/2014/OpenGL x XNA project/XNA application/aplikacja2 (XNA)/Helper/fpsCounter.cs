@@ -5,7 +5,7 @@ using System.Text;
 
 namespace aplikacja2__XNA_.BasicComponent
 {
-    class fpsCounter
+    class FpsCounter
     {
         private int FPS_ARRAY_LENGHT = 100;
 
@@ -27,7 +27,7 @@ namespace aplikacja2__XNA_.BasicComponent
         public int count = 0;
         public int Time0 = 0;
 
-        public fpsCounter()
+        public FpsCounter()
         {
             fpsArray = new int[FPS_ARRAY_LENGHT];
             fpsArray1 = new int[FPS_ARRAY_LENGHT];

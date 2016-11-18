@@ -5,7 +5,7 @@ using System.Text;
 
 namespace aplikacja2__XNA_.Helper
 {
-    class timeCounter
+    class TimeCounter
     {
         private int TIME_ARRAY_LENGHT = 100;
 
@@ -28,7 +28,7 @@ namespace aplikacja2__XNA_.Helper
 
         int time0 = 0;
 
-        public timeCounter()
+        public TimeCounter()
         {
             timeArray = new int[TIME_ARRAY_LENGHT];
             timeArray1 = new int[TIME_ARRAY_LENGHT];

@@ -9,7 +9,7 @@ using aplikacja2__XNA_.BasicComponent;
 
 namespace aplikacja2__XNA_.Tryby.tryb1
 {
-    class t3 : DrawableGameComponent
+    class T3 : DrawableGameComponent
     {
         #region Field
 
@@ -75,7 +75,7 @@ namespace aplikacja2__XNA_.Tryby.tryb1
 
         #region Initialization
 
-        public t3(Game game)
+        public T3(Game game)
             : base(game)
         {
             Size = new Vector3(1.0f, 1.0f, 1.0f);

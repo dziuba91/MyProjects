@@ -66,7 +66,7 @@ namespace aplikacja2__XNA_.BasicComponent
 
         int tryb = 1;
 
-        public Helper help;
+        public RubikCubeHelper help;
 
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace aplikacja2__XNA_.BasicComponent
             _vertices5 = new VertexPositionNormalTexture[ilosc * ilosc * ilosc][];
             _vertices6 = new VertexPositionNormalTexture[ilosc * ilosc * ilosc][];
 
-            help = new Helper();
+            help = new RubikCubeHelper();
         }
 
         public SpriteBatch spriteBatch

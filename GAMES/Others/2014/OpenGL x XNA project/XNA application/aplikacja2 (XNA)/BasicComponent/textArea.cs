@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace aplikacja2__XNA_.BasicComponent
 {
-    class textArea : DrawableGameComponent
+    class TextArea : DrawableGameComponent
     {
         # region Field
 
@@ -34,7 +34,7 @@ namespace aplikacja2__XNA_.BasicComponent
 
         #region Initialization
 
-        public textArea(Game game)
+        public TextArea(Game game)
             : base(game)
         {
 

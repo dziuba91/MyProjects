@@ -31,16 +31,16 @@ namespace aplikacja2__XNA_
         bool tryb3Choose = true;
 
         //Cube testCube;
-        textArea textField;
+        TextArea textField;
 
-        t1 tryb1;
-        t2 tryb2;
-        t3 tryb3;
-        t4 tryb4;
-        t5 tryb5;
+        T1 tryb1;
+        T2 tryb2;
+        T3 tryb3;
+        T4 tryb4;
+        T5 tryb5;
 
-        fpsCounter FPS;
-        timeCounter TIME;
+        FpsCounter FPS;
+        TimeCounter TIME;
 
         bool fpsCup = true;
 
@@ -67,26 +67,26 @@ namespace aplikacja2__XNA_
             //this.testCube = new Cube(this,);
             //Components.Add(this.testCube);
 
-            this.tryb1 = new t1(this);
+            this.tryb1 = new T1(this);
             Components.Add(this.tryb1);
 
-            this.tryb2 = new t2(this);
+            this.tryb2 = new T2(this);
             Components.Add(this.tryb2);
 
-            this.tryb3 = new t3(this);
+            this.tryb3 = new T3(this);
             Components.Add(this.tryb3);
 
-            this.tryb4 = new t4(this);
+            this.tryb4 = new T4(this);
             Components.Add(this.tryb4);
 
-            this.tryb5 = new t5(this);
+            this.tryb5 = new T5(this);
             Components.Add(this.tryb5);
 
-            this.textField = new textArea(this);
+            this.textField = new TextArea(this);
             Components.Add(this.textField);
 
-            FPS = new fpsCounter();
-            TIME = new timeCounter();
+            FPS = new FpsCounter();
+            TIME = new TimeCounter();
 
             sw = new Stopwatch();
         }

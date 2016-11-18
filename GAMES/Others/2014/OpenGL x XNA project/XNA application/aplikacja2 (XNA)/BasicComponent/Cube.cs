@@ -17,7 +17,7 @@ namespace aplikacja2__XNA_.BasicComponent
         public float speed1 = 0.5f;
         public float speed2 = 0.05f;
 
-        const int NUM_TRIANGLES = 4;
+        const int NUM_TRIANGLES = 24;
         const int NUM_VERTICES = 36;
 
 
