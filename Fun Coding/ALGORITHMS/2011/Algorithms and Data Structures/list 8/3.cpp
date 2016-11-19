@@ -36,7 +36,7 @@ int main ()
 
 		cin >> sprawdz;
 
-		if      (sprawdz=='a') wprowadz_element();
+		if		(sprawdz=='a') wprowadz_element();
 		else if (sprawdz=='b') usun_element();
 		else if (sprawdz=='c') ilosc_elementow();
 		else if (sprawdz=='d') {
@@ -44,13 +44,13 @@ int main ()
 										cout << "TAK";
 									else 
 										cout << "NIE";
-                                      
+									  
 									getch();
-                               }
+							   }
 		else if (sprawdz=='e') znajdz_element();
 		else if (sprawdz=='w') wyswietl();
-    }
-    
+	}
+	
 	cout << endl;
 	system("PAUSE");
 	return EXIT_SUCCESS;

@@ -39,16 +39,16 @@ int main ()
 
 		cin >> sprawdz;
 
-		if      (sprawdz=='a') utworz_liste();
+		if		(sprawdz=='a') utworz_liste();
 		else if (sprawdz=='b') wprowadz_element();
 		else if (sprawdz=='c') dadaj_element_przed_zadanym();
 		else if (sprawdz=='d') dadaj_element_po_zadanym();
 		else if (sprawdz=='e') usun_element();
 		else if (sprawdz=='f') znajdz_element();
 		else if (sprawdz=='g') ilosc_elementow();
-		else if (sprawdz=='w') wyswietl();             
+		else if (sprawdz=='w') wyswietl();			   
 	}
-    
+	
 	cout << endl;
 	system("PAUSE");
 	return EXIT_SUCCESS;
@@ -179,7 +179,7 @@ void usun_element()
 				i= i->next;
 				poczatek= i;
 				delete p;
-			    
+				
 				sprawdz=1;
 			}
 			else

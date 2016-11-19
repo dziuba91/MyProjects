@@ -1,8 +1,7 @@
 /*
-*    #gcc  rosyjska_ruletka.c  -lncurses  -orosyjska_ruletka.o
-*    #./rosyjska_ruletka.o
+*	 #gcc  rosyjska_ruletka.c  -lncurses  -orosyjska_ruletka.o
+*	 #./rosyjska_ruletka.o
 */
-
 
 #include <stdio.h>
 #include <errno.h>
@@ -12,61 +11,54 @@
 #include <signal.h>
 #include <ncurses.h>
 #include <time.h>
-//#include <conio.h>
-//#include <cstdlib>
 
-//WINDOW *Okno;
-char 		*liczba="123";
-char 		zn;
-char		zn2;
-int 		i=0;
+char	*liczba="123";
+char	zn;
+char	zn2;
+int		i=0;
 int		pkt[6]={1000,2000,4000,10000,20000,40000};
-int licz=0;
-char		tab[10][30];
-char		*wyn1;
-char		*wyn2;
-char		a;
-int 		k;
-char		X[10];
+int		licz=0;
+char	tab[10][30];
+char	*wyn1;
+char	*wyn2;
+char	a;
+int		k;
+char	X[10];
 int		XI[10];
-char		zmienna2[30];
-int 		zmienna;
-char		wyn[10][30];
-char		nick[30];
-char		S[10];
+char	zmienna2[30];
+int		zmienna;
+char	wyn[10][30];
+char	nick[30];
+char	S[10];
 int		SI[2];
-int 		proc[10];
-char		stat[14][50];
-
-//  licz= atoi(liczba);
-//  move(10,3);  printw("%d",licz);
+int		proc[10];
+char	stat[14][50];
 
 //---------------------------------------------------------------------------------------------
  
- void ekran()
+void ekran()
 {
-  move(2,5);  printw("ROSYJSKA RULETKA");  
-  move(4,3);  printw("1.\t GRAJ");
-  move(5,3);  printw("2.\t Wyniki");
-  move(6,3);  printw("3.\t Statystyki");
-  move(7,3);  printw("4.\t Wyjdź");
-
-  //refresh();   
+	move(2,5);  printw("ROSYJSKA RULETKA");  
+	move(4,3);  printw("1.\t GRAJ");
+	move(5,3);  printw("2.\t Wyniki");
+	move(6,3);  printw("3.\t Statystyki");
+	move(7,3);  printw("4.\t Wyjdź");
 }
 
 //--------------------------------------------------------------------------------------
 
- void losuj()
+void losuj()
 {
-  srand(time(0));
-  i= rand()%6;
+	srand(time(0));
+	i= rand()%6;
+	
 	FILE *fp; 
 	fp= fopen("liczba.txt","w");
 	fprintf(fp,"%d",i);
 	fclose(fp);
 }
 
- int sprawdz_miejsce(int score)
+int sprawdz_miejsce(int score)
 {
 	int j,w,g;	
 	
@@ -77,69 +69,70 @@ char		stat[14][50];
 	{
 		w=0;
 		g=0;
-	  while ((a=getc(fp))!='\n')
-          {
-           if (w==2 && a!='\t') {
-		X[g]=a; g++;		
-		}
+		while ((a=getc(fp))!='\n')
+		{
+			if (w==2 && a!='\t') {
+				X[g]=a; g++;		
+			}
 
-           if(a=='\t') w=2;  
-          } 
-	  XI[k]= atoi(X);
-	  for(j=0;j<10;j++) X[j]='\0';
+			if(a=='\t') w=2;	 
+		}
+		
+		XI[k]= atoi(X);
+		for(j=0;j<10;j++) X[j]='\0';
 	}
 
 	fclose(fp);
 
 	for (k=11;k>=1;k--)
 	{
-	  if (k==1) {return 1; break;}
+		if (k==1) {return 1;}
 
-	  if(XI[k-2]>score)
-	  {
-	    return k;
-	    break;
-	  }
+		if(XI[k-2]>score)
+		{
+			return k;
+		}
 	}
 }
 
- void statystyka1(int x)
+void statystyka1(int x)
 {	
 	int j=0,w=0,z=0,g=0,y=0;
 
- 	FILE *fp;
+	FILE *fp;
 	fp= fopen("statystyka1.txt","r");
 
 	while((a=getc(fp))!=EOF)
 	{	
-	  if (w==0)
-	  {
-	    tab[z][g]= a;
-	    g++;
-	    if (a=='\n') {z++; g=0;}
-	  }
-	  else
-	  {
-	    while ((a=getc(fp))!='\n')
-	    {
-		if (a==EOF) break;
+		if (w==0)
+		{
+			tab[z][g]= a;
+			g++;
+			if (a=='\n') {z++; g=0;}
+		}
+		else
+		{
+			while ((a=getc(fp))!='\n')
+			{
+				if (a==EOF) break;
 
-	      if (a!='\t')
-	      {
-		S[j]=a;
-		j++;
-	      }
-	    }
-	      SI[y]=atoi(S);
-	      for(j=0;j<10;j++) S[j]='\0';
-	      y++;
-	      j=0;
-	      w=0;
-	      g=0;
-	      z++;
-	  }
-
-	  if (a=='>') w=1;
+				if (a!='\t')
+				{
+					S[j]=a;
+					j++;
+				}
+			}
+			SI[y]=atoi(S);
+			for(j=0;j<10;j++) S[j]='\0';
+			
+			y++;
+			j=0;
+			w=0;
+			g=0;
+			z++;
+		}
+		
+		if (a=='>') w=1;
 	}
 	
 	fclose(fp);
@@ -154,12 +147,12 @@ char		stat[14][50];
 	{
 		if (k<4)
 		{
-		 fprintf(fs,"%s",tab[k]);
+			fprintf(fs,"%s",tab[k]);
 		} 
 		else
 		{
-		 fprintf(fs,"%s\t\t%d\n",tab[k],SI[j]);
-		 j++;
+			fprintf(fs,"%s\t\t%d\n",tab[k],SI[j]);
+			j++;
 		}
 	}
 
@@ -171,43 +164,45 @@ char		stat[14][50];
 	}
 }
 
- void statystyka2(int x)
+void statystyka2(int x)
 {	
 	int j=0,w=0,z=0,g=0,y=0;
 
- 	FILE *fp;
+	FILE *fp;
 	fp= fopen("statystyka2.txt","r");
 
 	while((a=getc(fp))!=EOF)
 	{	
-	  if (w==0)
-	  {
-	    stat[z][g]= a;
-	    g++;
-	    if (a=='\n') {z++; g=0;}
-	  }
-	  else
-	  {
-	    while ((a=getc(fp))!='\n')
-	    {
-		if (a==EOF) break;
+		if (w==0)
+		{
+			stat[z][g]= a;
+			g++;
+		
+			if (a=='\n') {z++; g=0;}
+		}
+		else
+		{
+			while ((a=getc(fp))!='\n')
+			{
+				if (a==EOF) break;
 
-	      if (a!='\t')
-	      {
-		X[j]=a;
-		j++;
-	      }
-	    }
-	      XI[y]=atoi(X);
-	      for(j=0;j<10;j++) X[j]='\0';
-	      y++;
-	      j=0;
-	      w=0;
-	      g=0;
-	      z++;
-	  }
+				if (a!='\t')
+				{
+					X[j]=a;
+					j++;
+				}
+			}
+			XI[y]=atoi(X);
+			for(j=0;j<10;j++) X[j]='\0';
+			
+			y++;
+			j=0;
+			w=0;
+			g=0;
+			z++;
+		}
 
-	  if (a=='>') w=1;
+		if (a=='>') w=1;
 	}
 	
 	fclose(fp);
@@ -231,12 +226,12 @@ char		stat[14][50];
 	{
 		if (k<4)
 		{
-		 fprintf(fs,"%s",stat[k]);
+			fprintf(fs,"%s",stat[k]);
 		} 
 		else
 		{
-		 fprintf(fs,"%s\t\t%d\n",stat[k],XI[j]);
-		 j++;
+			fprintf(fs,"%s\t\t%d\n",stat[k],XI[j]);
+			j++;
 		}
 	}
 
@@ -248,9 +243,9 @@ char		stat[14][50];
 	}
 }
 
- void zapis_wyniku(char *nick, int punkty)
+void zapis_wyniku(char *nick, int punkty)
 {
- 	int j,w,g;	
+	int j,w,g;	
 	
 	FILE *fp;
 	fp= fopen("wyniki.txt","r");
@@ -260,56 +255,54 @@ char		stat[14][50];
 		j=0;
 		w=0;
 		g=0;
-	  while ((a=getc(fp))!='\n')
-          {
-	   if (a=='\t') w=0;
+		while ((a=getc(fp))!='\n')
+		{
+			if (a=='\t') w=0;
 
-           if (w==1) {
-		tab[k][j]=a;
-		j++;
+			if (w==1) {
+				tab[k][j]=a;
+				j++;
+			}
+
+			if (w==2 && a!='\t') {
+				X[g]=a; g++;		
+			}
+
+			if(a==' ') w=1;
+			if(a=='\t') w=2;	 
 		}
-
-           if (w==2 && a!='\t') {
-		X[g]=a; g++;		
-		}
-
-	   if(a==' ') w=1;
-           if(a=='\t') w=2;  
-          } 
-	  XI[k]= atoi(X);
-	  for(j=0;j<10;j++) X[j]='\0';
+		XI[k]= atoi(X);
+		for(j=0;j<10;j++) X[j]='\0';
 	}
 
 	fclose(fp);
-	//*zmienna2="";
 	
 	for (k=9;k>=0;k--)
 	{
-	  if(XI[k]<punkty)
-	  {
-	    zmienna= XI[k];
-	    for(j=0;j<30;j++) zmienna2[j]='\0'; 
-	    for(j=0;j<30;j++) zmienna2[j]= tab[k][j];
-	    XI[k]= punkty;
-	    for(j=0;j<30;j++) tab[k][j]='\0';
-	    for(j=0;j<30;j++) tab[k][j]= nick[j];
-
-		if(k!=9)
+		if(XI[k]<punkty)
 		{
-		  //*tab[k+1]="";
-		  XI[k+1]=zmienna;
-		  for(j=0;j<30;j++) tab[k+1][j]='\0';
-		  for(j=0;j<30;j++) tab[k+1][j]=zmienna2[j];
+			zmienna= XI[k];
+			for(j=0;j<30;j++) zmienna2[j]='\0'; 
+			for(j=0;j<30;j++) zmienna2[j]= tab[k][j];
+			
+			XI[k]= punkty;
+			for(j=0;j<30;j++) tab[k][j]='\0';
+			for(j=0;j<30;j++) tab[k][j]= nick[j];
+
+			if(k!=9)
+			{
+				XI[k+1]=zmienna;
+				for(j=0;j<30;j++) tab[k+1][j]='\0';
+				for(j=0;j<30;j++) tab[k+1][j]=zmienna2[j];
+			}
 		}
-	  }
-	  else {break;}
+		else {break;}
 	}
 
 	FILE *fg;
 	fg= fopen("wyniki.txt","w");
 	for (k=0;k<10;k++)
 	{
-		//fprintf(fs,"RULETKA\n");
 		fprintf(fg,"%d. %s\t\t%d\n",k+1,tab[k],XI[k]);
 	}
 
@@ -321,315 +314,308 @@ char		stat[14][50];
 	}
 }
 
- void runda_40(int punkty, int runda)
+void runda_40(int punkty, int runda)
 {
 	clear();
-       	//refresh();
 	int j=0;
 	punkty= punkty+5000;
 
-	move(3,3);  printw("GRATULUJEMY!!! PRZESZEDLES 40 RUNDE!!! -> +5000pkt nagrody");
-	move(6,6);  printw("TWOJ WYNIK:");
-        move(8,6);  printw("RUNDA: %d",runda);
-       	move(9,6);  printw("PUNKTY: %d",punkty);
+	move(3,3);	printw("GRATULUJEMY!!! PRZESZEDLES 40 RUNDE!!! -> +5000pkt nagrody");
+	move(6,6);	printw("TWOJ WYNIK:");
+	move(8,6);	printw("RUNDA: %d",runda);
+	move(9,6);	printw("PUNKTY: %d",punkty);
 
 	if (punkty>0)
 	{
-	    if (sprawdz_miejsce(punkty)<=10)
-	    {
-	  	move(10,6);  printw("MIEJSCE: %d",sprawdz_miejsce(punkty));
-	  	move(12,6);  printw("PODAJ NICK: ");
-	  	refresh();
- 	  	move(13,6);  //scanw("%s",zmienna2);
-	  	while ((a=getch())!='\n')
-	   	{
-  	   	  if (a==' ') break;
-		  nick[j]=a; j++;
-	   	}
-  	  	refresh();
-	  	zapis_wyniku (nick,punkty);
-	  	statystyka1(1);
+		if (sprawdz_miejsce(punkty)<=10)
+		{
+			move(10,6);	 printw("MIEJSCE: %d",sprawdz_miejsce(punkty));
+			move(12,6);	 printw("PODAJ NICK: ");
+			refresh();
+			move(13,6);
+			
+			while ((a=getch())!='\n')
+			{
+				if (a==' ') break;
+				nick[j]=a; j++;
+			}
+			refresh();
+			zapis_wyniku (nick,punkty);
+			statystyka1(1);
 	
-	  	for(j=0;j<30;j++) zmienna2[j]='\0';
+			for(j=0;j<30;j++) zmienna2[j]='\0';
 
-        	move(15,6); printw(".");
-       	  	refresh();
-       	  	sleep(1);
-       	  	move(15,7); printw(".");
-    	  	refresh();
-       	  	sleep(1);
-       	  	move(15,8); printw(".");
-       	  	refresh();
-       	  	sleep(1); 
-	  	move(15,11); printw("Dokonano zapisu!!!");
-          	refresh();
-          	sleep(3);  
-	    }
-	    else
-	    {
-		move(10,6);  printw("MIEJSCE: po za pierwsza 10");
-		move(12,6);  printw("Twoj wynik nie kwalifikuje sie do zapisu!!!");
-		move(18,4);  printw("1. powrot");
-	   	refresh();
+			move(15,6); printw(".");
+			refresh();
+			sleep(1);
+			move(15,7); printw(".");
+			refresh();
+			sleep(1);
+			move(15,8); printw(".");
+			refresh();
+			sleep(1); 
+			move(15,11); printw("Dokonano zapisu!!!");
+			refresh();
+			sleep(3);  
+		}
+		else
+		{
+			move(10,6);	 printw("MIEJSCE: po za pierwsza 10");
+			move(12,6);	 printw("Twoj wynik nie kwalifikuje sie do zapisu!!!");
+			move(18,4);	 printw("1. powrot");
+			refresh();
 
-		while (1) 
- 		{
-   		 move (18,13);
-   		 zn=getch();  
+			while (1) 
+			{
+				move (18,13);
+				zn=getch();  
 
-	        if (zn=='1')    		
-		 {break;}
-  		else
-    		 {
-      		  move (18,13); printw("   ");
-    		 }
-  		}
-	    }
+				if (zn=='1') {break;}
+				else
+				{
+					move (18,13); printw("   ");
+				}
+			}
+		}
 	}
 	else
 	{
-	   move(12,6);  printw("NIEDOSTATECZNA LICZBA PUNKTOW!!!");
-	   move(18,4);  printw("1. powrot");
-	   refresh();
-       	      while (1) 
- 		{
-   		 move (18,13);
-   		 zn=getch();  
+		move(12,6);	printw("NIEDOSTATECZNA LICZBA PUNKTOW!!!");
+		move(18,4);	printw("1. powrot");
+		refresh();
+		
+		while (1) 
+		{
+			move (18,13);
+			zn=getch();  
 
-	        if (zn=='1')    		
-		 {break;}
-  		else
-    		 {
-      		  move (18,13); printw("   ");
-    		 }
-  		}
+			if (zn=='1') {break;}
+			else
+			{
+				move (18,13); printw("   ");
+			}
+		}
 	}
 
-       	clear();
-       	refresh();
-       	ekran();
+	clear();
+	refresh();
+	ekran();
 }
 
 //
-
- void GRA()
+void GRA()
 {
-  int strzal=0;
-  int runda=1;
-  int punkty=0;
+	int strzal=0;
+	int runda=1;
+	int punkty=0;
 
-  clear();
-  refresh();
-  
-  losuj();
-    
-  move(2,5);  printw("ROSYJSKA RULETKA");
-  //move(4,3);  printw("%d",a);
-  move(4,1);  printw("RUNDA: %d",runda);
-  move(5,1);  printw("STRZAL nr (pkt): %d (%d)     ",strzal+1,pkt[strzal]);
-  move(6,1);  printw("PUNKTY: %d     ",punkty);
-
-  move(9,3);  printw("strzal 1 -");
-  move(10,3);  printw("strzal 2 -");
-  move(11,3);  printw("strzal 3 -");
-  move(12,3);  printw("strzal 4 -");
-  move(13,3);  printw("strzal 5 -");
-  move(14,3);  printw("strzal 6 -");
-
-  move(18,4);  printw("1. strzal\t2. zakrec\t3. rezygnuj\t4. powrot");
-
-  for(;;)
-  {
-    move(strzal+9,15);  printw("<-");
-    zn2=getch();
-
-    if (zn2=='1')
-     {
-	move(strzal+9,15); printw(".  ");
-        refresh();
-        sleep(1);
-        move(strzal+9,16); printw(". ");
-        refresh();
-        sleep(1);
-        move(strzal+9,17); printw(".");
-        refresh();
-        sleep(1);
-
-	if(strzal==i)
-	{
-          move(strzal+9,15); printw("   BANG!!!");
-	  statystyka1(0);
-	  statystyka2(runda);
-	  refresh();
-          sleep(3);
-	  punkty= punkty- pkt[strzal]*2;
-          clear();
-          refresh();
-          ekran();
-          break;
-	}
-
-	if(strzal!=i)
-	{
-          move(strzal+9,15);  printw("   +");
-          punkty= punkty+ pkt[strzal];
-          //usleep(30000);
-          refresh();
-          runda++;
-	    if (runda==41) {runda_40(punkty,runda-1); break;}
-
-          strzal++;
-          move(4,1);  printw("RUNDA: %d",runda);
-          move(5,1);  printw("STRZAL nr (pkt): %d (%d)     ",strzal+1,pkt[strzal]);
-          move(6,1);  printw("PUNKTY: %d     ",punkty);
-          //move(strzal+9,15);  printw("");	  
-	}
-     }
-
-    else if (zn2=='2')
-     {
-	losuj();
-	punkty= punkty-1000;
-
-	  move(9,3);  printw("strzal 1 -      ");
-	  move(10,3);  printw("strzal 2 -      ");
-	  move(11,3);  printw("strzal 3 -      ");
-	  move(12,3);  printw("strzal 4 -      ");
-	  move(13,3);  printw("strzal 5 -      ");
-	  move(14,3);  printw("strzal 6 -      ");
-	
-	refresh();
-	runda++;
-	
-	if (runda==41) {runda_40(punkty,runda-1); break;}
-
-	strzal=0;
-
-	move(4,1);  printw("RUNDA: %d",runda);
-        move(5,1);  printw("STRZAL nr (pkt): %d (%d)     ",strzal+1,pkt[strzal]);
-        move(6,1);  printw("PUNKTY: %d     ",punkty);
-     }
-
-    else if (zn2=='3')
-     {
 	clear();
-        //refresh();
-	int j=0;
-
-	punkty= punkty-5000;
-
-	move(3,3);  printw("Zrezygnowales z dalszej gry -> -5000pkt kary");
-	move(6,6);  printw("TWOJ WYNIK:");
-        move(8,6);  printw("RUNDA: %d",runda);
-        move(9,6);  printw("PUNKTY: %d",punkty);
-
-	if (punkty>0)
-	{
-	  if (sprawdz_miejsce(punkty)<=10)
-	    {
-	  	move(10,6);  printw("MIEJSCE: %d",sprawdz_miejsce(punkty));
-	  	move(12,6);  printw("PODAJ NICK: ");
-	  	refresh();
- 	  	move(13,6);  //scanw("%s",zmienna2);
-	  	while ((a=getch())!='\n')
-	   	{
-  	   	  if (a==' ') break;
-		  nick[j]=a; j++;
-	   	}
-  	  	refresh();
-	  	zapis_wyniku (nick,punkty);
-	  	statystyka1(1);
+	refresh();
+  
+	losuj();
 	
-	  	for(j=0;j<30;j++) zmienna2[j]='\0';
+	move(2,5);  printw("ROSYJSKA RULETKA");
+	move(4,1);  printw("RUNDA: %d",runda);
+	move(5,1);  printw("STRZAL nr (pkt): %d (%d)	   ",strzal+1,pkt[strzal]);
+	move(6,1);  printw("PUNKTY: %d	 ",punkty);
 
-        	move(15,6); printw(".");
-       	  	refresh();
-       	  	sleep(1);
-       	  	move(15,7); printw(".");
-    	  	refresh();
-       	  	sleep(1);
-       	  	move(15,8); printw(".");
-       	  	refresh();
-       	  	sleep(1); 
-	  	move(15,11); printw("Dokonano zapisu!!!");
-          	refresh();
-          	sleep(3);  
-	    }
-	    else
-	    {
-		move(10,6);  printw("MIEJSCE: po za pierwsza 10");
-		move(12,6);  printw("Twoj wynik nie kwalifikuje sie do zapisu!!!");	
-		move(18,4);  printw("1. powrot");
-	   	refresh();
+	move(9,3);  printw("strzal 1 -");
+	move(10,3);  printw("strzal 2 -");
+	move(11,3);  printw("strzal 3 -");
+	move(12,3);  printw("strzal 4 -");
+	move(13,3);  printw("strzal 5 -");
+	move(14,3);  printw("strzal 6 -");
 
-		while (1) 
- 		{
-   		 move (18,13);
-   		 zn=getch();  
+	move(18,4);  printw("1. strzal\t2. zakrec\t3. rezygnuj\t4. powrot");
 
-	        if (zn=='1')    		
-		 {break;}
-  		else
-    		 {
-      		  move (18,13); printw("   ");
-    		 }
-  		}
-	    }
-	}
-	else
+	for(;;)
 	{
-	   move(12,6);  printw("NIEDOSTATECZNA LICZBA PUNKTOW!!!");
-	   move(18,4);  printw("1. powrot");
-	   refresh();
-              while (1) 
-  		{
-   		 move (18,13);
-   		 zn=getch();  
+		move(strzal+9,15);	printw("<-");
+		zn2=getch();
 
-	        if (zn=='1')    		
-		 {break;}
-  		else
-    		 {
-      		  move (18,13); printw("   ");
-    		 }
-  		}
+		if (zn2=='1')
+		{
+			move(strzal+9,15); printw(".  ");
+			refresh();
+			sleep(1);
+			move(strzal+9,16); printw(". ");
+			refresh();
+			sleep(1);
+			move(strzal+9,17); printw(".");
+			refresh();
+			sleep(1);
+
+			if(strzal==i)
+			{
+				move(strzal+9,15); printw("	BANG!!!");
+				statystyka1(0);
+				statystyka2(runda);
+				refresh();
+				sleep(3);
+				
+				punkty= punkty- pkt[strzal]*2;
+				clear();
+				refresh();
+				ekran();
+				break;
+			}
+
+			if(strzal!=i)
+			{
+				move(strzal+9,15);  printw("   +");
+				punkty= punkty+ pkt[strzal];
+
+				refresh();
+				runda++;
+				if (runda==41) {runda_40(punkty,runda-1); break;}
+
+				strzal++;
+				move(4,1);  printw("RUNDA: %d",runda);
+				move(5,1);  printw("STRZAL nr (pkt): %d (%d)	   ",strzal+1,pkt[strzal]);
+				move(6,1);  printw("PUNKTY: %d	 ",punkty);
+			}
+		}
+		else if (zn2=='2')
+		{
+			losuj();
+			punkty= punkty-1000;
+
+			move(9,3);  printw("strzal 1 -      ");
+			move(10,3);  printw("strzal 2 -      ");
+			move(11,3);  printw("strzal 3 -      ");
+			move(12,3);  printw("strzal 4 -      ");
+			move(13,3);  printw("strzal 5 -      ");
+			move(14,3);  printw("strzal 6 -      ");
+	
+			refresh();
+			runda++;
+	
+			if (runda==41) {runda_40(punkty,runda-1); break;}
+
+			strzal=0;
+
+			move(4,1);	printw("RUNDA: %d",runda);
+			move(5,1);	printw("STRZAL nr (pkt): %d (%d)     ",strzal+1,pkt[strzal]);
+			move(6,1);	printw("PUNKTY: %d     ",punkty);
+		}
+		else if (zn2=='3')
+		{
+			clear();
+			int j=0;
+
+			punkty= punkty-5000;
+
+			move(3,3);	printw("Zrezygnowales z dalszej gry -> -5000pkt kary");
+			move(6,6);	printw("TWOJ WYNIK:");
+			move(8,6);	printw("RUNDA: %d",runda);
+			move(9,6);	printw("PUNKTY: %d",punkty);
+
+			if (punkty>0)
+			{
+				if (sprawdz_miejsce(punkty)<=10)
+				{
+					move(10,6);	 printw("MIEJSCE: %d",sprawdz_miejsce(punkty));
+					move(12,6);	 printw("PODAJ NICK: ");
+					refresh();
+					move(13,6);
+					
+					while ((a=getch())!='\n')
+					{
+						if (a==' ') break;
+						nick[j]=a; j++;
+					}
+					refresh();
+					zapis_wyniku (nick,punkty);
+					statystyka1(1);
+	
+					for(j=0;j<30;j++) zmienna2[j]='\0';
+
+					move(15,6); printw(".");
+					refresh();
+					sleep(1);
+					move(15,7); printw(".");
+					refresh();
+					sleep(1);
+					move(15,8); printw(".");
+					refresh();
+					sleep(1); 
+					move(15,11); printw("Dokonano zapisu!!!");
+					refresh();
+					sleep(3);  
+				}
+				else
+				{
+					move(10,6);	 printw("MIEJSCE: po za pierwsza 10");
+					move(12,6);	 printw("Twoj wynik nie kwalifikuje sie do zapisu!!!");	
+					move(18,4);	 printw("1. powrot");
+					refresh();
+
+					while (1) 
+					{
+						move (18,13);
+						zn=getch();  
+
+						if (zn=='1') {break;}
+						else
+						{
+							move (18,13); printw("   ");
+						}
+					}
+				}
+			}
+			else
+			{
+				move(12,6);	printw("NIEDOSTATECZNA LICZBA PUNKTOW!!!");
+				move(18,4);	printw("1. powrot");
+				refresh();
+				
+				while (1) 
+				{
+					move (18,13);
+					zn=getch();  
+
+					if (zn=='1') {break;}
+					else
+					{
+						move (18,13); printw("   ");
+					}
+				}
+			}
+			
+			clear();
+			refresh();
+			ekran();
+			break;
+		}
+		else if (zn2=='4')
+		{
+			clear();
+			refresh();
+			ekran();
+			break;
+		}
+		else
+		{
+			move(strzal+9,15); printw("     ");
+		}
 	}
-
-        clear();
-        refresh();
-        ekran();
-        break;
-     }
-
-    else if (zn2=='4')
-     {
-       clear();
-       refresh();
-       ekran();
-       break;
-     }
-    else
-     {
-        move(strzal+9,15); printw("     ");
-     }
-  }
 }
-
 
 //-----------------------------------------------------------------------------
 
- void koniec(){
-    curs_set(1);
-    clear();
-    refresh();
-    endwin();
-    exit(0); 
+void koniec()
+{
+	curs_set(1);
+	clear();
+	refresh();
+	endwin();
+	exit(0); 
 }
 
- void wyniki()
+void wyniki()
 {
 	clear();
-        refresh();
+	refresh();
 	
 	int j;	
 
@@ -639,11 +625,11 @@ char		stat[14][50];
 	for (k=0;k<10;k++)
 	{
 		j=0;
-	  while ((a=getc(fp))!='\n')
-          {
-           tab[k][j]=a;
-		j++;
-          } 
+		while ((a=getc(fp))!='\n')
+		{
+			tab[k][j]=a;
+			j++;
+		}
 	}
 
 	fclose(fp);
@@ -658,32 +644,32 @@ char		stat[14][50];
 		for(j=0;j<30;j++) tab[k][j]='\0';
 	}
 
-//
-	move(18,4);  printw("1. powrot");
+	//
+	move(18,4);	 printw("1. powrot");
 
 	for(;;)
-        {
-	 move (18,13);
-         zn2=getch();
+	{
+		move (18,13);
+		zn2=getch();
 	 
-	if (zn2=='1')
-          {
-           clear();
-           refresh();
-           ekran();
-           break;
-          }
-	else
-	  {
-	    move (18,13); printw("   ");
-	  }
+		if (zn2=='1')
+		{
+			clear();
+			refresh();
+			ekran();
+			break;
+		}
+		else
+		{
+			move (18,13); printw("	 ");
+		}
 	}
 } 
 
- void statystyki()
+void statystyki()
 {
 	clear();
-        refresh();
+	refresh();
 	
 	int j;	
 
@@ -693,18 +679,18 @@ char		stat[14][50];
 	for (k=0;k<6;k++)
 	{
 		j=0;
-	  while ((a=getc(fp))!='\n')
-          {
-           tab[k][j]=a;
-		j++;
-          } 
+		while ((a=getc(fp))!='\n')
+		{
+			tab[k][j]=a;
+			j++;
+		}
 	}
 
 	fclose(fp);
 
 	for (k=0;k<6;k++)
 	{
-		move(k,3);  printw("%s",tab[k]);
+		move(k,3);	printw("%s",tab[k]);
 	}
 	
 	for (k=0;k<6;k++)
@@ -712,24 +698,23 @@ char		stat[14][50];
 		for(j=0;j<30;j++) tab[k][j]='\0';
 	}
 
-//
-
+	//
 	FILE *fs;
 	fs= fopen("statystyka2.txt","r");
 	
 	for (k=0;k<14;k++)
 	{
 		j=0;
-	  while ((a=getc(fs))!='\n')
-          {
-           stat[k][j]=a;
-		j++;
-          } 
+		while ((a=getc(fs))!='\n')
+		{
+			stat[k][j]=a;
+			j++;
+		}
 	}
 
 	fclose(fs);
 
-	move(7,0);  printw("##################################################################");
+	move(7,0);	printw("##################################################################");
 	
 	for (k=0;k<14;k++)
 	{
@@ -741,66 +726,57 @@ char		stat[14][50];
 		for(j=0;j<50;j++) stat[k][j]='\0';
 	}
 
-//
+	//
 	refresh();
-	move(23,4);  printw("1. powrot");
+	move(23,4);	 printw("1. powrot");
 	
-
 	for(;;)
-        {
-	 move(23,13);
-         zn2=getch();
+	{
+		move(23,13);
+		zn2=getch();
 	 
-	if (zn2=='1')
-          {
-           clear();
-           refresh();
-           ekran();
-           break;
-          }
-	else
-	  {
-	    move (23,13); printw("   ");
-	  }
+		if (zn2=='1')
+		{
+			clear();
+			refresh();
+			ekran();
+			break;
+		}
+		else
+		{
+			move (23,13); printw("	 ");
+		}
 	}
 } 
 
 // =================================================
-int main(int agrc, char **argv) {
-  
-  
-  initscr();
-  curs_set(0);
-  clear();
-  refresh();
+int main(int agrc, char **argv)
+{  
+	initscr();
+	curs_set(0);
+	clear();
+	refresh();
 
-  ekran();
+	ekran();
 
 
-   while (1) 
-  {
-   move (8,0);
-   zn=getch();  
+	while (1) 
+	{
+		move (8,0);
+		zn=getch();	
 
-   if (zn=='1')
-    {GRA();}
-   else if (zn=='2')
-    {wyniki();}
-   else if (zn=='3')
-    {statystyki();}
-   else if (zn=='4')
-    {break;}
-   else
-    {
-      move (8,0); printw("   ");
-    }
-  }
+		if (zn=='1') {GRA();}
+		else if (zn=='2') {wyniki();}
+		else if (zn=='3') {statystyki();}
+		else if (zn=='4') {break;}
+		else
+		{
+			move (8,0); printw("   ");
+		}
+	}
 
-  refresh();
-   
-  //usleep(30000000);      
+	refresh();   
 
-  koniec();
-  return (0); 
+	koniec();
+	return (0); 
 }
-

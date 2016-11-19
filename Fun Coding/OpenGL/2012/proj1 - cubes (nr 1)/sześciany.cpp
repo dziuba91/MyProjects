@@ -6,50 +6,47 @@
 // **** //
 */
 
-
-
 #include <windows.h>		// Header File For Windows
 #include <gl\gl.h>			// Header File For The OpenGL32 Library
 #include <gl\glu.h>			// Header File For The GLu32 Library
 #include <gl\glaux.h>		// Header File For The Glaux Library
 
+HDC			hDC=NULL;		// Prywatny kontekst u¿¹dzenia GDI
+HGLRC		hRC=NULL;		// Kontekst rysuj¹cy
+HWND		hWnd=NULL;		// Uchwyt naszego okna
+HINSTANCE	hInstance;		// Instancja aplikacji
 
-HDC			hDC=NULL;         // Prywatny kontekst u¿¹dzenia GDI
-HGLRC		hRC=NULL;         // Kontekst rysuj¹cy
-HWND		hWnd=NULL;         // Uchwyt naszego okna
-HINSTANCE	hInstance;         // Instancja aplikacji
+bool keys[256];				// Tablica klawiszy - wciœniêty czy nie
+bool active=TRUE;		  	// Flaga - czy okno jest aktywne?
+bool fullscreen=TRUE;		// Uruchom aplikacje na pe³nym ekranie
 
-bool keys[256];         // Tablica klawiszy - wciœniêty czy nie
-bool active=TRUE;         // Flaga - czy okno jest aktywne?
-bool fullscreen=TRUE;         // Uruchom aplikacje na pe³nym ekranie
+float odl = 3; 				//odelg³oœæ miêdzy kwadracikami
+float oddalenie = -20;		//oddalenie widoku (oddalenie miejsca rysowania bry³y)
+float kat = 35; 			//k¹]t rysowania bry³y 
+int ilosc = 3; 				//wskazuje na iloœæ jednego rz¹du szeœcianów (liczba szeœcianów = ilosc * ilosc * ilosc) 
 
-float odl = 3; //odelg³oœæ miêdzy kwadracikami
-float oddalenie = -20;  //oddalenie widoku (oddalenie miejsca rysowania bry³y)
-float kat = 35; //k¹]t rysowania bry³y 
-int ilosc = 3; //wskazuje na iloœæ jednego rz¹du szeœcianów (liczba szeœcianów = ilosc * ilosc * ilosc) 
-
-int tryb =1; //tryby poruszania siê
+int tryb =1; 				//tryby poruszania siê
 int tryb_3 =1;
 int tryb_4 =1;
 
-GLfloat rquad_1;         // K¹t obroty czworok¹ta ca³ego szeœcianu
-GLfloat rquad_2;		 // K¹t obrotu poszczególnych szeœcianów
+GLfloat rquad_1;		 	// K¹t obroty czworok¹ta ca³ego szeœcianu
+GLfloat rquad_2;		 	// K¹t obrotu poszczególnych szeœcianów
 
-float color1 = 0.8;        //wskaŸniki kontroluj¹ce kolor na trzech szeœcianach
+float color1 = 0.8;		   	//wskaŸniki kontroluj¹ce kolor na trzech szeœcianach
 float color2 = 0;
 
 GLfloat material[]={0.0, 0.0, 0.8, 0.0};			//kolory materia³ów
 GLfloat material1[]={color1, 0.0, color2, 0.0};
 GLfloat material2[]={0.0, color1, color2, 0.0};
 GLfloat material3[]={color1, color1, color2, 0.0};
-GLfloat ambient[]={0.3, 0.3, 0.3, 0.0};			//Oœwietlenia
+GLfloat ambient[]={0.3, 0.3, 0.3, 0.0};				//Oœwietlenia
 GLfloat diffuse[]={0.0, 0.0, 0.0, 0.5};
 GLfloat position[]={15.0, 30.0, 0.0, 3.0}; 
-GLfloat specular[]={0.0, 0.0, 0.0, 0.5};         // Wartoœci œwiat³a rozproszonego 
-
+GLfloat specular[]={0.0, 0.0, 0.0, 0.5};		 	// Wartoœci œwiat³a rozproszonego 
 
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 
+//
 GLvoid ReSizeGLScene(GLsizei width, GLsizei height)		// Resize And Initialize The GL Window
 {
 	if (height==0)										// Prevent A Divide By Zero By
@@ -79,7 +76,6 @@ int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);	// Really Nice Perspective Calculations
 	
 	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
-	//glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
 	glLightfv(GL_LIGHT0, GL_POSITION, position);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
 
@@ -91,48 +87,48 @@ int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 
 void DrawCube(float X)
 {
-	glBegin(GL_QUADS);         // Zacznij rysowanie szeœcianu
+	glBegin(GL_QUADS);		   // Zacznij rysowanie szeœcianu
 		glNormal3f( 0.0f, 0.0f, 1.0f);
-		glVertex3f(-X, -X,  X);
-		glVertex3f( X, -X,  X);
-		glVertex3f( X,  X,  X);
-		glVertex3f(-X,  X,  X);
+		glVertex3f(-X, -X,	X);
+		glVertex3f( X, -X,	X);
+		glVertex3f( X,	X,	X);
+		glVertex3f(-X,	X,	X);
 
 		glNormal3f( 0.0f, 0.0f,-1.0f);
 		glVertex3f(-X, -X, -X);
-		glVertex3f(-X,  X, -X);
-		glVertex3f( X,  X, -X);
+		glVertex3f(-X,	X, -X);
+		glVertex3f( X,	X, -X);
 		glVertex3f( X, -X, -X);
 
 		glNormal3f( 0.0f, 1.0f, 0.0f);
-		glVertex3f(-X,  X, -X);
-		glVertex3f(-X,  X,  X);
-		glVertex3f( X,  X,  X);
-		glVertex3f( X,  X, -X);
+		glVertex3f(-X,	X, -X);
+		glVertex3f(-X,	X,	X);
+		glVertex3f( X,	X,	X);
+		glVertex3f( X,	X, -X);
 
 		glNormal3f( 0.0f,-1.0f, 0.0f);
 		glVertex3f(-X, -X, -X);
 		glVertex3f( X, -X, -X);
-		glVertex3f( X, -X,  X);
-		glVertex3f(-X, -X,  X);
+		glVertex3f( X, -X,	X);
+		glVertex3f(-X, -X,	X);
 
 		glNormal3f( 1.0f, 0.0f, 0.0f);
 		glVertex3f( X, -X, -X);
-		glVertex3f( X,  X, -X);
-		glVertex3f( X,  X,  X);
-		glVertex3f( X, -X,  X);
+		glVertex3f( X,	X, -X);
+		glVertex3f( X,	X,	X);
+		glVertex3f( X, -X,	X);
 
 		glNormal3f(-1.0f, 0.0f, 0.0f);
 		glVertex3f(-X, -X, -X);
-		glVertex3f(-X, -X,  X);
-		glVertex3f(-X,  X,  X);
-		glVertex3f(-X,  X, -X); 
-    glEnd();         // Zakoñcz rysowanie czworok¹ta
+		glVertex3f(-X, -X,	X);
+		glVertex3f(-X,	X,	X);
+		glVertex3f(-X,	X, -X); 
+	glEnd();		 // Zakoñcz rysowanie czworok¹ta
 }
 
-int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
+int DrawGLScene(GLvoid)										// Here's Where We Do All The Drawing
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);         // Wyczyœæ ekran i bufor g³êbi
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		// Wyczyœæ ekran i bufor g³êbi
 
 	for(int k=0; k<ilosc; k++)
 	{
@@ -152,7 +148,7 @@ int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
 				if (c==2) c=-1;
 				if (c>2) { c--; c= c*(-1); }
 
-
+				//
 				glLoadIdentity();
 				
 				if (k == 1 && i == j && i == 0)
@@ -180,68 +176,68 @@ int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
 					glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material);
 				}
 
-				glTranslatef(0, 0, oddalenie);         // Oddal
-				glRotatef(kat, 1.0, 0.0, 0.0 );    //Obróæ
+				glTranslatef(0, 0, oddalenie);		   	//Oddal
+				glRotatef(kat, 1.0, 0.0, 0.0 );	   		//Obróæ
 
 
-				glRotatef(rquad_1,0,1.0f,0);         // Obróæ szeœcian wokó³ osi X, Y i Z
+				glRotatef(rquad_1,0,1.0f,0);		 	// Obróæ szeœcian wokó³ osi X, Y i Z
 
 				glTranslatef(odl*a, odl*b, odl*c);
 		
-				glRotatef(rquad_2,0.0f,1.0f,0.0f);         // Obróæ szeœcian wokó³ osi X, Y i Z
+				glRotatef(rquad_2,0.0f,1.0f,0.0f);		// Obróæ szeœcian wokó³ osi X, Y i Z
 				
 				
 				DrawCube(1.0);
 
-				glTranslatef(odl,0.0f,0.0f);    
+				glTranslatef(odl,0.0f,0.0f);	
 			}
 		}
 	}
 
-	if (tryb == 1) rquad_1-=0.5f;         // Zmniejsz licznik obrotu czworok¹ta
-	else if (tryb == 2) rquad_2-=1.0f;         // Zmniejsz licznik obrotu czworok¹ta
+	if (tryb == 1) rquad_1-=0.5f;		  		// Zmniejsz licznik obrotu czworok¹ta
+	else if (tryb == 2) rquad_2-=1.0f;		   	// Zmniejsz licznik obrotu czworok¹ta
 	else if (tryb == 3) 
-		{
-			if (tryb_3 == 1) odl-=0.02f;
-			else odl +=0.03f;
+	{
+		if (tryb_3 == 1) odl-=0.02f;
+		else odl +=0.03f;
 
-			if (odl >= 4) tryb_3 = 1;
-			if (odl <= 3) tryb_3 = 2;
-		}
+		if (odl >= 4) tryb_3 = 1;
+		if (odl <= 3) tryb_3 = 2;
+	}
 	else if (tryb == 4)
+	{
+		if (tryb_4 == 1) 
 		{
-			if (tryb_4 == 1) 
-				{
-					color1-=0.008;
-					color2+=0.008;
+			color1-=0.008;
+			color2+=0.008;
 
-					material1[0]=color1;
-					material1[2]=color2;
-					material2[1]=color1;
-					material2[2]=color2;
-					material3[0]=color1;
-					material3[1]=color1;
-					material3[2]=color2;
-				}
-			else
-				{
-					color1+=0.008;
-					color2-=0.008;
-
-					material1[0]=color1;
-					material1[2]=color2;
-					material2[1]=color1;
-					material2[2]=color2;
-					material3[0]=color1;
-					material3[1]=color1;
-					material3[2]=color2;
-				}
-
-			if (color2 >= 0.8) tryb_4 = 2;
-			if (color2 <= 0.0) tryb_4 = 1;
+			material1[0]=color1;
+			material1[2]=color2;
+			material2[1]=color1;
+			material2[2]=color2;
+			material3[0]=color1;
+			material3[1]=color1;
+			material3[2]=color2;
 		}
-    
-    return TRUE;         // Wszystko ok
+		else
+		{
+			color1+=0.008;
+			color2-=0.008;
+
+			material1[0]=color1;
+			material1[2]=color2;
+			material2[1]=color1;
+			material2[2]=color2;
+			material3[0]=color1;
+			material3[1]=color1;
+			material3[2]=color2;
+		}
+
+		if (color2 >= 0.8) tryb_4 = 2;
+		if (color2 <= 0.0) tryb_4 = 1;
+	}
+	
+	return TRUE;		 // Wszystko ok
 }
 
 GLvoid KillGLWindow(GLvoid)								// Properly Kill The Window
@@ -291,7 +287,6 @@ GLvoid KillGLWindow(GLvoid)								// Properly Kill The Window
  *	height			- Height Of The GL Window Or Fullscreen Mode			*
  *	bits			- Number Of Bits To Use For Color (8/16/24/32)			*
  *	fullscreenflag	- Use Fullscreen Mode (TRUE) Or Windowed Mode (FALSE)	*/
- 
 BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscreenflag)
 {
 	GLuint		PixelFormat;			// Holds The Results After Searching For A Match
@@ -340,7 +335,7 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 			// If The Mode Fails, Offer Two Options.  Quit Or Use Windowed Mode.
 			if (MessageBox(NULL,"The Requested Fullscreen Mode Is Not Supported By\nYour Video Card. Use Windowed Mode Instead?","NeHe GL",MB_YESNO|MB_ICONEXCLAMATION)==IDYES)
 			{
-				fullscreen=FALSE;		// Windowed Mode Selected.  Fullscreen = FALSE
+				fullscreen=FALSE;		// Windowed Mode Selected.	Fullscreen = FALSE
 			}
 			else
 			{
@@ -526,16 +521,9 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 	MSG		msg;									// Windows Message Structure
 	BOOL	done=FALSE;								// Bool Variable To Exit Loop
 
-	//Wy³¹czenie tryby fullscrean
-/*	// Ask The User Which Screen Mode They Prefer
-	if (MessageBox(NULL,"Would You Like To Run In Fullscreen Mode?", "Start FullScreen?",MB_YESNO|MB_ICONQUESTION)==IDNO)
-	{
-		fullscreen=FALSE;							// Windowed Mode
-	}*/
-
 	MessageBox(NULL,"Prze³¹czanie trybów - klawisze: 1, 2, 3, 4", "Info - Keyboard",MB_OK);
 
-	fullscreen=FALSE;							// Windowed Mode
+	fullscreen=FALSE;								// Windowed Mode
 
 	// Create Our OpenGL Window
 	CreateGLWindow("PROJ 1",640,480,16,fullscreen);
@@ -556,31 +544,15 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				DispatchMessage(&msg);				// Dispatch The Message
 			}
 		}
-		else		 							// If There Are No Messages
+		else										// If There Are No Messages
 		{
-			// Draw The Scene.  Watch For ESC Key And Quit Messages From DrawGLScene()
+			// Draw The Scene.	Watch For ESC Key And Quit Messages From DrawGLScene()
 			if (active)								// Program Active?
 			{
 				if (keys[VK_ESCAPE])				// Was ESC Pressed?
 				{
 					done=TRUE;						// ESC Signalled A Quit
 				}
-/*				else if (keys[VK_RIGHT])     //kontrolki do testowania
-				{
-					rquad_1+=0.000001;
-				}
-				else if (keys[VK_LEFT])
-				{
-					rquad_1-=0.000001;
-				}
-				else if (keys[VK_UP])
-				{
-					rquad_2+=0.000001;
-				}
-				else if (keys[VK_DOWN])
-				{
-					rquad_2-=0.000001;
-				}*/
 				else if (keys['1'])
 				{
 					tryb = 1;
@@ -604,19 +576,6 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 					SwapBuffers(hDC);				// Swap Buffers (Double Buffering)
 				}
 			}
-
-			//Kod zmieniaj¹cy okno na tryb pe³noekranowy wy³¹czony //uniemo¿liwienie trybu fullscrean//
-/*			if (keys[VK_F1])						// Is F1 Being Pressed?   
-			{
-				keys[VK_F1]=FALSE;					// If So Make Key FALSE
-				KillGLWindow();						// Kill Our Current Window
-				fullscreen=!fullscreen;				// Toggle Fullscreen / Windowed Mode
-				// Recreate Our OpenGL Window
-				if (!CreateGLWindow("NeHe's OpenGL Framework",640,480,16,fullscreen))
-				{
-					return 0;						// Quit If Window Was Not Created
-				}
-			}*/
 		}
 	}
 

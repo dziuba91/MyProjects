@@ -48,7 +48,7 @@ public:
 			poczatek= koniec;
 		}
 		else
-	    {
+		{
 			koniec->next= p;
 			koniec= p;
 		}
@@ -154,5 +154,5 @@ int main ()
 			cout << endl;
 	}
 
-    return EXIT_SUCCESS;
+	return EXIT_SUCCESS;
 }

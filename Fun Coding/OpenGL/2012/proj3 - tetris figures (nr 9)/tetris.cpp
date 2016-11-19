@@ -6,23 +6,20 @@
 // **** //
 */
 
-
-
 #include <windows.h>		// Header File For Windows
 #include <gl\gl.h>			// Header File For The OpenGL32 Library
 #include <gl\glu.h>			// Header File For The GLu32 Library
 #include <gl\glaux.h>		// Header File For The Glaux Library
 #include <ctime>
 
+HDC			hDC=NULL;		// Prywatny kontekst u¿¹dzenia GDI
+HGLRC		hRC=NULL;		// Kontekst rysuj¹cy
+HWND		hWnd=NULL;		// Uchwyt naszego okna
+HINSTANCE	hInstance;		// Instancja aplikacji
 
-HDC			hDC=NULL;         // Prywatny kontekst u¿¹dzenia GDI
-HGLRC		hRC=NULL;         // Kontekst rysuj¹cy
-HWND		hWnd=NULL;         // Uchwyt naszego okna
-HINSTANCE	hInstance;         // Instancja aplikacji
-
-bool keys[256];         // Tablica klawiszy - wciœniêty czy nie
-bool active=TRUE;         // Flaga - czy okno jest aktywne?
-bool fullscreen=TRUE;         // Uruchom aplikacje na pe³nym ekranie
+bool keys[256];				// Tablica klawiszy - wciœniêty czy nie
+bool active=TRUE;		  	// Flaga - czy okno jest aktywne?
+bool fullscreen=TRUE;		// Uruchom aplikacje na pe³nym ekranie
 
 bool grawitacja = FALSE;
 bool grawitacja2 = FALSE;
@@ -40,25 +37,16 @@ float odl1 = 0;
 float sufit = 12;
 float odl2 = 12;
 float odl3 = 0; 
-float oddalenie = -25;  //oddalenie widoku (oddalenie miejsca rysowania bry³y)
-float kat1 = 0.0; //k¹t rysowania bry³y 
-float kat2 = 0.0; //k¹t rysowania bry³y 
-//int ilosc = 3; //wskazuje na iloœæ jednego rz¹du szeœcianów (liczba szeœcianów = ilosc * ilosc * ilosc) 
+float oddalenie = -25;		//oddalenie widoku (oddalenie miejsca rysowania bry³y)
+float kat1 = 0.0; 			//k¹t rysowania bry³y 
+float kat2 = 0.0; 			//k¹t rysowania bry³y 
 
 int fig = 1;
 int kolor = 1;
-float odl = 2.1; //odelg³oœæ miêdzy kwadracikami
-float obrot = 0.0; //k¹t rysowania figury 
+float odl = 2.1; 			//odelg³oœæ miêdzy kwadracikami
+float obrot = 0.0; 			//k¹t rysowania figury 
 
-int tryb =0; //tryby poruszania siê
-//int tryb_3 =1;
-//int tryb_4 =1;
-
-//GLfloat rquad_1;         // K¹t obroty czworok¹ta ca³ego szeœcianu
-//GLfloat rquad_2;		 // K¹t obrotu poszczególnych szeœcianów
-
-//float color1 = 0.8;        //wskaŸniki kontroluj¹ce kolor na trzech szeœcianach
-//float color2 = 0;
+int tryb =0; 				//tryby poruszania siê
 
 int fig_odl [4];
 int fig_tab [8][4] =  {
@@ -85,18 +73,15 @@ GLfloat material2[]={0.0, 0.8, 0.0, 0.0};			//CZERWONY
 GLfloat material5[]={0.8, 0.8, 0.0, 0.0};			//¿Ó£TY
 GLfloat material4[]={0.8, 0.3, 0.0, 0.0};			//POMARAÑCZOWY
 GLfloat material6[]={0.8, 0.8, 0.8, 0.0};			//BIA£Y
-//GLfloat material[]={0.0, 0.0, 0.8, 0.0};			//kolory materia³ów
-//GLfloat material1[]={color1, 0.0, color2, 0.0};
-//GLfloat material2[]={0.0, color1, color2, 0.0};
-//GLfloat material3[]={color1, color1, color2, 0.0};
-GLfloat ambient[]={0.3, 0.3, 0.3, 0.0};			//Oœwietlenia
+
+GLfloat ambient[]={0.3, 0.3, 0.3, 0.0};				//Oœwietlenia
 GLfloat diffuse[]={0.0, 0.0, 0.0, 0.5};
 GLfloat position[]={15.0, 30.0, 0.0, 3.0}; 
-GLfloat specular[]={0.0, 0.0, 0.0, 0.5};         // Wartoœci œwiat³a rozproszonego 
-
+GLfloat specular[]={0.0, 0.0, 0.0, 0.5};		 	//Wartoœci œwiat³a rozproszonego 
 
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 
+//
 GLvoid ReSizeGLScene(GLsizei width, GLsizei height)		// Resize And Initialize The GL Window
 {
 	if (height==0)										// Prevent A Divide By Zero By
@@ -126,7 +111,6 @@ int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);	// Really Nice Perspective Calculations
 	
 	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
-	//glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
 	glLightfv(GL_LIGHT0, GL_POSITION, position);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
 
@@ -178,506 +162,429 @@ void Color (int numer)
 
 void Draw(float X)
 {
-//		float X = 1.0;
-		float A = X- 0.15;
-		glBegin(GL_QUADS);         // Zacznij rysowanie szeœcianu
-			// (kwadrat) przednia
-			glNormal3f( 0.0f, 0.0f, 1.0f);
-			glVertex3f(-A, -A,  X);
-			glVertex3f( A, -A,  X);
-			glVertex3f( A,  A,  X);
-			glVertex3f(-A,  A,  X);
-
-				// (prostok¹t) pomiêdzy górn¹ i przedni¹
-				glNormal3f( 0.0f, 1.0f, 1.0f);
-				glVertex3f( A,  A,  X);
-				glVertex3f(-A,  A,  X);
-				glVertex3f(-A,  X,  A);
-				glVertex3f( A,  X,  A);
-				////
-
-				// (prostok¹t) pomiêdzy doln¹ i przedni¹
-				glNormal3f( 0.0f,-1.0f, 1.0f);
-				glVertex3f(-A, -A,  X);
-				glVertex3f( A, -A,  X);
-				glVertex3f( A, -X,  A);
-				glVertex3f(-A, -X,  A);
-				////
-
-				// (prostok¹t) pomiêdzy prawym i przedni¹
-				glNormal3f( 1.0f, 0.0f, 1.0f);
-				glVertex3f( A, -A,  X);
-				glVertex3f( A,  A,  X);
-				glVertex3f( X,  A,  A);
-				glVertex3f( X, -A,  A);
-				////
-
-				// (prostok¹t) pomiêdzy lew¹ i przedni¹
-				glNormal3f(-1.0f, 0.0f, 1.0f);
-				glVertex3f(-A, -A,  X);
-				glVertex3f(-A,  A,  X);
-				glVertex3f(-X,  A,  A);
-				glVertex3f(-X, -A,  A);
-				////
-					
-			// (kwadrat) tylnia
-			glNormal3f( 0.0f, 0.0f,-1.0f);
-			glVertex3f(-A, -A, -X);
-			glVertex3f(-A,  A, -X);
-			glVertex3f( A,  A, -X);
-			glVertex3f( A, -A, -X);
-			
-				// (prostok¹t) pomiêdzy górn¹ i tylni¹
-				glNormal3f( 0.0f, 1.0f,-1.0f);
-				glVertex3f( A,  A, -X);
-				glVertex3f(-A,  A, -X);
-				glVertex3f(-A,  X, -A);
-				glVertex3f( A,  X, -A);
-				////
-
-				// (prostok¹t) pomiêdzy doln¹ i tylni¹
-				glNormal3f( 0.0f,-1.0f,-1.0f);
-				glVertex3f(-A, -A, -X);
-				glVertex3f( A, -A, -X);
-				glVertex3f( A, -X, -A);
-				glVertex3f(-A, -X, -A);
-				////
-
-				// (prostok¹t) pomiêdzy prawym i tylni¹
-				glNormal3f( 1.0f, 0.0f,-1.0f);
-				glVertex3f( A, -A, -X);
-				glVertex3f( A,  A, -X);
-				glVertex3f( X,  A, -A);
-				glVertex3f( X, -A, -A);
-				////
-
-				// (prostok¹t) pomiêdzy lew¹ i tylni¹
-				glNormal3f(-1.0f, 0.0f,-1.0f);
-				glVertex3f(-A, -A, -X);
-				glVertex3f(-A,  A, -X);
-				glVertex3f(-X,  A, -A);
-				glVertex3f(-X, -A, -A);
-				////
-
-			// (kwadrat) górna
-			glNormal3f( 0.0f, 1.0f, 0.0f);
-			glVertex3f(-A,  X, -A);
-			glVertex3f(-A,  X,  A);
-			glVertex3f( A,  X,  A);
-			glVertex3f( A,  X, -A);
-
-			// (kwadrat) dolna
-			glNormal3f( 0.0f,-1.0f, 0.0f);
-			glVertex3f(-A, -X, -A);
-			glVertex3f( A, -X, -A);
-			glVertex3f( A, -X,  A);
-			glVertex3f(-A, -X,  A);
-
-			// (kwadrat) prawy
-			glNormal3f( 1.0f, 0.0f, 0.0f);
-			glVertex3f( X, -A, -A);
-			glVertex3f( X,  A, -A);
-			glVertex3f( X,  A,  A);
-			glVertex3f( X, -A,  A);
-			
-				// (prostok¹t) pomiêdzy prawym i górn¹
-				glNormal3f( 1.0f, 1.0f, 0.0f);
-				glVertex3f( A,  X, -A);
-				glVertex3f( A,  X,  A);
-				glVertex3f( X,  A,  A);
-				glVertex3f( X,  A, -A);
-				////
-
-				// (prostok¹t) pomiêdzy prawym i doln¹
-				glNormal3f( 1.0f,-1.0f, 0.0f);
-				glVertex3f( X, -A, -A);
-				glVertex3f( X, -A,  A);
-				glVertex3f( A, -X,  A);
-				glVertex3f( A, -X, -A);
-				////
-
-			// (kwadrat) lewy
-			glNormal3f(-1.0f, 0.0f, 0.0f);
-			glVertex3f(-X, -A, -A);
-			glVertex3f(-X, -A,  A);
-			glVertex3f(-X,  A,  A);
-			glVertex3f(-X,  A, -A); 
-
-				// (prostok¹t) pomiêdzy lewym i górn¹
-				glNormal3f(-1.0f, 1.0f, 0.0f);
-				glVertex3f(-A,  X, -A);
-				glVertex3f(-A,  X,  A);
-				glVertex3f(-X,  A,  A);
-				glVertex3f(-X,  A, -A);
-				////
-
-				// (prostok¹t) pomiêdzy lewym i doln¹
-				glNormal3f(-1.0f,-1.0f, 0.0f);
-				glVertex3f(-X, -A, -A);
-				glVertex3f(-X, -A,  A);
-				glVertex3f(-A, -X,  A);
-				glVertex3f(-A, -X, -A);
-				////
-		glEnd();         // Zakoñcz rysowanie czworok¹ta
-
+	float A = X- 0.15;
+	
+	glBegin(GL_QUADS);		   // Zacznij rysowanie szeœcianu
 		
-					// ^^^ TRÓJK¥TY: ^^^ //
-				glBegin(GL_TRIANGLES);  
-					// PRZÓD:
-					// (trójk¹t) przedni¹ -> lewy górny róg (góra, przód, lewy)
-					glNormal3f(-1.0f, 1.0f, 1.0f);
-					glVertex3f(-X,  A,  A);
-					glVertex3f(-A,  X,  A);
-					glVertex3f(-A,  A,  X);
-					////
+		// (kwadrat) przednia
+		glNormal3f( 0.0f, 0.0f, 1.0f);
+		glVertex3f(-A, -A,	X);
+		glVertex3f( A, -A,	X);
+		glVertex3f( A,	A,	X);
+		glVertex3f(-A,	A,	X);
+
+			// (prostok¹t) pomiêdzy górn¹ i przedni¹
+			glNormal3f( 0.0f, 1.0f, 1.0f);
+			glVertex3f( A,	A,	X);
+			glVertex3f(-A,	A,	X);
+			glVertex3f(-A,	X,	A);
+			glVertex3f( A,	X,	A);
+			////
+
+			// (prostok¹t) pomiêdzy doln¹ i przedni¹
+			glNormal3f( 0.0f,-1.0f, 1.0f);
+			glVertex3f(-A, -A,	X);
+			glVertex3f( A, -A,	X);
+			glVertex3f( A, -X,	A);
+			glVertex3f(-A, -X,	A);
+			////
+
+			// (prostok¹t) pomiêdzy prawym i przedni¹
+			glNormal3f( 1.0f, 0.0f, 1.0f);
+			glVertex3f( A, -A,	X);
+			glVertex3f( A,	A,	X);
+			glVertex3f( X,	A,	A);
+			glVertex3f( X, -A,	A);
+			////
+
+			// (prostok¹t) pomiêdzy lew¹ i przedni¹
+			glNormal3f(-1.0f, 0.0f, 1.0f);
+			glVertex3f(-A, -A,	X);
+			glVertex3f(-A,	A,	X);
+			glVertex3f(-X,	A,	A);
+			glVertex3f(-X, -A,	A);
+			////
 					
-					// (trój¹t) przednia -> prawy górny róg (góra, przód, prawy)
-					glNormal3f( 1.0f, 1.0f, 1.0f);
-					glVertex3f( X,  A,  A);
-					glVertex3f( A,  X,  A);
-					glVertex3f( A,  A,  X);
-					////
+		// (kwadrat) tylnia
+		glNormal3f( 0.0f, 0.0f,-1.0f);
+		glVertex3f(-A, -A, -X);
+		glVertex3f(-A,	A, -X);
+		glVertex3f( A,	A, -X);
+		glVertex3f( A, -A, -X);
+			
+			// (prostok¹t) pomiêdzy górn¹ i tylni¹
+			glNormal3f( 0.0f, 1.0f,-1.0f);
+			glVertex3f( A,	A, -X);
+			glVertex3f(-A,	A, -X);
+			glVertex3f(-A,	X, -A);
+			glVertex3f( A,	X, -A);
+			////
 
-					// (trójk¹t) przedni¹ -> lewy dolny róg (dó³, przód, lewy)
-					glNormal3f(-1.0f,-1.0f, 1.0f);
-					glVertex3f(-X, -A,  A);
-					glVertex3f(-A, -X,  A);
-					glVertex3f(-A, -A,  X);
-					////
+			// (prostok¹t) pomiêdzy doln¹ i tylni¹
+			glNormal3f( 0.0f,-1.0f,-1.0f);
+			glVertex3f(-A, -A, -X);
+			glVertex3f( A, -A, -X);
+			glVertex3f( A, -X, -A);
+			glVertex3f(-A, -X, -A);
+			////
 
-					// (trójk¹t) przedni¹ -> prawy dolny róg (dó³, przód, prawy)
-					glNormal3f( 1.0f,-1.0f, 1.0f);
-					glVertex3f( X, -A,  A);
-					glVertex3f( A, -X,  A);
-					glVertex3f( A, -A,  X);
-					////
+			// (prostok¹t) pomiêdzy prawym i tylni¹
+			glNormal3f( 1.0f, 0.0f,-1.0f);
+			glVertex3f( A, -A, -X);
+			glVertex3f( A,	A, -X);
+			glVertex3f( X,	A, -A);
+			glVertex3f( X, -A, -A);
+			////
 
-					// TY£:
-					// (trójk¹t) tylnia -> lewy górny róg (ty³, góra, lewy)
-					glNormal3f(-1.0f, 1.0f,-1.0f);
-					glVertex3f(-X,  A, -A);
-					glVertex3f(-A,  X, -A);
-					glVertex3f(-A,  A, -X);
-					////
+			// (prostok¹t) pomiêdzy lew¹ i tylni¹
+			glNormal3f(-1.0f, 0.0f,-1.0f);
+			glVertex3f(-A, -A, -X);
+			glVertex3f(-A,	A, -X);
+			glVertex3f(-X,	A, -A);
+			glVertex3f(-X, -A, -A);
+			////
+
+		// (kwadrat) górna
+		glNormal3f( 0.0f, 1.0f, 0.0f);
+		glVertex3f(-A,	X, -A);
+		glVertex3f(-A,	X,	A);
+		glVertex3f( A,	X,	A);
+		glVertex3f( A,	X, -A);
+
+		// (kwadrat) dolna
+		glNormal3f( 0.0f,-1.0f, 0.0f);
+		glVertex3f(-A, -X, -A);
+		glVertex3f( A, -X, -A);
+		glVertex3f( A, -X,	A);
+		glVertex3f(-A, -X,	A);
+
+		// (kwadrat) prawy
+		glNormal3f( 1.0f, 0.0f, 0.0f);
+		glVertex3f( X, -A, -A);
+		glVertex3f( X,	A, -A);
+		glVertex3f( X,	A,	A);
+		glVertex3f( X, -A,	A);
+			
+			// (prostok¹t) pomiêdzy prawym i górn¹
+			glNormal3f( 1.0f, 1.0f, 0.0f);
+			glVertex3f( A,	X, -A);
+			glVertex3f( A,	X,	A);
+			glVertex3f( X,	A,	A);
+			glVertex3f( X,	A, -A);
+			////
+
+			// (prostok¹t) pomiêdzy prawym i doln¹
+			glNormal3f( 1.0f,-1.0f, 0.0f);
+			glVertex3f( X, -A, -A);
+			glVertex3f( X, -A,	A);
+			glVertex3f( A, -X,	A);
+			glVertex3f( A, -X, -A);
+			////
+
+		// (kwadrat) lewy
+		glNormal3f(-1.0f, 0.0f, 0.0f);
+		glVertex3f(-X, -A, -A);
+		glVertex3f(-X, -A,	A);
+		glVertex3f(-X,	A,	A);
+		glVertex3f(-X,	A, -A); 
+
+			// (prostok¹t) pomiêdzy lewym i górn¹
+			glNormal3f(-1.0f, 1.0f, 0.0f);
+			glVertex3f(-A,	X, -A);
+			glVertex3f(-A,	X,	A);
+			glVertex3f(-X,	A,	A);
+			glVertex3f(-X,	A, -A);
+			////
+
+			// (prostok¹t) pomiêdzy lewym i doln¹
+			glNormal3f(-1.0f,-1.0f, 0.0f);
+			glVertex3f(-X, -A, -A);
+			glVertex3f(-X, -A,	A);
+			glVertex3f(-A, -X,	A);
+			glVertex3f(-A, -X, -A);
+			////
+	
+	glEnd();		 // Zakoñcz rysowanie czworok¹ta
+
+	//	
+	// ^^^ TRÓJK¥TY: ^^^ //
+	glBegin(GL_TRIANGLES);
+		// PRZÓD:
+		// (trójk¹t) przedni¹ -> lewy górny róg (góra, przód, lewy)
+		glNormal3f(-1.0f, 1.0f, 1.0f);
+		glVertex3f(-X,	A,	A);
+		glVertex3f(-A,	X,	A);
+		glVertex3f(-A,	A,	X);
+		////
 					
-					// (trój¹t) tylnia -> prawy górny róg (ty³, góra, prawy)
-					glNormal3f( 1.0f, 1.0f,-1.0f);
-					glVertex3f( X,  A, -A);
-					glVertex3f( A,  X, -A);
-					glVertex3f( A,  A, -X);
-					////
+		// (trój¹t) przednia -> prawy górny róg (góra, przód, prawy)
+		glNormal3f( 1.0f, 1.0f, 1.0f);
+		glVertex3f( X,	A,	A);
+		glVertex3f( A,	X,	A);
+		glVertex3f( A,	A,	X);
+		////
 
-					// (trójk¹t) tylnia -> lewy dolny róg (ty³, dó³, lewy)
-					glNormal3f(-1.0f,-1.0f,-1.0f);
-					glVertex3f(-X, -A, -A);
-					glVertex3f(-A, -X, -A);
-					glVertex3f(-A, -A, -X);
-					////
+		// (trójk¹t) przedni¹ -> lewy dolny róg (dó³, przód, lewy)
+		glNormal3f(-1.0f,-1.0f, 1.0f);
+		glVertex3f(-X, -A,	A);
+		glVertex3f(-A, -X,	A);
+		glVertex3f(-A, -A,	X);
+		////
 
-					// (trójk¹t) tylnia -> prawy dolny róg (ty³, dó³, prawy)
-					glNormal3f( 1.0f,-1.0f,-1.0f);
-					glVertex3f( X, -A, -A);
-					glVertex3f( A, -X, -A);
-					glVertex3f( A, -A, -X);
-					////
-				glEnd();         // Zakoñcz rysowanie trójk¹t
+		// (trójk¹t) przedni¹ -> prawy dolny róg (dó³, przód, prawy)
+		glNormal3f( 1.0f,-1.0f, 1.0f);
+		glVertex3f( X, -A,	A);
+		glVertex3f( A, -X,	A);
+		glVertex3f( A, -A,	X);
+		////
+
+		// TY£:
+		// (trójk¹t) tylnia -> lewy górny róg (ty³, góra, lewy)
+		glNormal3f(-1.0f, 1.0f,-1.0f);
+		glVertex3f(-X,	A, -A);
+		glVertex3f(-A,	X, -A);
+		glVertex3f(-A,	A, -X);
+		////
+					
+		// (trój¹t) tylnia -> prawy górny róg (ty³, góra, prawy)
+		glNormal3f( 1.0f, 1.0f,-1.0f);
+		glVertex3f( X,	A, -A);
+		glVertex3f( A,	X, -A);
+		glVertex3f( A,	A, -X);
+		////
+
+		// (trójk¹t) tylnia -> lewy dolny róg (ty³, dó³, lewy)
+		glNormal3f(-1.0f,-1.0f,-1.0f);
+		glVertex3f(-X, -A, -A);
+		glVertex3f(-A, -X, -A);
+		glVertex3f(-A, -A, -X);
+		////
+
+		// (trójk¹t) tylnia -> prawy dolny róg (ty³, dó³, prawy)
+		glNormal3f( 1.0f,-1.0f,-1.0f);
+		glVertex3f( X, -A, -A);
+		glVertex3f( A, -X, -A);
+		glVertex3f( A, -A, -X);
+		////
+	glEnd();		 // Zakoñcz rysowanie trójk¹t
 					
 }
 
 void Figura(int figura) 
 {
+	if (figura == 1)  // 4
+	{
+		for (int i = 0; i < 4; i++)	
+		{
+			Draw(1.0);
+			
+			if(i == 0) glTranslatef( 0.0, -odl, 0.0);
+			if(i == 1) glTranslatef( 0.0, 2*odl, 0.0);
+			if(i == 2) glTranslatef( 0.0, odl, 0.0);
+		}
+	}
+	
+	if (figura == 2)  // 6
+	{
+		for (int i = 0; i < 4; i++)	
+		{
+			Draw(1.0);
 
-		if (figura == 1)  // 4
-		{
-			for (int i = 0; i < 4; i++)	
-			{
-				Draw(1.0);
-				if(i == 0) glTranslatef( 0.0, -odl, 0.0);
-				if(i == 1) glTranslatef( 0.0, 2*odl, 0.0);
-				if(i == 2) glTranslatef( 0.0, odl, 0.0);
-				//if(i == 3) glTranslatef( 0.0, -2*odl, 0.0);
-			}
+			if (i != 1) glTranslatef( 0.0,-odl, 0.0);
+			if (i == 1) glTranslatef( odl, odl, 0.0);
 		}
-		if (figura == 2)  // 6
+	}
+	
+	if (figura == 3)  // 4
+	{
+		for (int i = 0; i < 4; i++)	
 		{
-			for (int i = 0; i < 4; i++)	
-			{
-				Draw(1.0);
-
-				if (i != 1) glTranslatef( 0.0,-odl, 0.0);
-				if (i == 1) glTranslatef( odl, odl, 0.0);
-				//if (i > 1) glTranslatef( 2.5, 2.05, 0.0);
-			}
+			Draw(1.0);
+			
+			if(i == 0) glTranslatef( 0.0, -odl, 0.0);
+			if(i == 1) glTranslatef( -odl, odl, 0.0);
+			if(i == 2) glTranslatef( 0.0, odl, 0.0);
 		}
-		if (figura == 3)  // 4
+	}
+	
+	if (figura == 4)  // 2
+	{
+		for (int i = 0; i < 4; i++)	
 		{
-			for (int i = 0; i < 4; i++)	
-			{
-				Draw(1.0);
-				if(i == 0) glTranslatef( 0.0, -odl, 0.0);
-				if(i == 1) glTranslatef( -odl, odl, 0.0);
-				if(i == 2) glTranslatef( 0.0, odl, 0.0);
-			}
+			Draw(1.0);
+			
+			if(i == 0) glTranslatef( 0.0, -odl, 0.0);
+			if(i == 1) glTranslatef( odl, odl, 0.0);
+			if(i == 2) glTranslatef( 0.0, odl, 0.0);
 		}
-		if (figura == 4)  // 2
+	}
+	
+	if (figura == 5)  // 1
+	{
+		for (int i = 0; i < 4; i++)	
 		{
-			for (int i = 0; i < 4; i++)	
-			{
-				Draw(1.0);
-				if(i == 0) glTranslatef( 0.0, -odl, 0.0);
-				if(i == 1) glTranslatef( odl, odl, 0.0);
-				if(i == 2) glTranslatef( 0.0, odl, 0.0);
-			}
+			Draw(1.0);
+			
+			if(i == 0) glTranslatef( 0.0, -odl, 0.0);
+			if(i == 1) glTranslatef( 0.0,2*odl, 0.0);
+			if(i == 2) glTranslatef( odl, 0.0, 0.0);
 		}
-		if (figura == 5)  // 1
+	}
+	
+	if (figura == 6)  // 3
+	{
+		for (int i = 0; i < 4; i++)	
 		{
-			for (int i = 0; i < 4; i++)	
-			{
-				Draw(1.0);
-				if(i == 0) glTranslatef( 0.0, -odl, 0.0);
-				if(i == 1) glTranslatef( 0.0,2*odl, 0.0);
-				if(i == 2) glTranslatef( odl, 0.0, 0.0);
-			}
+			Draw(1.0);
+			
+			if(i == 0) glTranslatef( 0.0, -odl, 0.0);
+			if(i == 1) glTranslatef( 0.0,2*odl, 0.0);
+			if(i == 2) glTranslatef(-odl, 0.0, 0.0);
 		}
-		if (figura == 6)  // 3
+	}
+	
+	if (figura == 7)  // 7
+	{
+		for (int i = 0; i < 4; i++)	
 		{
-			for (int i = 0; i < 4; i++)	
-			{
-				Draw(1.0);
-				if(i == 0) glTranslatef( 0.0, -odl, 0.0);
-				if(i == 1) glTranslatef( 0.0,2*odl, 0.0);
-				if(i == 2) glTranslatef(-odl, 0.0, 0.0);
-			}
+			Draw(1.0);
+			
+			if(i == 0) glTranslatef( 0.0, -odl, 0.0);
+			if(i == 1) glTranslatef( 0.0,2*odl, 0.0);
+			if(i == 2) glTranslatef( odl,-odl, 0.0);
 		}
-		if (figura == 7)  // 7
-		{
-			for (int i = 0; i < 4; i++)	
-			{
-				Draw(1.0);
-				if(i == 0) glTranslatef( 0.0, -odl, 0.0);
-				if(i == 1) glTranslatef( 0.0,2*odl, 0.0);
-				if(i == 2) glTranslatef( odl,-odl, 0.0);
-			}
-		} 
-
-	/*
-		if (figura == 1)  // 4
-		{
-			for (int i = 0; i < 4; i++)	
-			{
-				Draw(1.0);
-				glTranslatef( 0.0, odl, 0.0);
-			}
-		}
-		if (figura == 2)  // 6
-		{
-			for (int i = 0; i < 4; i++)	
-			{
-				Draw(1.0);
-				if (i != 1) glTranslatef( 0.0, odl, 0.0);
-				if (i == 1) glTranslatef( odl,-odl, 0.0);
-				//if (i > 1) glTranslatef( 2.5, 2.05, 0.0);
-			}
-		}
-		if (figura == 3)  // 4
-		{
-			for (int i = 0; i < 4; i++)	
-			{
-				Draw(1.0);
-				if (i != 1) glTranslatef( 0.0, odl, 0.0);
-				if (i == 1) glTranslatef( -odl, 0.0, 0.0);
-				//if (i > 1) glTranslatef( 2.5, 2.05, 0.0);
-			}
-		}
-		if (figura == 4)  // 2
-		{
-			for (int i = 0; i < 4; i++)	
-			{
-				Draw(1.0);
-				if (i != 1) glTranslatef( 0.0, odl, 0.0);
-				if (i == 1) glTranslatef( odl, 0.0, 0.0);
-				//if (i > 1) glTranslatef( 2.5, 2.05, 0.0);
-			}
-		}
-		if (figura == 5)  // 1
-		{
-			for (int i = 0; i < 4; i++)	
-			{
-				Draw(1.0);
-				if (i != 2) glTranslatef( 0.0, odl, 0.0);
-				if (i == 2) glTranslatef( odl, 0.0, 0.0);
-				//if (i > 1) glTranslatef( 2.5, 2.05, 0.0);
-			}
-		}
-		if (figura == 6)  // 3
-		{
-			for (int i = 0; i < 4; i++)	
-			{
-				Draw(1.0);
-				if (i != 2) glTranslatef( 0.0, odl, 0.0);
-				if (i == 2) glTranslatef( -odl, 0.0, 0.0);
-				//if (i > 1) glTranslatef( 2.5, 2.05, 0.0);
-			}
-		}
-		if (figura == 7)  // 7
-		{
-			for (int i = 0; i < 4; i++)	
-			{
-				Draw(1.0);
-				if (i != 2) glTranslatef( 0.0, odl, 0.0);
-				if (i == 2) glTranslatef( odl, -odl, 0.0);
-				//if (i > 1) glTranslatef( 2.5, 2.05, 0.0);
-			}
-		} */
+	} 
 }
 
 int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);         // Wyczyœæ ekran i bufor g³êbi
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);			// Wyczyœæ ekran i bufor g³êbi
 
-		glLoadIdentity();
+	glLoadIdentity();
 			
-		Color (kolor);
+	Color(kolor);
 
-
-		glTranslatef(0, 0, oddalenie);         // Oddal
+	glTranslatef(0, 0, oddalenie);		   // Oddal
 		
-		glRotatef(kat1, 1.0, 0.0, 0.0 );    //Obróæ
-		glRotatef(kat2, 0.0, 1.0, 0.0 );    //Obróæ
+	glRotatef(kat1, 1.0, 0.0, 0.0 );		//Obróæ
+	glRotatef(kat2, 0.0, 1.0, 0.0 );		//Obróæ
 
+	glTranslatef(odl1, odl2, odl3);
+
+	glRotatef(obrot, 0.0, 0.0, 1.0 );	 	//Obróæ
 		
-	//	glRotatef(rquad_1,0,1.0f,0);         // Obróæ szeœcian wokó³ osi X, Y i Z
+	Figura(fig);
 
-		glTranslatef(odl1, odl2, odl3);
-
-		glRotatef(obrot, 0.0, 0.0, 1.0 );    //Obróæ
-
-	//	glRotatef(rquad_2,0.0f,1.0f,0.0f);         // Obróæ szeœcian wokó³ osi X, Y i Z
+	if (podloga	 + fig_odl[2]== max_podl) stop = TRUE;
+	if (tryb == 0) {} 
+	if (stop == TRUE ) {}
+	else if (grawitacja2 == TRUE) 
+	{
+		odl2-=0.7f;
+		licznik2 += 1.0;
 		
-		Figura (fig);
-
-		if (podloga  + fig_odl[2]== max_podl) stop = TRUE;
-		if (tryb == 0) {} 
-		if (stop == TRUE ) {}
-	    else if (grawitacja2 == TRUE) 
+		if (licznik2 == 3.0)
 		{
-		//	if (licznik2 == 0.0) podloga++;
-
-			odl2-=0.7f;
-			licznik2 += 1.0;
-			//tryb = 0;
-			if (licznik2 == 3.0)
-			{
-				grawitacja2 = FALSE;
-				//	kat2+=5.5f;
-		//		odl2-=0.3f;
-				podloga++;
-				licznik2= 0.0;
-				wait = FALSE;
-				wait2 = FALSE;
-				//tryb= 0;
-			}
-		}	
-		else if (grawitacja == TRUE) 
-		{
-	//		if (licznik2 == 0.0) podloga++;
-
-			odl2-=0.35f;
-			licznik2 += 1.0;
-			//tryb = 0;
-			if (licznik2 == 6.0)
-			{
-				grawitacja = FALSE;
-				//	kat2+=5.5f;
-				podloga++;
-				licznik2= 0.0;
-				wait2 = FALSE;
-			}
+			grawitacja2 = FALSE;
+			podloga++;
+			licznik2= 0.0;
+			
+			wait = FALSE;
+			wait2 = FALSE;
 		}
-		if (podloga  + fig_odl[2]== max_podl) stop = TRUE;
-
-		if (tryb == 1		&& sciana + fig_odl[0] <= prawa_max && sciana - fig_odl[2] >= lewa_max			//zakaz obrotu jak wybiegnie za œciane
-							&& podloga + fig_odl[1]<= max_podl)				//zakaz obrotu jak za blisko pod³ogi (przyp 1)
-			{     // kierunek obrotu ->
-				if (licznik == 0.0)
-				{
-					int tmp = fig_odl[3];
-					//
-					for (int i= 3; i> 0; i--)
-					{
-						fig_odl[i] = fig_odl[i-1];
-					}
-				    fig_odl[0] = tmp;
-				}
-				
-				obrot-=10.0f;
-				licznik+=10.0;
-
-				if (licznik == 90.0)
-				{
-					tryb = 0;
-					wait = FALSE;
-					licznik = 0.0;
-				}
-			}
-		else if (tryb == 2		 && sciana - fig_odl[0] >= lewa_max && sciana + fig_odl[2] <= prawa_max 	
-								 && podloga + fig_odl[3]<= max_podl) 
-			{	 // kierunek obrotu: <-
-				if (licznik == 0.0)
-				{
-					int tmp = fig_odl[0];
-					//
-					for (int i= 0; i< 3 ; i++)
-					{
-						fig_odl[i] = fig_odl[i+1];
-					}
-				    fig_odl[3] = tmp;
-				}
-				
-
-				obrot+=10.0f;
-				licznik+=10.0;
-
-				if (licznik == 90.0)
-				{
-					tryb = 0;
-					wait = FALSE;
-					licznik = 0.0;
-				//	kat2+=5.5f; h
-				}
-			}
-		else if (tryb == 3 &&  sciana - fig_odl[3] != lewa_max) 
-			{
-				odl1-=0.35f;
-				licznik+=1.0;
-
-				if (licznik == 6.0)
-				{
-					tryb = 0;
-					wait = FALSE;
-					licznik = 0.0;
-					sciana--;
-				//	kat2+=5.5f;
-				}
-			}
-		else if (tryb == 4  && sciana + fig_odl[1] != prawa_max) 
-			{
-				odl1+=0.35f;
-				licznik+=1.0;
-
-				if (licznik == 6.0)
-				{
-					tryb = 0;
-					wait = FALSE;
-					licznik = 0.0;
-				//	kat2+=5.5f;
-					sciana++;
-				}
-			}
-		else	wait = FALSE;
+	}	
+	else if (grawitacja == TRUE) 
+	{
+		odl2-=0.35f;
+		licznik2 += 1.0;
+		
+		if (licznik2 == 6.0)
+		{
+			grawitacja = FALSE;
+			podloga++;
+			licznik2= 0.0;
+			
+			wait2 = FALSE;
+		}
+	}
 	
-    
-    return TRUE;         // Wszystko ok
+	if (podloga	 + fig_odl[2]== max_podl) stop = TRUE;
+
+	if (tryb == 1 && sciana + fig_odl[0] <= prawa_max && sciana - fig_odl[2] >= lewa_max			//zakaz obrotu jak wybiegnie za œciane
+		&& podloga + fig_odl[1]<= max_podl)				//zakaz obrotu jak za blisko pod³ogi (przyp 1)
+	{	// kierunek obrotu ->
+		if (licznik == 0.0)
+		{
+			int tmp = fig_odl[3];
+			//
+			for (int i= 3; i> 0; i--)
+			{
+				fig_odl[i] = fig_odl[i-1];
+			}
+			fig_odl[0] = tmp;
+		}
+		obrot-=10.0f;
+		licznik+=10.0;
+
+		if (licznik == 90.0)
+		{
+			tryb = 0;
+			wait = FALSE;
+			licznik = 0.0;
+		}
+	}
+	else if (tryb == 2 && sciana - fig_odl[0] >= lewa_max && sciana + fig_odl[2] <= prawa_max		
+		&& podloga + fig_odl[3]<= max_podl) 
+	{	// kierunek obrotu: <-
+		if (licznik == 0.0)
+		{
+			int tmp = fig_odl[0];
+			//
+			for (int i= 0; i< 3 ; i++)
+			{
+				fig_odl[i] = fig_odl[i+1];
+			}
+			fig_odl[3] = tmp;
+		}
+		obrot+=10.0f;
+		licznik+=10.0;
+
+		if (licznik == 90.0)
+		{
+			tryb = 0;
+			wait = FALSE;
+			licznik = 0.0;
+		}
+	}
+	else if (tryb == 3 && sciana - fig_odl[3] != lewa_max) 
+	{
+		odl1-=0.35f;
+		licznik+=1.0;
+
+		if (licznik == 6.0)
+		{
+			tryb = 0;
+			wait = FALSE;
+			licznik = 0.0;
+			sciana--;
+		}
+	}
+	else if (tryb == 4 && sciana + fig_odl[1] != prawa_max) 
+	{
+		odl1+=0.35f;
+		licznik+=1.0;
+
+		if (licznik == 6.0)
+		{
+			tryb = 0;
+			wait = FALSE;
+			licznik = 0.0;
+			sciana++;
+		}
+	}
+	else wait = FALSE;
+	
+	return TRUE;		 // Wszystko ok
 }
 
 GLvoid KillGLWindow(GLvoid)								// Properly Kill The Window
@@ -727,7 +634,6 @@ GLvoid KillGLWindow(GLvoid)								// Properly Kill The Window
  *	height			- Height Of The GL Window Or Fullscreen Mode			*
  *	bits			- Number Of Bits To Use For Color (8/16/24/32)			*
  *	fullscreenflag	- Use Fullscreen Mode (TRUE) Or Windowed Mode (FALSE)	*/
- 
 BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscreenflag)
 {
 	GLuint		PixelFormat;			// Holds The Results After Searching For A Match
@@ -776,7 +682,7 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 			// If The Mode Fails, Offer Two Options.  Quit Or Use Windowed Mode.
 			if (MessageBox(NULL,"The Requested Fullscreen Mode Is Not Supported By\nYour Video Card. Use Windowed Mode Instead?","NeHe GL",MB_YESNO|MB_ICONEXCLAMATION)==IDYES)
 			{
-				fullscreen=FALSE;		// Windowed Mode Selected.  Fullscreen = FALSE
+				fullscreen=FALSE;		// Windowed Mode Selected.	Fullscreen = FALSE
 			}
 			else
 			{
@@ -962,16 +868,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 	MSG		msg;									// Windows Message Structure
 	BOOL	done=FALSE;								// Bool Variable To Exit Loop
 
-	//Wy³¹czenie tryby fullscrean
-/*	// Ask The User Which Screen Mode They Prefer
-	if (MessageBox(NULL,"Would You Like To Run In Fullscreen Mode?", "Start FullScreen?",MB_YESNO|MB_ICONQUESTION)==IDNO)
-	{
-		fullscreen=FALSE;							// Windowed Mode
-	}*/
-
-//	MessageBox(NULL,"Prze³¹czanie trybów - klawisze: 1, 2, 3, 4", "Info - Keyboard",MB_OK);
-
-	fullscreen=FALSE;							// Windowed Mode
+	fullscreen=FALSE;				// Windowed Mode
 
 	// Create Our OpenGL Window
 	CreateGLWindow("PROJ 9",640,480,16,fullscreen);
@@ -979,7 +876,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 	DrawGLScene();	
 	SwapBuffers(hDC);				// Swap Buffers (Double Buffering)// Draw The Scene
 
-
+	//
 	odl2 = sufit;
 
 	srand( time( NULL ) );
@@ -989,7 +886,6 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 	kolor= (rand()%6) + 1;
 
 	for (int i = 0; i < 4; i++)		fig_odl[i]= fig_tab[fig][i];
-
 
 	DWORD time1 = GetTickCount();
 
@@ -1009,9 +905,9 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				DispatchMessage(&msg);				// Dispatch The Message
 			}
 		}
-		else		 							// If There Are No Messages
+		else									// If There Are No Messages
 		{
-			// Draw The Scene.  Watch For ESC Key And Quit Messages From DrawGLScene()
+			// Draw The Scene.	Watch For ESC Key And Quit Messages From DrawGLScene()
 			if (active)								// Program Active?
 			{
 				
@@ -1024,12 +920,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 					grawitacja2 = TRUE;
 					wait = TRUE;
 					wait2 = TRUE;
-				//	podloga++;
 				}
-				//else
-				//{
-				//	grawitacja2 = FALSE;
-				//}
 				else if (keys[VK_RETURN])				// Was ENT Pressed?
 				{
 					sciana =0;
@@ -1057,103 +948,59 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				}
 				else if (keys['0'])
 				{
-				//	tryb = 0;
-				//	grawitacja = FALSE;
 					stop = TRUE;
 				}
-		/*		else if (keys['1'])
-				{
-					tryb = 1;
-				}*/
 				else if (keys['W'] && wait == FALSE && stop == FALSE)
 				{
 					tryb = 1;
 					wait = TRUE;
-
-		//			DrawGLScene();					// Draw The Scene
-		//			SwapBuffers(hDC);				// Swap Buffers (Double Buffering)
 				}
 				else if (keys['S'] && wait == FALSE && stop == FALSE)
 				{
 					tryb = 2;
 					wait = TRUE;
-
-		//			DrawGLScene();					// Draw The Scene
-		//			SwapBuffers(hDC);				// Swap Buffers (Double Buffering)
 				}
 				else if (keys['A'] && wait == FALSE && stop == FALSE)
 				{
 					tryb = 3;
 					wait = TRUE;
-
-	//				DrawGLScene();					// Draw The Scene
-	//				SwapBuffers(hDC);				// Swap Buffers (Double Buffering)
 				}
 				else if (keys['D'] && wait == FALSE && stop == FALSE)
 				{
 					tryb = 4;
 					wait = TRUE;
-
-		//			DrawGLScene();					// Draw The Scene
-		//			SwapBuffers(hDC);				// Swap Buffers (Double Buffering)
 				}
-
 				else if ( GetTickCount() - time2 >= 10 )
 				{				
 					DrawGLScene();					// Draw The Scene
 					SwapBuffers(hDC);				// Swap Buffers (Double Buffering)
 				}
 
-				
-
 				if ( GetTickCount() - time1 >= 1000 && grawitacja2 == FALSE)
 				{	
-//					tryb = 1;
 					grawitacja = TRUE;
 					wait2 = TRUE;
-			//		podloga++;
-		//			DrawGLScene();					// Draw The Scene
-		//			SwapBuffers(hDC);				// Swap Buffers (Double Buffering)
 
 					time1 = GetTickCount();
-				//	while ( GetTickCount() - time <= 600 ) {}
 				}
 			
-
-				if (keys[VK_RIGHT])     //kontrolki do testowania
+				if (keys[VK_RIGHT])		//kontrolki do testowania
 				{
 					kat2-=0.000001;
-		//			kat2+=5.5f;
 				}
 				if (keys[VK_LEFT])
 				{
 					kat2+=0.000001;
-		//			kat2-=5.5f;
 				}
 				if (keys[VK_UP])
 				{
 					kat1+=0.000001;
-	//				kat1+=5.5f;
 				}
 				if (keys[VK_DOWN])
 				{
 					kat1-=0.000001;
-		//			kat1-=5.5f;
 				}
 			}
-
-			//Kod zmieniaj¹cy okno na tryb pe³noekranowy wy³¹czony //uniemo¿liwienie trybu fullscrean//
-/*			if (keys[VK_F1])						// Is F1 Being Pressed?   
-			{
-				keys[VK_F1]=FALSE;					// If So Make Key FALSE
-				KillGLWindow();						// Kill Our Current Window
-				fullscreen=!fullscreen;				// Toggle Fullscreen / Windowed Mode
-				// Recreate Our OpenGL Window
-				if (!CreateGLWindow("NeHe's OpenGL Framework",640,480,16,fullscreen))
-				{
-					return 0;						// Quit If Window Was Not Created
-				}
-			}*/
 		}
 	}
 

@@ -33,13 +33,13 @@ int main ()
 
 		cin >> sprawdz;
 
-		if      (sprawdz=='a') utworz_kolejke_priorytetowa();
+		if		(sprawdz=='a') utworz_kolejke_priorytetowa();
 		else if (sprawdz=='b') wprowadz_element();
 		else if (sprawdz=='c') usun_element();
 		else if (sprawdz=='d') ilosc_elementow();
-		else if (sprawdz=='w') wyswietl();              
+		else if (sprawdz=='w') wyswietl();				
 	}
-    
+	
 	cout << endl;
 	system("PAUSE");
 	return EXIT_SUCCESS;

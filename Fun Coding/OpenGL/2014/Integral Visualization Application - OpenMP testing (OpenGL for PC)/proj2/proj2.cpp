@@ -5,8 +5,6 @@
 // **** //
 */
 
-
-
 #include <windows.h>		// Header File For Windows
 #include <gl\gl.h>			// Header File For The OpenGL32 Library
 #include <gl\glu.h>			// Header File For The GLu32 Library
@@ -16,35 +14,19 @@
 #include <iostream>
 #include "rysuj_funkcje.h"
 
+HDC			hDC=NULL;		  // Prywatny kontekst u¿¹dzenia GDI
+HGLRC		hRC=NULL;		  // Kontekst rysuj¹cy
+HWND		hWnd=NULL;		   // Uchwyt naszego okna
+HINSTANCE	hInstance;		   // Instancja aplikacji
 
-HDC			hDC=NULL;         // Prywatny kontekst u¿¹dzenia GDI
-HGLRC		hRC=NULL;         // Kontekst rysuj¹cy
-HWND		hWnd=NULL;         // Uchwyt naszego okna
-HINSTANCE	hInstance;         // Instancja aplikacji
-
-bool keys[256];         // Tablica klawiszy - wciœniêty czy nie
-bool active=TRUE;         // Flaga - czy okno jest aktywne?
-bool fullscreen=TRUE;         // Uruchom aplikacje na pe³nym ekranie
+bool keys[256];			// Tablica klawiszy - wciœniêty czy nie
+bool active=TRUE;		  // Flaga - czy okno jest aktywne?
+bool fullscreen=TRUE;		  // Uruchom aplikacje na pe³nym ekranie
 
 bool wait = FALSE;
 GLfloat speed1 = 0.5f;
 
 int tryb =0; //tryby poruszania siê
-
-
-/*
-GLfloat material1[]={0.0, 0.0, 0.8, 0.0};			//NIEBIESKI
-GLfloat material3[]={0.8, 0.0, 0.0, 0.0};			//ZIELONY
-GLfloat material2[]={0.0, 0.8, 0.0, 0.0};			//CZERWONY
-GLfloat material5[]={0.8, 0.8, 0.0, 0.0};			//¿Ó£TY
-GLfloat material4[]={0.8, 0.3, 0.0, 0.0};			//POMARAÑCZOWY
-GLfloat material6[]={0.8, 0.8, 0.8, 0.0};			//BIA£Y
-GLfloat ambient[]={0.3, 0.3, 0.3, 0.0};			//Oœwietlenia
-GLfloat diffuse[]={0.0, 0.0, 0.0, 0.5};
-GLfloat position[]={15.0, 30.0, 0.0, 3.0}; 
-GLfloat specular[]={0.0, 0.0, 0.0, 0.5};         // Wartoœci œwiat³a rozproszonego 
-*/
-						
 
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 
@@ -75,14 +57,6 @@ int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 	glEnable(GL_DEPTH_TEST);							// Enables Depth Testing
 	glDepthFunc(GL_LEQUAL);								// The Type Of Depth Testing To Do
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);	// Really Nice Perspective Calculations
-	
-	//glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
-	//glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
-	//glLightfv(GL_LIGHT0, GL_POSITION, position);
-	//glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
-
-	//glEnable(GL_LIGHTING);
-	//glEnable(GL_LIGHT0); 
 	
 	return TRUE;										// Initialization Went OK
 }
@@ -134,7 +108,6 @@ GLvoid KillGLWindow(GLvoid)								// Properly Kill The Window
  *	height			- Height Of The GL Window Or Fullscreen Mode			*
  *	bits			- Number Of Bits To Use For Color (8/16/24/32)			*
  *	fullscreenflag	- Use Fullscreen Mode (TRUE) Or Windowed Mode (FALSE)	*/
- 
 BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscreenflag)
 {
 	GLuint		PixelFormat;			// Holds The Results After Searching For A Match
@@ -183,7 +156,7 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 			// If The Mode Fails, Offer Two Options.  Quit Or Use Windowed Mode.
 			if (MessageBox(NULL,"The Requested Fullscreen Mode Is Not Supported By\nYour Video Card. Use Windowed Mode Instead?","NeHe GL",MB_YESNO|MB_ICONEXCLAMATION)==IDYES)
 			{
-				fullscreen=FALSE;		// Windowed Mode Selected.  Fullscreen = FALSE
+				fullscreen=FALSE;		// Windowed Mode Selected.	Fullscreen = FALSE
 			}
 			else
 			{
@@ -369,15 +342,6 @@ int main(int argc, char* argv[])			// Window Show State
 	float a;
 	float b;
 
-	/*
-	std :: cout << "Podaj dolna granice calkowania: ";
-	std :: cin >> a;
-	if(std::cin.fail())
-	{
-		std::cout << "B³¹d!";
-	}
-	*/
-
 	for (;;)
 	{
 		std :: cout << "Podaj dolna granice calkowania: ";
@@ -390,18 +354,17 @@ int main(int argc, char* argv[])			// Window Show State
 			std :: cout << "Blad wprowadzania danych! " << std :: endl << "Podaj dane ponownie:" << std :: endl;
 			continue;
 		}
-		//std::cout << "Czy udalo sie wczytac? " << std::cin.fail() << std::endl;
 
-		bleble:
-		std :: cout << "Podaj gorna granice calkowania: ";
-		std :: cin >> b;
+		repeat:
+		std::cout << "Podaj gorna granice calkowania: ";
+		std::cin >> b;
 		if(std::cin.fail())
 		{
 			std::cin.clear();
 			std::cin.sync();
 			b = 0;
 			std :: cout << "Blad wprowadzania danych! " << std :: endl << "Podaj dane ponownie:" << std :: endl;
-			goto bleble;
+			goto repeat;
 		}
 
 		if (a < b) break;
@@ -432,25 +395,9 @@ int main(int argc, char* argv[])			// Window Show State
 		}
 	}
 	
-	//Wy³¹czenie tryby fullscrean
-/*	// Ask The User Which Screen Mode They Prefer
-	if (MessageBox(NULL,"Would You Like To Run In Fullscreen Mode?", "Start FullScreen?",MB_YESNO|MB_ICONQUESTION)==IDNO)
-	{
-		fullscreen=FALSE;							// Windowed Mode
-	}*/
+	numberOfQuotes=4;
 
-	//MessageBox(NULL,"Prze³¹czanie trybów - klawisze: 1, 2, 3, 4", "Info - Keyboard",MB_OK);
-
-	/*
-	strcpy(quote[0],"Luke, I am your father!.");
-	strcpy(quote[1],"Luke, I am your father!.");
-	strcpy(quote[2],"Luke, I am your father!.");
-	strcpy(quote[3],"Luke, I am your father!.");
-	strcpy(quote[4],"Luke, I am your father!.");
-	*/
-    numberOfQuotes=4;
-
-	fullscreen=FALSE;							// Windowed Mode
+	fullscreen=FALSE;								// Windowed Mode
 
 	// Create Our OpenGL Window
 	CreateGLWindow("PROJ 2",640,480,16,fullscreen);
@@ -471,41 +418,18 @@ int main(int argc, char* argv[])			// Window Show State
 				DispatchMessage(&msg);				// Dispatch The Message
 			}
 		}
-		else		 							// If There Are No Messages
+		else										// If There Are No Messages
 		{
-			// Draw The Scene.  Watch For ESC Key And Quit Messages From DrawGLScene()
+			// Draw The Scene.	Watch For ESC Key And Quit Messages From DrawGLScene()
 			if (active)								// Program Active?
 			{
 				if (keys[VK_ESCAPE])				// Was ESC Pressed?
 				{
 					done=TRUE;						// ESC Signalled A Quit
 				}
-				/*
-				else if (keys[VK_RIGHT] && wait == FALSE)     //kontrolki do testowania
-				{
-					tryb=1;
-				//	speed1 = 0.5f;
-				}
-				else if (keys[VK_LEFT] && wait == FALSE)
-				{
-					tryb=2;
-				//	speed1 = 0.5f;
-				}
-				else if (keys[VK_UP] && wait == FALSE)
-				{
-					tryb=3;
-				//	speed1 = 0.5f;
-				}
-				else if (keys[VK_DOWN] && wait == FALSE)
-				{
-					tryb=4;			
-				//	speed1 = 0.5f;
-				}
-				*/
 				else if (keys['0'] && wait == FALSE)
 				{
 					tryb=0;
-					//kat-=0.00001f;
 				}
 				else if (keys['1'] && wait == FALSE)
 				{
@@ -517,24 +441,10 @@ int main(int argc, char* argv[])			// Window Show State
 				}
 				else
 				{
-					//if (tryb==2) while ( GetTickCount() - time <= 20 ) {}
 					DrawGLScene(tryb, a, b, c);					// Draw The Scene
-					SwapBuffers(hDC);				// Swap Buffers (Double Buffering)
+					SwapBuffers(hDC);							// Swap Buffers (Double Buffering)
 				}
 			}
-
-			//Kod zmieniaj¹cy okno na tryb pe³noekranowy wy³¹czony //uniemo¿liwienie trybu fullscrean//
-/*			if (keys[VK_F1])						// Is F1 Being Pressed?   
-			{
-				keys[VK_F1]=FALSE;					// If So Make Key FALSE
-				KillGLWindow();						// Kill Our Current Window
-				fullscreen=!fullscreen;				// Toggle Fullscreen / Windowed Mode
-				// Recreate Our OpenGL Window
-				if (!CreateGLWindow("NeHe's OpenGL Framework",640,480,16,fullscreen))
-				{
-					return 0;						// Quit If Window Was Not Created
-				}
-			}*/
 		}
 	}
 

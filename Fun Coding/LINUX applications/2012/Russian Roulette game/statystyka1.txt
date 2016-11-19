@@ -1,6 +1,0 @@
-Statystyka przeżycia:
-
-*liczba:
----------
--smierci->		141
--przetrwan->		11
