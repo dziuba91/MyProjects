@@ -11,9 +11,9 @@ function rekrutacja()
 		{
 			if (isset($_POST['uczen'.$i]))
 			{
-			$zapytanie = "update uczen set status=1 where uczen_ID='".$_POST['uczen'.$i]."'";
-			mysql_query($zapytanie);
-			$j++;
+				$zapytanie = "update uczen set status=1 where uczen_ID='".$_POST['uczen'.$i]."'";
+				mysql_query($zapytanie);
+				$j++;
 			}
 		}
 	

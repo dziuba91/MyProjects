@@ -10,7 +10,7 @@
 	</head>
 
 <?php	
-	if(isset($_SESSION['id']))				//================================== UZYTKOWNIK POPRAWNIE ZALOGOWANY ===============
+	if(isset($_SESSION['id']))	//================================== UZYTKOWNIK POPRAWNIE ZALOGOWANY ===============
 	{
 		$id=$_SESSION['id'];
 		
@@ -90,7 +90,7 @@
 		
 		echo '</div>';
 	}
-	else									//======================================= UZYTKOWNIK SIE NIE ZALOGOWAL TYLKO WSZEDL NA PODSTRONE =======
+	else				//======================================= UZYTKOWNIK SIE NIE ZALOGOWAL TYLKO WSZEDL NA PODSTRONE =======
 	{
 		session_destroy();
 		header("Location: index.php");

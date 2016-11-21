@@ -124,7 +124,6 @@ function plan_utworz()
 
 function pokaz_mod()
 {
-	//echo '<script>window.alert("Uwaga, plan posiada już wpisane dane!");</script>';
 	$i=0;
 	$j=0;
 	$jest=0;
@@ -244,7 +243,7 @@ function pokaz_mod()
 		
 		$j=0;
 		echo"</tr>";
-        $i++;
+		$i++;
 	} 
 	while($i < 8) ;
 
@@ -432,7 +431,7 @@ function plan_pokaz($plan, $co)
 		
 		$j=0;
 		echo"</tr>";
-        $i++;
+		$i++;
 	} 
 	while($i < 8);
 	
@@ -510,7 +509,7 @@ function pokaz_plan_uczen()
 		
 		$j=0;
 		echo"</tr>";
-        $i++;
+		$i++;
 	} 
 	while($i < 8);
 	
@@ -526,7 +525,7 @@ function pokaz_plan_nauczyciel()
 	echo "<tr>";
 	
 	$id=$_SESSION['id'];
-	$zapytanie = "SELECT imie, nazwisko, profil_ID from  profil where profil.profil_ID=".$id.";";
+	$zapytanie = "SELECT imie, nazwisko, profil_ID from	 profil where profil.profil_ID=".$id.";";
 	$wynik = mysql_query($zapytanie);		
 	while($row = mysql_fetch_row($wynik))
 	{
@@ -589,7 +588,7 @@ function pokaz_plan_nauczyciel()
 		
 		$j=0;
 		echo"</tr>";
-        $i++;
+		$i++;
 	} 
 	while($i < 8) ;
 
@@ -644,7 +643,7 @@ function plan_szkoly()
 			echo"<tr>";
 		
 			$godz_lekc=$j+1;
-			if($j==0)echo'<th rowspan=8>'.$dzien.'  </th>';
+			if($j==0)echo'<th rowspan=8>'.$dzien.'	</th>';
 				echo'<th> Lekcja '.$godz_lekc.'</th>';
 			
 			$zapytanie_klasa = "select klasa_ID, poziom, podklasa from klasa;";
@@ -666,7 +665,6 @@ function plan_szkoly()
 				else
 				{
 					echo'<td></td>';
-					//echo'<td>'.$dzien.', '.$godz_lekc.', '.$klasa_ID.'</td>';
 				}
 			}	
 		
@@ -686,7 +684,6 @@ function plan_szkoly()
 				else
 				{
 					echo'<td></td>';
-					//echo'<td>'.$dzien.', '.$godz_lekc.', '.$klasa_ID.'</td>';
 				}
 			}
 			
@@ -696,7 +693,7 @@ function plan_szkoly()
 		while($j<8);
 		
 		$j=0;
-        $i++;
+		$i++;
 	} 
 	while($i < 5) ;
 	

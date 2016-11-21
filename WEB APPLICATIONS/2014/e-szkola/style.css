@@ -65,19 +65,12 @@
 	padding-right: 5px;
 }
 #panel_edycji{
-    /*display:block;
-    width:10px;
-    font-size:10px;
-    text-align:center;
-    line-height:14px;
-    padding:8 18 8 18;*/
-    
-    display:block;
-    width:38px;
-    line-height:14px;
-    padding:8 18 8 16;
-    
-    -moz-box-shadow:inset -2px 2px 22px -1px #43b531;
+	display:block;
+	width:38px;
+	line-height:14px;
+	padding:8 18 8 16;
+	
+	-moz-box-shadow:inset -2px 2px 22px -1px #43b531;
 	-webkit-box-shadow:inset -2px 2px 22px -1px #43b531;
 	box-shadow:inset -2px 2px 22px -1px #43b531;
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #4ba64e) );
@@ -98,8 +91,7 @@
 	border-bottom-left-radius:18px;
 	text-indent:0;
 	border:1px solid #030303;
-	/*color:#d12c2c;*/
-    color:red;
+	color:red;
 	font-family:arial;
 	font-size:12px;
 	font-weight:bold;
@@ -107,10 +99,10 @@
 	text-decoration:none;
 	text-align:center;
 	text-shadow:1px 1px 0px #ffffff;
-    
-    margin: auto;
-    vertical-align: middle;
-    height: auto;
+	
+	margin: auto;
+	vertical-align: middle;
+	height: auto;
 }
 #panel_edycji:hover {
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #4ba64e), color-stop(1, #ededed) );
@@ -123,11 +115,11 @@
 	top:1px;
 }
 #panel_edycji_act {
-    display:block;
-    width:38px;
-    line-height:14px;
-    padding:8 18 8 16;
-    
+	display:block;
+	width:38px;
+	line-height:14px;
+	padding:8 18 8 16;
+	
 	-moz-box-shadow:inset -2px 2px 22px -1px #fa7878;
 	-webkit-box-shadow:inset -2px 2px 22px -1px #fa7878;
 	box-shadow:inset -2px 2px 22px -1px #fa7878;
@@ -157,10 +149,10 @@
 	text-decoration:none;
 	text-align:center;
 	text-shadow:1px 1px 0px #ffffff;
-    
-    margin: auto;
-    vertical-align: middle;
-    height: auto;
+	
+	margin: auto;
+	vertical-align: middle;
+	height: auto;
 }
 #panel_edycji_act:hover {
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff0000), color-stop(1, #ffffff) );
@@ -173,11 +165,11 @@
 	top:1px;
 }
 #panel_edycji_act_save {
-    display:block;
-    width:150px;
-    line-height:18px;
-    padding:28 25 28 25;
-    
+	display:block;
+	width:150px;
+	line-height:18px;
+	padding:28 25 28 25;
+	
 	-moz-box-shadow:inset -2px 2px 22px -1px #fa7878;
 	-webkit-box-shadow:inset -2px 2px 22px -1px #fa7878;
 	box-shadow:inset -2px 2px 22px -1px #fa7878;
@@ -207,10 +199,10 @@
 	text-decoration:none;
 	text-align:center;
 	text-shadow:1px 1px 0px #ffffff;
-    
-    margin: auto;
-    vertical-align: middle;
-    height: auto;
+	
+	margin: auto;
+	vertical-align: middle;
+	height: auto;
 }
 #panel_edycji_act_save:hover {
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff0000), color-stop(1, #ffffff) );
@@ -251,14 +243,13 @@
 	font-weight:bold;
 	font-style:normal;
 	height:55px;
-	/*line-height:40px;*/
 	width:180px;
 	text-decoration:none;
 	text-align:center;
 	text-shadow:2px 2px 0px #ffffff;
-    
-    margin: auto;
-    vertical-align: middle;
+	
+	margin: auto;
+	vertical-align: middle;
 }
 #panel_edycji_extend:hover {
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #c2c2c2), color-stop(1, #ffffff) );
@@ -273,28 +264,14 @@
 
 
 /*
-div#sMenu {
-    margin:auto;
-    vertical-align: middle;
-	background-color:black;
-	height: 25px;
-	font-size: 16px;
-
-    text-align: center;
-	font-family: Verdana;
-}
-*/
-
-
-/*
   Rozwijane menu w CSS
 */
-   
+  
 div#sMenu {
-    margin:auto;
+	margin:auto;
 	background-color:black;
 	height: 25px;
-    width: 18px;
+	width: 18px;
 	font-size: 16px;
 	font-family: Verdana;
 }
@@ -322,7 +299,6 @@ div#sMenu ul li:hover {
 }
 
 div#sMenu ul li {
-	/*height: 20px;*/ 
 	width: auto;
 }
 
@@ -347,7 +323,7 @@ div#sMenu ul ul {
 	top: 20px;
 	border-right: 3px solid red;
 	background: #3d3d3d;
-    font-size: 12px;
+	font-size: 12px;
 }
 
 div#sMenu li:hover > ul {
@@ -367,7 +343,6 @@ div#sMenu ul ul ul {
 }
 
 
-
 .wiad {width: 800px; border: 0px;table-layout: fixed;}
 .tytul{width: 350px;border:1px solid #bdc7d8;font-weight:bold;background-color:lightblue;}
 .tytul_n{width: 350px;border:1px solid #bdc7d8;font-weight:bold;background-color:red;}
@@ -378,8 +353,6 @@ div#sMenu ul ul ul {
 .usun {font-size: 8px; border: 0px;}
 .przerwa {height: 50px; border: 0px; border-top: 1px dotted black;}
 .label1 {font-size: 10px;}
-	
-	
 	
 	
 .right {text-align: right;}

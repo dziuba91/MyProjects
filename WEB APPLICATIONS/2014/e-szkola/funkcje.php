@@ -102,7 +102,7 @@ include 'zarzadzanie_uzytkownikami.php';
 			if ($_GET['akcja']=='strona_glowna') //strona glowna
 			{
 				// kod strony głównej
-        
+		
 				utworz_lekcje();
 			}
 	
@@ -131,12 +131,12 @@ include 'zarzadzanie_uzytkownikami.php';
 			{
 				pokaz_plan_nauczyciel();
 			}
-    
+	
 			if ($_GET['akcja']=='dziennik') //pokaz plan
 			{
 				dziennik();
 			}
-    
+	
 			if ($_GET['akcja']=='uzyt_usun') //pokaz plan
 			{
 				plan();
@@ -145,7 +145,7 @@ include 'zarzadzanie_uzytkownikami.php';
 			if ($_GET['akcja']=='strona_glowna') //strona glowna
 			{
 				// kod strony głównej
-        
+		
 				utworz_lekcje();
 			}
 		}
@@ -155,7 +155,7 @@ include 'zarzadzanie_uzytkownikami.php';
 			if ($_GET['akcja']=='strona_glowna' && isset($status))//strona glowna
 			{
 				echo '<div id="container">';
-				if ($status<4)  echo '<h1>Aktualny status:</h1>';
+				if ($status<4)	echo '<h1>Aktualny status:</h1>';
 				if ($status==0) echo '<h2>Oczekuje na decyzję...</h2>';
 				if ($status==1) echo '<h2>Przyjęty, oczekuje na przydział do klasy...</h2>';
 				if ($status==2)
@@ -189,7 +189,7 @@ include 'zarzadzanie_uzytkownikami.php';
 				{
 					plan_pokaz($row[0], 'klasa');
 					echo 'ddd';
-                }
+				}
 			}
 		}
 	}

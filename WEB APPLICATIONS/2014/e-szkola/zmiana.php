@@ -1,7 +1,7 @@
 ﻿<?php
 function zmien_ustawienia()
 {
-	?>
+?>
 	
 	<div id="container">
 	<form method="POST" action="funkcje.php?akcja=zmiana">
@@ -11,7 +11,7 @@ function zmien_ustawienia()
 			potwierdź nowy login: </td><td><input type="text" name="login_p"></td></tr></table>
 		<center><input type="submit" value="Zmień login" name="zmien_login"></center>
 	</form>
-    
+	
 	<form method="POST" action="funkcje.php?akcja=zmiana">
 		<table class="pusta"><tr><td>
 			stare hasło:</td><td> <input type="password" name="haslo_s"></td></tr><tr><td>
@@ -19,7 +19,7 @@ function zmien_ustawienia()
 			potwierdź nowe hasło: </td><td><input type="password" name="haslo_p"></td></tr></table>
 		<center><input type="submit" value="Zmień hasło" name="zmien_haslo"></center>
 	</form>
-    
+	
 <?php
 	if (isset($_POST['zmien_login']))
 	{
@@ -60,7 +60,7 @@ function zmien_ustawienia()
 		if ($_POST['haslo_s']!='' && $_POST['haslo_n']!='' && $_POST['haslo_p']!='')
 		{
 			if ($_POST['haslo_n']==$_POST['haslo_p'])
-            {
+			{
 				$zapytanie="select haslo from profil where profil_ID=".$_SESSION['id']."";
 				$wynik = mysql_query($zapytanie);
 				if ($row = mysql_fetch_row($wynik))
@@ -74,7 +74,7 @@ function zmien_ustawienia()
 				else
 					echo '<h1>Niepoprawne stare hasło!</h1>';
 			}
-            else
+			else
 				echo '<h1>Nowe hasło i potwierdzenie się nie zgadzają!</h1>';
 		}
 		else

@@ -14,7 +14,6 @@ function add_user()
 		</form> ";
 
 
-
 	if (isset($_POST['Dalej']) && $_POST['prawa'] == 1)
 	{
 		echo"<form method=\"POST\" action=\"funkcje.php?akcja=nowy_user\">	
@@ -200,8 +199,8 @@ function delete_user()
 	if (isset($_POST['usun1']))
 	{
 		$profil2_ID = $_POST['nauczyciel_usun'];
-	    $zapytanie = "delete from nauczyciel where profil_ID =".$profil2_ID."";
-	    $wynik = mysql_query($zapytanie);
+		$zapytanie = "delete from nauczyciel where profil_ID =".$profil2_ID."";
+		$wynik = mysql_query($zapytanie);
 		
 		$zapytanie2 = "delete from profil where profil_ID =".$profil2_ID."";
 		$wynik2 = mysql_query($zapytanie2);	
