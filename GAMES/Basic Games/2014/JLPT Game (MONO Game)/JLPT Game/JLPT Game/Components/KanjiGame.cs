@@ -6,7 +6,6 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-//using System.Xml.Linq;
 using XMLDataTypes;
 
 namespace JLPT_Game.Components
@@ -70,8 +69,6 @@ namespace JLPT_Game.Components
             game.Components.Add(this.kanjiList);
 
             rep = new List<int>();
-            //wins = 0;
-            //round = 0;
         }
         ~ KanjiGame() 
         {
@@ -144,15 +141,12 @@ namespace JLPT_Game.Components
                 spriteBatch.DrawString(text4, score, new Vector2(10, 5), Color.Black);
 
                 // solution
-
                 if (round > 0)
                 {
                     Rectangle solutionBox = new Rectangle(GraphicsDevice.Viewport.Width - 200, 5, 180, 37);
                     spriteBatch.Draw(blank, solutionBox, Color.Black);
 
-                    //int widthSolution = 40;
                     string goodKanji = kanji[goodAnswer].sign;
-                    //int measureString = text5.MeasureString(goodKanji);
 
                     if (correctAnswer)
                     {
@@ -258,7 +252,6 @@ namespace JLPT_Game.Components
 
                 //
                 // must "constructWirtualMenu()" -> realized
-
                 spriteBatch.Draw(blank, mainText, Color.White);
 
                 int lineSpacing = 0;
@@ -266,7 +259,6 @@ namespace JLPT_Game.Components
                 if (text1.MeasureString(test1).Y > 40) lineSpacing = 5;
                 else lineSpacing = 15;
 
-                //int textPosition = mainText.Y + lineSpacing;
                 int textSpacing = lineSpacing + mainText.Y;
 
                 Vector2 meaningPosition = Vector2.Zero;
