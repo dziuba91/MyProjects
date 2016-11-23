@@ -39,7 +39,7 @@ void sortowanie_babelkowe2(int tab[], int n)
 			}
 }
 
-extern "C" int __declspec(dllexport) Balabala()
+extern "C" int __declspec(dllexport) BasicTest()
 {
 	return i;
 }
@@ -77,6 +77,5 @@ extern "C" int __declspec(dllexport) Add(bool a)
 
 	i++;
 
-    return endTick-startTick;
-	//return 1;
+	return endTick-startTick;
 }

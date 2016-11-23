@@ -16,74 +16,69 @@ using System.Windows.Threading;
 
 namespace WpfApplication2
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
-    {
-        Thread t1;
-        bool watek = false;
+	/// <summary>
+	/// Interaction logic for MainWindow.xaml
+	/// </summary>
+	public partial class MainWindow : Window
+	{
+		Thread t1;
+		bool watek = false;
 
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+		public MainWindow()
+		{
+			InitializeComponent();
+		}
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            t1 = new Thread(czekaj);
-            t1.Start();
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+			t1 = new Thread(czekaj);
+			t1.Start();
 
-            watek = true;
-        }
+			watek = true;
+		}
 
-        public void czekaj()
-        {
-            Thread.Sleep(5000);
+		public void czekaj()
+		{
+			Thread.Sleep(5000);
 
-            watek = false;
+			watek = false;
 
-            try
-            {
-                this.Dispatcher.Invoke(
-                DispatcherPriority.Normal,
-                new Action(
-                delegate()
-                {
-                    this.RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice,
-                                    PresentationSource.FromVisual(this), 0, Key.Enter) { RoutedEvent = Keyboard.KeyDownEvent });
-                }));
-            }
-            catch { }
-        }
+			try
+			{
+				this.Dispatcher.Invoke(
+				DispatcherPriority.Normal,
+				new Action(
+					delegate()
+					{
+						this.RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice,
+									PresentationSource.FromVisual(this), 0, Key.Enter) { RoutedEvent = Keyboard.KeyDownEvent });
+					})
+				);
+			}
+			catch { }
+		}
 
-        private void win1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                /*
-                if (watek)
-                {
-                    t1.Abort();
-                }*/
+		private void win1_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Enter)
+			{
+				WybierzTryb a = new WybierzTryb();
+				a.Show();
 
-                WybierzTryb a = new WybierzTryb();
-                a.Show();
+				Close();
+			}
+			if (e.Key == Key.Escape)
+			{
+				this.Close();
+			}
+		}
 
-                Close();
-            }
-            if (e.Key == Key.Escape)
-            {
-                this.Close();
-            }
-        }
-
-        private void win1_Closed(object sender, EventArgs e)
-        {
-            if (watek)
-            {
-                t1.Abort();
-            }
-        }
-    }
+		private void win1_Closed(object sender, EventArgs e)
+		{
+			if (watek)
+			{
+				t1.Abort();
+			}
+		}
+	}
 }

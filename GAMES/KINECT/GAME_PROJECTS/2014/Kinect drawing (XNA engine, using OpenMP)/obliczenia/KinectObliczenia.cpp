@@ -20,16 +20,12 @@ extern "C" int __declspec(dllexport) kinus(float * tX, float *tY, int *tI, int p
 					if (i==0)
 					{
 						if (tX[j-1]<=tX[j] && tY[j-1]>=tY[j]) spr[k]++;
-						//if (tX[j-1]<=tX[j]) spr1++;
-						//spr1++;
 					}
 
 					if (i==1)
 					{
 						int pl = j +tI[i-1];
 						if (tX[pl-1]<=tX[pl] && tY[pl-1]<=tY[pl]) spr[k]++;
-						//if (tX[pl-1]<=tX[pl]) spr1++;
-						//spr1++;
 					}
 				}
 
@@ -88,32 +84,24 @@ extern "C" int __declspec(dllexport) kinus(float * tX, float *tY, int *tI, int p
 		tX[tI[0]-1] > tX[tI[0]+1])
 	{
 		procent = (int)(spr[0]*100/p1);
-		//if (procent1 > 87 && procent1 < 97) return procent1 + 10000;
+
 		if (procent > 87) return procent + 10000;
 		else return procent;
 	}
 	else if (p2>=3 && tX[0]+50<tX[tI[0]-1] &&  // warunki konieczne akceptacji algorytmu 2
 		tY[0]+5 < tY[tI[0]+2] &&
-		tY[tI[0]]+5 < tY[tI[0]+tI[1]+2])// &&
-		//tX[tI[0]-1] > tX[tI[0]+1])
+		tY[tI[0]]+5 < tY[tI[0]+tI[1]+2])
 	{
 		procent = (int)(spr[1]*100/p1);
 		if (procent > 87) return procent + 20000;
 		else return procent;
 	}
-	else if (p2>=4 && tX[0]+50<tX[tI[0]-1]) //&&  // warunki konieczne akceptacji algorytmu 3
-		//tY[0]+5 < tY[tI[0]+2] &&
-		//tY[tI[0]]+5 < tY[tI[0]+tI[1]+2])// &&
-		//tX[tI[0]-1] > tX[tI[0]+1])
+	else if (p2>=4 && tX[0]+50<tX[tI[0]-1])	 // warunki konieczne akceptacji algorytmu 3
 	{
 		procent = (int)(spr[2]*100/p1);
 		if (procent > 87) return procent + 30000;
 		else return procent;
 	}
-	return -1 * procent;
 
-	/*
-	if (tX[0]!=0)
-	return tX[p1-1];
-	else return -1;*/
+	return -1 * procent;
 }
