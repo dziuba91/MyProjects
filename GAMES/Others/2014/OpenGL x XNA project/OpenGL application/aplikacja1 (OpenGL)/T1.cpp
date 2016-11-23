@@ -5,7 +5,7 @@ T1::T1()
 {
 	oddalenie1 = -9;
 	speed1 = 0.06f;
-	kat1 = 0; //35
+	kat1 = 0;
 	rquadX_1 = 0.0f;
 	rquadY_1 = 0.0f;
 
@@ -14,7 +14,7 @@ T1::T1()
 
 int T1::InitGL1(GLvoid)										// All Setup For OpenGL Goes Here
 {
-	GLfloat ambient1[]={0.3, 0.3, 0.3, 0.0};			//Oœwietlenia
+	GLfloat ambient1[]={0.3, 0.3, 0.3, 0.0};				//Oœwietlenia
 	GLfloat diffuse1[]={0.0, 0.0, 0.0, 0.5};
 	GLfloat position1[]={15.0, 30.0, 0.0, 3.0}; 
 	GLfloat specular1[]={0.0, 0.0, 0.0, 0.5}; 
@@ -34,8 +34,8 @@ int T1::DrawGLScene1()									// Here's Where We Do All The Drawing
 {
 	InitGL1();
 
-	glTranslatef(0, 1.2f, oddalenie1);         // Oddal
-	glRotatef(kat1, 1.0, 0.0, 0.0 );            // K¹t
+	glTranslatef(0, 1.2f, oddalenie1);		   // Oddal
+	glRotatef(kat1, 1.0, 0.0, 0.0 );			// K¹t
 	
 	glRotatef(rquadX_1,0,1.0f,0); 
 	glRotatef(rquadY_1,1.0f,0,0); 
@@ -51,12 +51,12 @@ int T1::DrawGLScene1()									// Here's Where We Do All The Drawing
 
 	DrawCube(1.0);
 
-	return TRUE;         // Wszystko ok
+	return TRUE;		 // Wszystko ok
 }
 
 void T1::keyboard1(bool *keys)
 {
-	if (keys[VK_RIGHT])     //kontrolki do testowania
+	if (keys[VK_RIGHT])		//kontrolki do testowania
 	{
 		trybObrotu1=1;
 	}

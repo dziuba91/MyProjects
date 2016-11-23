@@ -7,18 +7,18 @@
 #include <gl\glaux.h>		// Header File For The Glaux Library
 #include <gl\glut.h>
 
-HDC hDC=NULL;         // Prywatny kontekst u¿¹dzenia GDI
-HGLRC hRC=NULL;         // Kontekst rysuj¹cy
-HWND hWnd=NULL;         // Uchwyt naszego okna
+HDC hDC=NULL;				// Prywatny kontekst u¿¹dzenia GDI
+HGLRC hRC=NULL;				// Kontekst rysuj¹cy
+HWND hWnd=NULL;				// Uchwyt naszego okna
 
-HINSTANCE hInstance;         // Instancja aplikacji
+HINSTANCE hInstance;		// Instancja aplikacji
 
 int windowHeight= 640;
 int windowWidth= 640;
 
-bool keys[256];         // Tablica klawiszy - wciœniêty czy nie
-bool active=TRUE;         // Flaga - czy okno jest aktywne?
-bool fullscreen=TRUE;         // Uruchom aplikacje na pe³nym ekranie
+bool keys[256];				// Tablica klawiszy - wciœniêty czy nie
+bool active=TRUE;			// Flaga - czy okno jest aktywne?
+bool fullscreen=TRUE;		// Uruchom aplikacje na pe³nym ekranie
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 
@@ -44,7 +44,7 @@ GLvoid ReSizeGLScene(GLsizei width, GLsizei height)		// Resize And Initialize Th
 int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 {
 	glShadeModel(GL_SMOOTH);							// Enable Smooth Shading
-	glClearColor(255.0f, 255.0f, 255.0f, 0.5f);				// Black Background
+	glClearColor(255.0f, 255.0f, 255.0f, 0.5f);			// Black Background
 	glClearDepth(1.0f);									// Depth Buffer Setup
 	glEnable(GL_DEPTH_TEST);							// Enables Depth Testing
 	glDepthFunc(GL_LEQUAL);								// The Type Of Depth Testing To Do
@@ -102,17 +102,17 @@ GLvoid KillGLWindow(GLvoid)								// Properly Kill The Window
  *	fullscreenflag	- Use Fullscreen Mode (TRUE) Or Windowed Mode (FALSE)	*/
 BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscreenflag)
 {
-	GLuint		PixelFormat;			// Holds The Results After Searching For A Match
-	WNDCLASS	wc;						// Windows Class Structure
-	DWORD		dwExStyle;				// Window Extended Style
-	DWORD		dwStyle;				// Window Style
-	RECT		WindowRect;				// Grabs Rectangle Upper Left / Lower Right Values
-	WindowRect.left=(long)0;			// Set Left Value To 0
-	WindowRect.right=(long)width;		// Set Right Value To Requested Width
-	WindowRect.top=(long)0;				// Set Top Value To 0
-	WindowRect.bottom=(long)height;		// Set Bottom Value To Requested Height
+	GLuint		PixelFormat;									// Holds The Results After Searching For A Match
+	WNDCLASS	wc;												// Windows Class Structure
+	DWORD		dwExStyle;										// Window Extended Style
+	DWORD		dwStyle;										// Window Style
+	RECT		WindowRect;										// Grabs Rectangle Upper Left / Lower Right Values
+	WindowRect.left=(long)0;									// Set Left Value To 0
+	WindowRect.right=(long)width;								// Set Right Value To Requested Width
+	WindowRect.top=(long)0;										// Set Top Value To 0
+	WindowRect.bottom=(long)height;								// Set Bottom Value To Requested Height
 
-	fullscreen=fullscreenflag;			// Set The Global Fullscreen Flag
+	fullscreen=fullscreenflag;									// Set The Global Fullscreen Flag
 
 	hInstance			= GetModuleHandle(NULL);				// Grab An Instance For Our Window
 	wc.style			= CS_HREDRAW | CS_VREDRAW | CS_OWNDC;	// Redraw On Size, And Own DC For Window.
@@ -148,7 +148,7 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 			// If The Mode Fails, Offer Two Options.  Quit Or Use Windowed Mode.
 			if (MessageBox(NULL,"The Requested Fullscreen Mode Is Not Supported By\nYour Video Card. Use Windowed Mode Instead?","NeHe GL",MB_YESNO|MB_ICONEXCLAMATION)==IDYES)
 			{
-				fullscreen=FALSE;		// Windowed Mode Selected.  Fullscreen = FALSE
+				fullscreen=FALSE;		// Windowed Mode Selected.	Fullscreen = FALSE
 			}
 			else
 			{
@@ -317,7 +317,7 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 
 		//case WM_SIZE:								// Resize The OpenGL Window
 		//{
-			//ReSizeGLScene(LOWORD(lParam),HIWORD(lParam));  // LoWord=Width, HiWord=Height
+			//ReSizeGLScene(LOWORD(lParam),HIWORD(lParam));	 // LoWord=Width, HiWord=Height
 		//	return 0;								// Jump Back
 		//}
 	}

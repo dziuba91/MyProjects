@@ -1,4 +1,3 @@
-
 #include "t4.h"
 
 	//
@@ -16,7 +15,7 @@
 							{2,2,2}, {2,2,0}, {2,2,1}
 						};
 
-	static int kostka [3][9] =  {
+	static int kostka [3][9] =	{
 							{0,1,2,
 							 3,4,5,
 							 6,7,8},
@@ -43,10 +42,9 @@
 		oddalenie4 = -21;
 		odl4 = 2.0f;
 		speed4 = 0.3f;
-		kat4 = 0; //35
+		kat4 = 0;
 		rquadX_4 = 0.0f;
 		rquadY_4 = 0.0f;
-
 
 		trybObrotu4 = 1;
 
@@ -54,16 +52,6 @@
 
 		rotatuj=1.5f;
 
-		texture[6];
-
-		rot [27][3];
-
-		rot_nr [27][1000];
-		licznik [27];
-	
-		tab[3][3];
-
-		max4;
 		wait4 = false;
 
 		ilosc4 = 3;
@@ -97,7 +85,7 @@
 
 		AUX_RGBImageRec *TextureImage[1];					// Create Storage Space For The Texture
 
-		memset(TextureImage,0,sizeof(void *)*1);           	// Set The Pointer To NULL
+		memset(TextureImage,0,sizeof(void *)*1);			// Set The Pointer To NULL
 
 		char text[20];
 		// Load The Bitmap, Check For Errors, If Bitmap's Not Found Quit
@@ -142,10 +130,10 @@
 		glBegin(GL_QUADS);
 			// Front Face
 			glNormal3f( 0.0f, 0.0f, 1.0f);
-			glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f,  1.0f);
-			glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f, -1.0f,  1.0f);
-			glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f,  1.0f,  1.0f);
-			glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f,  1.0f,  1.0f);
+			glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f,	1.0f);
+			glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f, -1.0f,	1.0f);
+			glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f,	 1.0f,	1.0f);
+			glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f,	 1.0f,	1.0f);
 		glEnd();
 
 		glBindTexture(GL_TEXTURE_2D, texture[1]);
@@ -154,8 +142,8 @@
 			// Back Face
 			glNormal3f( 0.0f, 0.0f,-1.0f);
 			glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
-			glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f,  1.0f, -1.0f);
-			glTexCoord2f(0.0f, 1.0f); glVertex3f( 1.0f,  1.0f, -1.0f);
+			glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f,	 1.0f, -1.0f);
+			glTexCoord2f(0.0f, 1.0f); glVertex3f( 1.0f,	 1.0f, -1.0f);
 			glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, -1.0f, -1.0f);
 		glEnd();
 
@@ -164,10 +152,10 @@
 		glBegin(GL_QUADS);
 			// Top Face
 			glNormal3f( 0.0f, 1.0f, 0.0f);
-			glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f,  1.0f, -1.0f);
-			glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f,  1.0f,  1.0f);
-			glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f,  1.0f,  1.0f);
-			glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f,  1.0f, -1.0f);
+			glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f,	 1.0f, -1.0f);
+			glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f,	 1.0f,	1.0f);
+			glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f,	 1.0f,	1.0f);
+			glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f,	 1.0f, -1.0f);
 		glEnd();
 
 		glBindTexture(GL_TEXTURE_2D, texture[3]);
@@ -177,8 +165,8 @@
 			glNormal3f( 0.0f,-1.0f, 0.0f);
 			glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
 			glTexCoord2f(0.0f, 1.0f); glVertex3f( 1.0f, -1.0f, -1.0f);
-			glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, -1.0f,  1.0f);
-			glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f,  1.0f);
+			glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, -1.0f,	1.0f);
+			glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f,	1.0f);
 		glEnd();
 
 		glBindTexture(GL_TEXTURE_2D, texture[4]);
@@ -187,9 +175,9 @@
 			// Right face
 			glNormal3f( 1.0f, 0.0f, 0.0f);
 			glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f, -1.0f, -1.0f);
-			glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f,  1.0f, -1.0f);
-			glTexCoord2f(0.0f, 1.0f); glVertex3f( 1.0f,  1.0f,  1.0f);
-			glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, -1.0f,  1.0f);
+			glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f,	 1.0f, -1.0f);
+			glTexCoord2f(0.0f, 1.0f); glVertex3f( 1.0f,	 1.0f,	1.0f);
+			glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, -1.0f,	1.0f);
 		glEnd();
 
 		glBindTexture(GL_TEXTURE_2D, texture[5]);
@@ -198,9 +186,9 @@
 			// Left Face
 			glNormal3f(-1.0f, 0.0f, 0.0f);
 			glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
-			glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f,  1.0f);
-			glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f,  1.0f,  1.0f);
-			glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f,  1.0f, -1.0f);
+			glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f,	1.0f);
+			glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f,	 1.0f,	1.0f);
+			glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f,	 1.0f, -1.0f);
 		glEnd();
 	}
 
@@ -285,17 +273,17 @@
 
 					glLoadIdentity();
 
-					glTranslatef(0, przesuniecie4, oddalenie4);         // Oddal
-					glRotatef(kat4, 1.0, 0.0, 0.0 );    //Obróæ
+					glTranslatef(0, przesuniecie4, oddalenie4);			// Oddal
+					glRotatef(kat4, 1.0, 0.0, 0.0 );	//Obróæ
 
 					glRotatef(rquadY_4,1.0f,0,0); 
-					glRotatef(rquadX_4,0,1.0f,0);        
+					glRotatef(rquadX_4,0,1.0f,0);		 
 
 					//
 					for (int s= 0; s< 27; s++)
 						if (k==numb[s][0] && j==numb[s][1] && i==numb[s][2])
 						{	
-							glRotatef(rot[s][0],0.0f,0.0f,1.0f);    
+							glRotatef(rot[s][0],0.0f,0.0f,1.0f);	
 							glRotatef(rot[s][1],0.0f,1.0f,0.0f);
 							glRotatef(rot[s][2],1.0f,0.0f,0.0f);
 
@@ -310,7 +298,7 @@
 			}
 		}
 
-		if (trybObrotu4 == 0) {	speed4 = 0.3f;   max4 = 0.0f;   wait4 = FALSE;	  }
+		if (trybObrotu4 == 0) {	speed4 = 0.3f;	 max4 = 0.0f;	wait4 = FALSE;	  }
 		else if (trybObrotu4 == 1) 
 		{
 			rquadX_4+=speed4;  
@@ -340,7 +328,6 @@
 			}
 		
 			max4 += rotatuj;
-
 			if (max4 == 90.0f) 
 			{
 				int k = 2;
@@ -395,8 +382,6 @@
 			}
 		
 			max4 += rotatuj;
-
-
 			if (max4 == 90.0f) 
 			{
 				int k = 2;
@@ -451,8 +436,6 @@
 			}
 		
 			max4 += rotatuj;
-
-
 			if (max4 == 90.0f) 
 			{
 				int k = 2;
@@ -502,8 +485,6 @@
 			}
 		
 			max4 += rotatuj;
-
-
 			if (max4 == 90.0f) 
 			{
 				
@@ -546,8 +527,6 @@
 			}
 		
 			max4 += rotatuj;
-
-
 			if (max4 == 90.0f) 
 			{
 				
@@ -590,11 +569,8 @@
 			}
 		
 			max4 += rotatuj;
-
-
 			if (max4 == 90.0f) 
 			{
-				
 				int index = 0;
 				for (int i= 0; i<3; i++)
 					for (int j= 0; j<3; j++)
@@ -640,8 +616,6 @@
 			}
 		
 			max4 += rotatuj;
-
-
 			if (max4 == 90.0f) 
 			{
 				int k = 2;
@@ -702,8 +676,6 @@
 			}
 		
 			max4 += rotatuj;
-
-
 			if (max4 == 90.0f) 
 			{
 				int k = 1;
@@ -764,8 +736,6 @@
 			}
 		
 			max4 += rotatuj;
-
-
 			if (max4 == 90.0f) 
 			{
 				int k = 0;
@@ -790,7 +760,7 @@
 						l--;	
 					}
 					k=0;
-					l=2;     
+					l=2;	 
 				}	
 				
 				//
@@ -825,8 +795,6 @@
 			}
 		
 			max4 += rotatuj;
-
-
 			if (max4 == 90.0f) 
 			{
 				int k = 2;
@@ -882,8 +850,6 @@
 			}
 		
 			max4 += rotatuj;
-
-
 			if (max4 == 90.0f) 
 			{
 				int k = 2;
@@ -939,8 +905,6 @@
 			}
 		
 			max4 += rotatuj;
-
-
 			if (max4 == 90.0f) 
 			{
 				int k = 2;
@@ -991,11 +955,8 @@
 			}
 		
 			max4 += rotatuj;
-
-
 			if (max4 == 90.0f) 
 			{
-				
 				int index = 0;
 				for (int i= 0; i<3; i++)
 					for (int j= 0; j<3; j++)
@@ -1036,8 +997,6 @@
 			}
 		
 			max4 += rotatuj;
-
-
 			if (max4 == 90.0f) 
 			{
 				
@@ -1081,8 +1040,6 @@
 			}
 		
 			max4 += rotatuj;
-
-
 			if (max4 == 90.0f) 
 			{
 				
@@ -1132,8 +1089,6 @@
 			}
 		
 			max4 += rotatuj;
-
-
 			if (max4 == 90.0f) 
 			{
 				int k = 2;
@@ -1193,8 +1148,6 @@
 			}
 		
 			max4 += rotatuj;
-
-
 			if (max4 == 90.0f) 
 			{
 				int k = 1;
@@ -1254,8 +1207,6 @@
 			}
 		
 			max4 += rotatuj;
-
-
 			if (max4 == 90.0f) 
 			{
 				int k = 0;
@@ -1275,11 +1226,11 @@
 				{
 					for (int j= 0; j<3; j++)
 					{
-						kostka[i][k]= tab[j][l];	//  
+						kostka[i][k]= tab[j][l];	//	
 						k+=3;
 					}
 					k=0;
-					l--;     //
+					l--;	 //
 				}	
 				
 				//
@@ -1304,12 +1255,12 @@
 	
 		glDisable(GL_TEXTURE_2D);
 
-		return TRUE;         // Wszystko ok
+		return TRUE;		 // Wszystko ok
 	}
 
 	void T4::keyboard4(bool *keys)
 	{
-		if (keys[VK_RIGHT])     //kontrolki do testowania
+		if (keys[VK_RIGHT])		//kontrolki do testowania
 		{
 			trybObrotu4=1;
 		}
@@ -1324,6 +1275,14 @@
 		else if (keys[VK_DOWN])
 		{
 			trybObrotu4=4;			
+		}
+		else if (keys['O'] && wait_sim == FALSE)
+		{
+			if (sim == FALSE) sim = TRUE;
+			else sim = FALSE;
+			
+			time_sim = GetTickCount();
+			wait_sim = TRUE;
 		}
 		else if (keys['L'] && wait4 == FALSE)
 		{
@@ -1423,6 +1382,8 @@
 			trybObrotu4 = 62;
 			wait4 = TRUE;
 		}
+
+		if ( wait_sim == TRUE && (GetTickCount() - time_sim >= 200) ) { wait_sim = FALSE; }
 
 		if (sim) simulation();
 	}

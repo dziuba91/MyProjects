@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __T3_H
+#define __T3_H
 
 #include <windows.h>		// Header File For Windows
 #include <gl\gl.h>			// Header File For The OpenGL32 Library
@@ -13,7 +14,7 @@ class T3
 private:
 	float oddalenie3;
 	GLfloat speed3;
-	GLfloat kat3; //35
+	GLfloat kat3;
 	GLfloat rquadX_3;
 	GLfloat rquadY_3;
 
@@ -45,3 +46,5 @@ public:
 
 	void keyboard3(bool *);
 };
+
+#endif

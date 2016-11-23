@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __T2_H
+#define __T2_H
 
 #include <windows.h>		// Header File For Windows
 #include <gl\gl.h>			// Header File For The OpenGL32 Library
@@ -14,7 +15,7 @@ private:
 	float przesuniecie2;
 	float oddalenie2;
 	GLfloat speed2;
-	GLfloat kat2; //35
+	GLfloat kat2;
 	GLfloat rquadX_2;
 	GLfloat rquadY_2;
 
@@ -33,3 +34,5 @@ public:
 	int DrawGLScene2();
 	void keyboard2(bool *keys);
 };
+
+#endif

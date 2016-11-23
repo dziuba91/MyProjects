@@ -45,19 +45,6 @@ int numberOfQuotes = 0;
 int tryb = 1; //tryby poruszania siê
 bool timePause = false;
 
-/*
-GLfloat material1[]={0.0, 0.0, 0.8, 0.0};			//NIEBIESKI
-GLfloat material3[]={0.8, 0.0, 0.0, 0.0};			//ZIELONY
-GLfloat material2[]={0.0, 0.8, 0.0, 0.0};			//CZERWONY
-GLfloat material5[]={0.8, 0.8, 0.0, 0.0};			//¿Ó£TY
-GLfloat material4[]={0.8, 0.3, 0.0, 0.0};			//POMARAÑCZOWY
-GLfloat material6[]={0.8, 0.8, 0.8, 0.0};			//BIA£Y
-GLfloat ambient[]={0.3, 0.3, 0.3, 0.0};			//Oœwietlenia
-GLfloat diffuse[]={0.0, 0.0, 0.0, 0.5};
-GLfloat position[]={15.0, 30.0, 0.0, 3.0}; 
-GLfloat specular[]={0.0, 0.0, 0.0, 0.5};         // Wartoœci œwiat³a rozproszonego 
-*/
-
 int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 					HINSTANCE	hPrevInstance,		// Previous Instance
 					LPSTR		lpCmdLine,			// Command Line Parameters
@@ -67,7 +54,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 	BOOL	done=FALSE;								// Bool Variable To Exit Loop
 	
 
-    numberOfQuotes=4;
+	numberOfQuotes=4;
 
 	fullscreen=FALSE;							// Windowed Mode
 
@@ -91,9 +78,9 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				DispatchMessage(&msg);				// Dispatch The Message
 			}
 		}
-		else		 							// If There Are No Messages
+		else									// If There Are No Messages
 		{
-			// Draw The Scene.  Watch For ESC Key And Quit Messages From DrawGLScene()
+			// Draw The Scene.	Watch For ESC Key And Quit Messages From DrawGLScene()
 			if (active)								// Program Active?
 			{
 				if (keys[VK_ESCAPE])				// Was ESC Pressed?
@@ -146,13 +133,6 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				{
 					if (timePause) timePause = false;
 					else timePause = true;
-
-					wait = TRUE;
-				}
-				else if (keys['O'] && tryb == 4 && wait == FALSE)
-				{
-					if (t4.sim == FALSE) t4.sim = TRUE;
-					else t4.sim = FALSE;
 
 					wait = TRUE;
 				}
@@ -213,19 +193,6 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 					SwapBuffers(hDC);				// Swap Buffers (Double Buffering)
 				}
 			}
-
-			//Kod zmieniaj¹cy okno na tryb pe³noekranowy wy³¹czony //uniemo¿liwienie trybu fullscrean//
-/*			if (keys[VK_F1])						// Is F1 Being Pressed?   
-			{
-				keys[VK_F1]=FALSE;					// If So Make Key FALSE
-				KillGLWindow();						// Kill Our Current Window
-				fullscreen=!fullscreen;				// Toggle Fullscreen / Windowed Mode
-				// Recreate Our OpenGL Window
-				if (!CreateGLWindow("NeHe's OpenGL Framework",640,480,16,fullscreen))
-				{
-					return 0;						// Quit If Window Was Not Created
-				}
-			}*/
 		}
 	}
 

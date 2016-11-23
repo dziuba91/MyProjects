@@ -8,117 +8,101 @@ using Microsoft.Xna.Framework.Input;
 
 namespace aplikacja2__XNA_.BasicComponent
 {
-    class TextArea : DrawableGameComponent
-    {
-        # region Field
+	class TextArea : DrawableGameComponent
+	{
+		# region Field
 
-        Texture2D blank;
-        SpriteFont text;
+		Texture2D blank;
+		SpriteFont text;
 
-        public int fps;
+		public int fps;
 
-        public int timeMean;
-        public int timeMax;
-        public int timeMin;
-        public int timeStart;
-        public int timeStop;
+		public int timeMean;
+		public int timeMax;
+		public int timeMin;
+		public int timeStart;
+		public int timeStop;
 
-        public int tryb;
+		public int tryb;
+		public bool block;
 
-        public bool block;
+		public bool pause;
 
-        public bool pause;
-
-        #endregion
-
-
-        #region Initialization
-
-        public TextArea(Game game)
-            : base(game)
-        {
-
-        }
-
-        public SpriteBatch spriteBatch
-        {
-            get
-            {
-                return (SpriteBatch)this.Game.Services.GetService(typeof(SpriteBatch));
-            }
-        }
-
-        #endregion
+		#endregion
 
 
-        #region BasicComponentMethod
+		#region Initialization
 
-        public override void Initialize()
-        {
+		public TextArea(Game game)
+			: base(game)
+		{	}
 
-            base.Initialize();
-        }
+		public SpriteBatch spriteBatch
+		{
+			get
+			{
+				return (SpriteBatch)this.Game.Services.GetService(typeof(SpriteBatch));
+			}
+		}
 
-        protected override void LoadContent()
-        {
-            text = Game.Content.Load<SpriteFont>("tekst");
-
-            blank = new Texture2D(GraphicsDevice, 1, 1);
-            blank.SetData(new[] { Color.White });
-        }
-
-        public void Update(GameTime gameTime)
-        {
-
-            base.Update(gameTime);
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-            spriteBatch.Begin();
-
-            //int border = 15;
-            string t1 = "TRYB: " + tryb;
-
-            Rectangle textPosition = new Rectangle(
-                    (int)0,
-                    (int)(3*GraphicsDevice.Viewport.Height/4),
-                    (int)(GraphicsDevice.Viewport.Width),
-                    (int)(GraphicsDevice.Viewport.Height));
-
-            spriteBatch.Draw(blank, textPosition, Color.White);
+		#endregion
 
 
-            Vector2 miPosition = new Vector2((int)(textPosition.X + 50), textPosition.Y + 5);
+		#region BasicComponentMethod
 
-            spriteBatch.DrawString(text, t1, miPosition, Color.Black);
+		protected override void LoadContent()
+		{
+			text = Game.Content.Load<SpriteFont>("tekst");
 
-            string t2 ="";
+			blank = new Texture2D(GraphicsDevice, 1, 1);
+			blank.SetData(new[] { Color.White });
+		}
 
-            if (block)
-                t2 = "fps= " + fps + " (limited)";
-            else
-                t2 = "fps= " + fps;
+		public override void Draw(GameTime gameTime)
+		{
+			spriteBatch.Begin();
 
-            miPosition.Y += 30; ;
+			string t1 = "TRYB: " + tryb;
 
-            spriteBatch.DrawString(text, t2, miPosition, Color.Black);
+			Rectangle textPosition = new Rectangle(
+					(int)0,
+					(int)(3*GraphicsDevice.Viewport.Height/4),
+					(int)(GraphicsDevice.Viewport.Width),
+					(int)(GraphicsDevice.Viewport.Height));
 
-            string t3 = "";
-            
-            if (!pause)
-                t3 = "section1= " + timeMean + "[ms] \n         (" + "t1= " + timeStart + "; tn= " + timeStop + "; tmin= " + timeMin + "; tmax= " + timeMax + ")";
-            else
-                t3 = "section1= " + timeMean + "[ms]   (pause)\n         (" + "t1= " + timeStart + "; tn= " + timeStop + "; tmin= " + timeMin + "; tmax= " + timeMax + ")";
-            miPosition.Y += 30; ;
+			spriteBatch.Draw(blank, textPosition, Color.White);
 
-            spriteBatch.DrawString(text, t3, miPosition, Color.Black);
+			//
+			Vector2 miPosition = new Vector2((int)(textPosition.X + 50), textPosition.Y + 5);
 
-            spriteBatch.End();
+			spriteBatch.DrawString(text, t1, miPosition, Color.Black);
 
-            base.Draw(gameTime);
-        }
+			string t2 ="";
 
-        #endregion
-    }
+			if (block)
+				t2 = "fps= " + fps + " (limited)";
+			else
+				t2 = "fps= " + fps;
+
+			miPosition.Y += 30; ;
+
+			spriteBatch.DrawString(text, t2, miPosition, Color.Black);
+
+			string t3 = "";
+			
+			if (!pause)
+				t3 = "section1= " + timeMean + "[ms] \n	        (" + "t1= " + timeStart + "; tn= " + timeStop + "; tmin= " + timeMin + "; tmax= " + timeMax + ")";
+			else
+				t3 = "section1= " + timeMean + "[ms]   (pause)\n         (" + "t1= " + timeStart + "; tn= " + timeStop + "; tmin= " + timeMin + "; tmax= " + timeMax + ")";
+			miPosition.Y += 30; ;
+
+			spriteBatch.DrawString(text, t3, miPosition, Color.Black);
+
+			spriteBatch.End();
+
+			base.Draw(gameTime);
+		}
+
+		#endregion
+	}
 }

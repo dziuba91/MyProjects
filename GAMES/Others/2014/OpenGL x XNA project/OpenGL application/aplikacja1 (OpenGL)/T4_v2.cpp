@@ -10,10 +10,10 @@
 	static GLfloat ambient44[]={0.3, 0.3, 0.3, 0.0};			//Oœwietlenia
 	static GLfloat diffuse44[]={0.0, 0.0, 0.0, 0.5};
 	static GLfloat position44[]={15.0, 30.0, 0.0, 3.0}; 
-	static GLfloat specular44[]={0.0, 0.0, 0.0, 0.5};         // Wartoœci œwiat³a rozproszonego 
+	static GLfloat specular44[]={0.0, 0.0, 0.0, 0.5};		  // Wartoœci œwiat³a rozproszonego 
 
 	
-	static int numb44 [27][3] =  {							 // Oznaczenie (numeracja) kwadracików 
+	static int numb44 [27][3] =	 {							 // Oznaczenie (numeracja) kwadracików 
 							{1,1,2}, {1,1,0}, {1,1,1},
 							{0,1,2}, {0,1,0}, {0,1,1},
 							{2,1,2}, {2,1,0}, {2,1,1},
@@ -41,14 +41,14 @@
 							  24,25,26}
 						 };
 
-
+	//
 	T4_v2::T4_v2()
 	{
 		przesuniecie44 = 3.5f;
 		oddalenie44 = -35;
 		odl44 = 2.5f;
 		speed44 = 0.2f;
-		kat44 = 0; //35
+		kat44 = 0;
 		rquadX_44 = 0.0f;
 		rquadY_44 = 0.0f;
 		
@@ -57,15 +57,6 @@
 		rotatuj44=1.0f;
 
 		//
-		rot44 [27][3];
-
-		rot_nr44 [27][1000];
-		licznik44 [27];
-
-		tab44[3][3];
-
-		//
-		max44;
 		wait44 = false;
 
 		ilosc44 = 3;
@@ -75,17 +66,17 @@
 
 	void T4_v2::DrawColoredCube(float X)
 	{
-		glBegin(GL_QUADS);         // Zacznij rysowanie szeœcianu
+		glBegin(GL_QUADS);		   // Zacznij rysowanie szeœcianu
 		
 			glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, material1);
 			glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, material1);
 			glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material1);
 
 			glNormal3f( 0.0f, 0.0f, 1.0f);
-			glVertex3f(-X, -X,  X);
-			glVertex3f( X, -X,  X);
-			glVertex3f( X,  X,  X);
-			glVertex3f(-X,  X,  X);
+			glVertex3f(-X, -X,	X);
+			glVertex3f( X, -X,	X);
+			glVertex3f( X,	X,	X);
+			glVertex3f(-X,	X,	X);
 	
 
 			glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, material2);
@@ -94,8 +85,8 @@
 	
 			glNormal3f( 0.0f, 0.0f,-1.0f);
 			glVertex3f(-X, -X, -X);
-			glVertex3f(-X,  X, -X);
-			glVertex3f( X,  X, -X);
+			glVertex3f(-X,	X, -X);
+			glVertex3f( X,	X, -X);
 			glVertex3f( X, -X, -X);
 	
 
@@ -104,10 +95,10 @@
 			glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material3);
 			
 			glNormal3f( 0.0f, 1.0f, 0.0f);
-			glVertex3f(-X,  X, -X);
-			glVertex3f(-X,  X,  X);
-			glVertex3f( X,  X,  X);
-			glVertex3f( X,  X, -X);
+			glVertex3f(-X,	X, -X);
+			glVertex3f(-X,	X,	X);
+			glVertex3f( X,	X,	X);
+			glVertex3f( X,	X, -X);
 	
 		
 			glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, material4);
@@ -117,8 +108,8 @@
 			glNormal3f( 0.0f,-1.0f, 0.0f);
 			glVertex3f(-X, -X, -X);
 			glVertex3f( X, -X, -X);
-			glVertex3f( X, -X,  X);
-			glVertex3f(-X, -X,  X);
+			glVertex3f( X, -X,	X);
+			glVertex3f(-X, -X,	X);
 		
 
 			glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, material5);
@@ -127,9 +118,9 @@
 	
 			glNormal3f( 1.0f, 0.0f, 0.0f);
 			glVertex3f( X, -X, -X);
-			glVertex3f( X,  X, -X);
-			glVertex3f( X,  X,  X);
-			glVertex3f( X, -X,  X);
+			glVertex3f( X,	X, -X);
+			glVertex3f( X,	X,	X);
+			glVertex3f( X, -X,	X);
 			
 
 			glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, material6);
@@ -138,10 +129,10 @@
 	
 			glNormal3f(-1.0f, 0.0f, 0.0f);
 			glVertex3f(-X, -X, -X);
-			glVertex3f(-X, -X,  X);
-			glVertex3f(-X,  X,  X);
-			glVertex3f(-X,  X, -X); 
-		glEnd();         // Zakoñcz rysowanie czworok¹ta
+			glVertex3f(-X, -X,	X);
+			glVertex3f(-X,	X,	X);
+			glVertex3f(-X,	X, -X); 
+		glEnd();		 // Zakoñcz rysowanie czworok¹ta
 	}
 
 	void T4_v2::Tryb44(int x)
@@ -180,7 +171,7 @@
 		return TRUE;										// Initialization Went OK
 	}
 
-	int T4_v2::DrawGLScene44()									// Here's Where We Do All The Drawing
+	int T4_v2::DrawGLScene44()								// Here's Where We Do All The Drawing
 	{
 		InitGL44();
 	
@@ -207,17 +198,17 @@
 					//
 					glLoadIdentity();
 
-					glTranslatef(0, przesuniecie44, oddalenie44);         // Oddal
-					glRotatef(kat44, 1.0, 0.0, 0.0 );    //Obróæ
+					glTranslatef(0, przesuniecie44, oddalenie44);		  // Oddal
+					glRotatef(kat44, 1.0, 0.0, 0.0 );	 //Obróæ
 
 					glRotatef(rquadY_44,1.0f,0,0); 
-					glRotatef(rquadX_44,0,1.0f,0);        
+					glRotatef(rquadX_44,0,1.0f,0);		  
 
 					//
 					for (int s= 0; s< 27; s++)
 						if (k==numb44[s][0] && j==numb44[s][1] && i==numb44[s][2])
 						{	
-							glRotatef(rot44[s][0],0.0f,0.0f,1.0f);    
+							glRotatef(rot44[s][0],0.0f,0.0f,1.0f);	  
 							glRotatef(rot44[s][1],0.0f,1.0f,0.0f);
 							glRotatef(rot44[s][2],1.0f,0.0f,0.0f);
 
@@ -232,7 +223,7 @@
 			}
 		}
 
-		if (trybObrotu44 == 0) {	speed44 = 0.2f;   max44 = 0.0f;   wait44 = FALSE;	  }
+		if (trybObrotu44 == 0) {	speed44 = 0.2f;	  max44 = 0.0f;	  wait44 = FALSE;	  }
 		else if (trybObrotu44 == 1) 
 		{
 			rquadX_44+=speed44;
@@ -262,7 +253,6 @@
 			}
 		
 			max44 += rotatuj44;
-
 			if (max44 == 90.0f) 
 			{
 				int k = 2;
@@ -317,8 +307,6 @@
 			}
 		
 			max44 += rotatuj44;
-
-
 			if (max44 == 90.0f) 
 			{
 				int k = 2;
@@ -373,8 +361,6 @@
 			}
 		
 			max44 += rotatuj44;
-
-
 			if (max44 == 90.0f) 
 			{
 				int k = 2;
@@ -424,11 +410,8 @@
 			}
 		
 			max44 += rotatuj44;
-
-
 			if (max44 == 90.0f) 
 			{
-				
 				int index = 0;
 				for (int i= 0; i<3; i++)
 					for (int j= 0; j<3; j++)
@@ -468,8 +451,6 @@
 			}
 		
 			max44 += rotatuj44;
-
-
 			if (max44 == 90.0f) 
 			{
 				
@@ -512,8 +493,6 @@
 			}
 		
 			max44 += rotatuj44;
-
-
 			if (max44 == 90.0f) 
 			{
 				
@@ -562,8 +541,6 @@
 			}
 		
 			max44 += rotatuj44;
-
-
 			if (max44 == 90.0f) 
 			{
 				int k = 2;
@@ -624,8 +601,6 @@
 			}
 		
 			max44 += rotatuj44;
-
-
 			if (max44 == 90.0f) 
 			{
 				int k = 1;
@@ -686,8 +661,6 @@
 			}
 		
 			max44 += rotatuj44;
-
-
 			if (max44 == 90.0f) 
 			{
 				int k = 0;
@@ -712,7 +685,7 @@
 						l--;	
 					}
 					k=0;
-					l=2;     
+					l=2;	 
 				}	
 				
 				//
@@ -747,8 +720,6 @@
 			}
 		
 			max44 += rotatuj44;
-
-
 			if (max44 == 90.0f) 
 			{
 				int k = 2;
@@ -804,8 +775,6 @@
 			}
 		
 			max44 += rotatuj44;
-
-
 			if (max44 == 90.0f) 
 			{
 				int k = 2;
@@ -861,8 +830,6 @@
 			}
 		
 			max44 += rotatuj44;
-
-
 			if (max44 == 90.0f) 
 			{
 				int k = 2;
@@ -913,11 +880,8 @@
 			}
 		
 			max44 += rotatuj44;
-
-
 			if (max44 == 90.0f) 
 			{
-				
 				int index = 0;
 				for (int i= 0; i<3; i++)
 					for (int j= 0; j<3; j++)
@@ -958,11 +922,8 @@
 			}
 		
 			max44 += rotatuj44;
-
-
 			if (max44 == 90.0f) 
 			{
-				
 				int index = 0;
 				for (int i= 0; i<3; i++)
 					for (int j= 0; j<3; j++)
@@ -1003,8 +964,6 @@
 			}
 		
 			max44 += rotatuj44;
-
-
 			if (max44 == 90.0f) 
 			{
 				
@@ -1054,8 +1013,6 @@
 			}
 		
 			max44 += rotatuj44;
-
-
 			if (max44 == 90.0f) 
 			{
 				int k = 2;
@@ -1115,8 +1072,6 @@
 			}
 		
 			max44 += rotatuj44;
-
-
 			if (max44 == 90.0f) 
 			{
 				int k = 1;
@@ -1176,8 +1131,6 @@
 			}
 		
 			max44 += rotatuj44;
-
-
 			if (max44 == 90.0f) 
 			{
 				int k = 0;
@@ -1197,11 +1150,11 @@
 				{
 					for (int j= 0; j<3; j++)
 					{
-						kostka44[i][k]= tab44[j][l];	//  
+						kostka44[i][k]= tab44[j][l];	//	
 						k+=3;
 					}
 					k=0;
-					l--;     //
+					l--;	 //
 				}	
 				
 				//
@@ -1226,12 +1179,12 @@
 	
 		glDisable(GL_TEXTURE_2D);
 
-		return TRUE;         // Wszystko ok
+		return TRUE;		 // Wszystko ok
 	}
 
 	void T4_v2::keyboard44(bool *keys)
 	{
-		if (keys[VK_RIGHT] && wait44 == FALSE)     //kontrolki do testowania
+		if (keys[VK_RIGHT] && wait44 == FALSE)	   //kontrolki do testowania
 		{
 			trybObrotu44=1;
 		}

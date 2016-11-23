@@ -6,7 +6,7 @@ T2::T2()
 	przesuniecie2 = 4.0f;
 	oddalenie2 = -45;
 	speed2 = 0.1f;
-	kat2 = 0; //35
+	kat2 = 0;
 	rquadX_2 = 0.0f;
 	rquadY_2 = 0.0f;
 
@@ -52,7 +52,6 @@ int T2::DrawGLScene2()									// Here's Where We Do All The Drawing
 					a-=pol;
 					a*=-1;
 				}
-				//if (a>2) { a--; a= a*(-1); }
 				
 				int b=k;
 				if (b>pol) 
@@ -60,7 +59,6 @@ int T2::DrawGLScene2()									// Here's Where We Do All The Drawing
 					b-=pol;
 					b*=-1;
 				}
-				//if (b>2) { b--; b= b*(-1); }
 				
 				int c=i;
 				if (c>pol) 
@@ -68,13 +66,11 @@ int T2::DrawGLScene2()									// Here's Where We Do All The Drawing
 					c-=pol;
 					c*=-1;
 				}
-				//if (c>2) { c--; c= c*(-1); }
-
 
 				glLoadIdentity();
 
-				glTranslatef(0, przesuniecie2, oddalenie2);         // Oddal
-				glRotatef(kat2, 1.0, 0.0, 0.0 );            // K¹t
+				glTranslatef(0, przesuniecie2, oddalenie2);			// Oddal
+				glRotatef(kat2, 1.0, 0.0, 0.0 );			// K¹t
 	
 				glRotatef(rquadX_2,0,1.0f,0); 
 				glRotatef(rquadY_2,1.0f,0,0); 
@@ -83,8 +79,6 @@ int T2::DrawGLScene2()									// Here's Where We Do All The Drawing
 				glTranslatef(odl*a, odl*b, odl*c);
 
 				DrawCube(1.0);
-
-				//glTranslatef(odl,0.0f,0.0f);    
 			}
 		}
 	}
@@ -100,12 +94,12 @@ int T2::DrawGLScene2()									// Here's Where We Do All The Drawing
 
 	DrawCube(1.0);
 
-	return TRUE;         // Wszystko ok
+	return TRUE;		 // Wszystko ok
 }
 
 void T2::keyboard2(bool *keys)
 {
-	if (keys[VK_RIGHT])     //kontrolki do testowania
+	if (keys[VK_RIGHT])		//kontrolki do testowania
 	{
 		trybObrotu2=1;
 	}

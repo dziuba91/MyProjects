@@ -1,12 +1,8 @@
-
 #include "t5.h"
 
 	T5::T5(FPS * fps1)
 	{
 		ustawParametry = true;
-
-		max;
-		maxPrzedzial;
 	
 		przesun = 0.4f;
 
@@ -29,13 +25,13 @@
 	}
 
 	void T5::drawString (void * font, char * s, float x, float y, float z){
-	    unsigned int i, j;
-	    glRasterPos3f(x, y, z);
+		unsigned int i, j;
+		glRasterPos3f(x, y, z);
 
-	     for (i = 0; i < strlen (s); i++)
+		 for (i = 0; i < strlen (s); i++)
 		 {
 			  //glColor3f(0,255,255);
-	          glutBitmapCharacter (font, s[i]);
+			  glutBitmapCharacter (font, s[i]);
 		 }
 	}
 
@@ -142,15 +138,15 @@
 		float oddalenie = -3;
 		float offset = -0.9f;
 
-		glTranslatef(0, przesun, oddalenie);         // Oddal
+		glTranslatef(0, przesun, oddalenie);		 // Oddal
 	
 		glColor3f(0.0f,0.0f,0.0f); //blue color
 
-	    glPointSize(3.0f);//set point size to 10 pixels
-    
+		glPointSize(3.0f);//set point size to 10 pixels
+	
 		// wykres X
 		glBegin(GL_LINES);
-		 	glVertex3f(1.4f,offset,0.0f);
+			glVertex3f(1.4f,offset,0.0f);
 			glVertex3f(-1.4f,offset,0.0f);
 		glEnd();
 
@@ -222,7 +218,6 @@
 
 		for (j = 0; j < fps1->FPS_ARRAY_LENGHT; j++)
 		{
-			//char buf[10];
 			if (tryb5 == 0)
 			{
 				pointX = (j + 1)*0.025f - 1.2f;
@@ -341,8 +336,8 @@
 			}
 
 			if (setLine && tryb5 != 10)
-		    {
-	            glBegin(GL_LINES);
+			{
+				glBegin(GL_LINES);
 					glVertex3f(pointX,pointY,0.0f);
 					glVertex3f(previousPointX,previousPointY,0.0f);
 				glEnd();
@@ -372,12 +367,12 @@
 		drawString(GLUT_BITMAP_HELVETICA_18, buf3, -1.4f, 1.05f, 0.1f);
 	
 
-	    return TRUE;         // Wszystko ok
+		return TRUE;		 // Wszystko ok
 	}
 
 	void T5::keyboard5(bool *keys)
 	{
-		if (keys['Q'])     //kontrolki do testowania
+		if (keys['Q'])	   //kontrolki do testowania
 		{
 			tryb5=0;
 			ustawParametry = true;

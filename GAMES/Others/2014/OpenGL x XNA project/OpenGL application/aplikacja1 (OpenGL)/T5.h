@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __T5_H
+#define __T5_H
 
 #include <windows.h>		// Header File For Windows
 #include <gl\gl.h>			// Header File For The OpenGL32 Library
@@ -40,3 +41,5 @@ public:
 
 	void keyboard5(bool *keys);
 };
+
+#endif

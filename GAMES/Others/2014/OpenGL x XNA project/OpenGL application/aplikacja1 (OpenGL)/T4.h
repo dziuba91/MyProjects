@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __T4_H
+#define __T4_H
 
 #include <windows.h>		// Header File For Windows
 #include <gl\gl.h>			// Header File For The OpenGL32 Library
@@ -10,15 +11,14 @@
 
 class T4
 {
-public:
+private:
 	bool sim;
 
-private:
 	float przesuniecie4;
 	float oddalenie4;
 	float odl4;
 	GLfloat speed4;
-	GLfloat kat4; //35
+	GLfloat kat4;
 	GLfloat rquadX_4;
 	GLfloat rquadY_4;
 
@@ -39,6 +39,9 @@ private:
 
 	GLfloat max4;
 	bool wait4;
+
+	bool wait_sim;
+	int time_sim;
 
 	int ilosc4;
 	
@@ -63,3 +66,5 @@ public:
 
 	void keyboard4(bool *keys);
 };
+
+#endif

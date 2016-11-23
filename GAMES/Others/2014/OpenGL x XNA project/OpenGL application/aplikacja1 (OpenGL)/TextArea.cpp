@@ -33,11 +33,11 @@ void TextArea::drawString0 (void * font, char * s, float x, float y, float z)
 
 	for (i = 0; i < strlen (s); i++)
 	{
-	     glutBitmapCharacter (font, s[i]);
+		 glutBitmapCharacter (font, s[i]);
 	}
 }
 
-int TextArea::DrawGLScene(int tryb, bool timePause)									// Here's Where We Do All The Drawing
+int TextArea::DrawGLScene(int tryb, bool timePause)					// Here's Where We Do All The Drawing
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
 	
@@ -76,8 +76,8 @@ int TextArea::DrawGLScene(int tryb, bool timePause)									// Here's Where We D
 	drawString0(GLUT_BITMAP_HELVETICA_18, buf3, -maxWindow+0.1f, -maxWindow+areaHeight-0.08f, 0.1f);
 
 	char buf4 [100];
-	sprintf(buf4,"             (t1= %d; tn= %d; tmin= %d; tmax= %d)", time1->startTime, time1->stopTime, time1->minTime, time1->maxTime);
+	sprintf(buf4,"           (t1= %d; tn= %d; tmin= %d; tmax= %d)", time1->startTime, time1->stopTime, time1->minTime, time1->maxTime);
 	drawString0(GLUT_BITMAP_HELVETICA_18, buf4, -maxWindow+0.1f, -maxWindow+areaHeight-0.11f, 0.1f);
 	
-	return TRUE;         // Wszystko ok
+	return TRUE;		 // Wszystko ok
 }

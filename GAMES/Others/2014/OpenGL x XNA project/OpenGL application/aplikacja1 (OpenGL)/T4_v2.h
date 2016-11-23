@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __T4_V2_H
+#define __T4_V2_H
 
 #include <windows.h>		// Header File For Windows
 #include <gl\gl.h>			// Header File For The OpenGL32 Library
@@ -10,13 +11,12 @@
 
 class T4_v2
 {
-
 private:
 	float przesuniecie44;
 	float oddalenie44;
 	float odl44;
 	GLfloat speed44;
-	GLfloat kat44; //35
+	GLfloat kat44;
 	GLfloat rquadX_44;
 	GLfloat rquadY_44;
 	
@@ -55,3 +55,5 @@ public:
 
 	void keyboard44(bool *);
 };
+
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __T1_H
+#define __T1_H
 
 #include <windows.h>		// Header File For Windows
 #include <gl\gl.h>			// Header File For The OpenGL32 Library
@@ -13,7 +14,7 @@ class T1
 private:
 	float oddalenie1;
 	GLfloat speed1;
-	GLfloat kat1; //35
+	GLfloat kat1;
 	GLfloat rquadX_1;
 	GLfloat rquadY_1;
 
@@ -27,3 +28,5 @@ public:
 	int DrawGLScene1();
 	void keyboard1(bool *keys);
 };
+
+#endif
