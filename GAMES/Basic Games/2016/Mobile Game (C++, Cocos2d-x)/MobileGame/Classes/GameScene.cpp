@@ -12,17 +12,17 @@ Scene* GameScene::createScene()
 	scene->getPhysicsWorld()->setGravity(Vect(0, 0));
 
 	auto layer = GameScene::create();
-    scene->addChild(layer);
+	scene->addChild(layer);
 	
-    return scene;
+	return scene;
 }
 
 bool GameScene::init()
 {
-    if ( !Layer::init() )
-    {
-        return false;
-    }
+	if ( !Layer::init() )
+	{
+		return false;
+	}
 
 	// layer settings
 	this->setKeypadEnabled(true);
@@ -50,7 +50,7 @@ bool GameScene::init()
 
 	this->addComponent(PlayerComponent::create(_touchPanels, _touchPanels[activeArea]->getCenterPosition()));
 
-    return true;
+	return true;
 }
 
 void GameScene::onExit()

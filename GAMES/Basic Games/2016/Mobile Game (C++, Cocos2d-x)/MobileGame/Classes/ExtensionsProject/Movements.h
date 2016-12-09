@@ -38,7 +38,7 @@ private:
 	// @Variables for the physics calculations:
 	float _x; // * coordinates 'X' of 'main point' (position of the object in movement)
 	float _y; // * coordinates 'Y' of 'main point' (position of the object in movement)
-	float _x0;  // * coordinates 'X' of start pendulum point ('point zero'/ 'touch position')
+	float _x0;	// * coordinates 'X' of start pendulum point ('point zero'/ 'touch position')
 	float _y0; // * coordinates 'Y' of start pendulum point ('point zero'/ 'touch position')
 	float _alpha; // * calculation parameter (an angle)
 	float _l; // * calculation parameter (length beetwen 'main point' and 'touch point')
