@@ -1,70 +1,59 @@
-===========
-README [PL]
-===========
+======
+README
+======
 
----------------------------------
-1) PODSTAWOWE INFORMACJE
----------------------------------
-	* Nazwa projektu: Asteroids Game
+-------------------------------------------
+1) INTRODUCTION
+-------------------------------------------
+	* Project Name: Asteroids Game
 	
-	* Opis: Prosta gra zręcznościowa
+	* Description: A simple arcade game
 	
-	* Autor: Tomasz Dziuba
+	* Author: Tomasz Dziuba
 	
-	* Data wykonania: 18.10.2016
+	* Project was finalized in: 18.10.2016
 	
----------------------------------
+-------------------------------------------
 2) GAMEPLAY
----------------------------------
-	* gracz steruje obiektem reprezentującym 'statek kosmiczny'
+-------------------------------------------
+	* The player controls an object which represents 'Spaceship'.
 	
-	* co jakiś czas z góry spadają prostopadłościany (o losowym rozmiarze) reprezentujące 'asteroidy'
+	* Periodically from the top, random sized, cubes objects (represents 'Asteroids') falls.
 	
-	* gracz może poruszać się w lewo/ prawo oraz strzelać
+	* 'Asteroids' falls with a slight deviation in left/ right direction and have given random rotation.
+	
+	* The player can move in left/ right direction and shot.
+	
+	* Shot down an 'Asteroid' remove it from the screen, while 
+		another objects will appear with greater frequency.
+	
+	* Collision 'Asteroid' and 'Spaceship' resets the state of the game.
 
-	* 'asteroidy' spadają z lekkim odchyleniem w prawo lub lewo oraz mają nadaną losową rotację
+-------------------------------------------
+3) IMPLEMENTATION
+-------------------------------------------
+	* Programming language: C++
 	
-	* w przypadku zestrzelenia 'asteroidu' zostaje on usunięty z ekranu, 
-		natomiast kolejne obiekty będą pojawiać się z większą częstotliwością
+	* Graphics programming API: OpenGL
 	
-	* kolizja 'asteroidu' ze 'statkiem kosmicznym' resetuje stan gry
+	* Development environment (IDE): Visual Studio 2015 (Community)
 
----------------------------------
-3) STEROWANIE
----------------------------------
-	* LEWO (strzałka) - ruch w lewo
-	
-	* PRAWO (strzałka) - ruch w prawo
-	
-	* SPACJA - oddanie strzału
-	
-	* ESC - wyjście z aplikacji
-
----------------------------------
-4) WYKONANIE
----------------------------------
-	* Język: C++
-	
-	* Graficzne API: OpenGL
-	
-	* Środowisko programistyczne: Visual Studio 2015 (Community)
-
----------------------------------
-5) STRUKTURA PROJEKTU
----------------------------------
-	Projekt został podzielony na 2 logiczne części.
+-------------------------------------------
+4) PROJECT STRUCTURE
+-------------------------------------------
+	The project was divided into 2 logical parts.
 	
 	a) 'MyGameEngine': 
-		* Mini projekt mojego małego silnika gry
+		* Project of my little game engine (only for Windows system).
 		
-		* Zawiera elementy (klasy, struktury) niezbędne do wykonania tego zadania, m.in.:
-			-> inicjalizuje i tworzy okno aplikacji (funkcje Win API)
-			-> inicjuje użycie OpenGL (perspektywa kamery, oświetlenia)
-			-> zarządza główną 'pętlą gry'
-			-> przetwarza 'komponenty gry'
+		* Contains elements (classes, structures) necessary to accomplish simple game on Windows system, which e.g.:
+			+ initialize and create the application,
+			+ initiates the use of OpenGL (camera perspectives, lighting),
+			+ control game 'main loop',
+			+ process 'components' of the game.
 			
-		* Struktura projektu:
-			-> MyGameEngine/								// główny folder dla projektu silnika
+		* 'MyGameEngine' project structure:
+			-> MyGameEngine/
 			-> MyGameEngine/Application.h
 			-> MyGameEngine/Application.cpp
 			-> MyGameEngine/Component.h
@@ -72,31 +61,31 @@ README [PL]
 			-> MyGameEngine/Game.h
 			-> MyGameEngine/Game.cpp
 			-> MyGameEngine/Definitions.h
-			-> MyGameEngine/Extensions/						// dodatkowe typy danych i funkcje zwiększające przejrzystość kodu
+			-> MyGameEngine/Extensions/
 			-> MyGameEngine/Extensions/Color.h
 			-> MyGameEngine/Extensions/Color.cpp
 			-> MyGameEngine/Extensions/Dimension.h
 			-> MyGameEngine/Extensions/Dimension.cpp
-			-> MyGameEngine/Extensions/Draw.h				// funkcje rysujące obiekty na ekranie (sześcany) wykorzystujące OpenGL
+			-> MyGameEngine/Extensions/Draw.h
 			-> MyGameEngine/Extensions/Draw.cpp
 			-> MyGameEngine/Extensions/Keys.h
 			-> MyGameEngine/Extensions/Keys.cpp
 			-> MyGameEngine/Extensions/Vector3D.h
 			-> MyGameEngine/Extensions/Vector3D.cpp
-			-> MyGameEngine/Tools/							// narzędzia umożliwiające kontrolę kolizji
+			-> MyGameEngine/Tools/
 			-> MyGameEngine/Tools/CollisionControl.h
 			-> MyGameEngine/Tools/CollisionControl.cpp
-			-> MyGameEngine/Tools/CollisionControl/			// elementy związane z narzędziem 'Collision Control'
+			-> MyGameEngine/Tools/CollisionControl/
 			-> MyGameEngine/Tools/CollisionControl/BoundingBox.h
 			-> MyGameEngine/Tools/CollisionControl/BoundingBox.cpp
 	
 	b) 'GameComponents':
-		* Zawiera komponenty gry oraz dodatkowe klasy
+		* Includes components of the game and additional classes.
 		
-		* Implementuje 'gameplay' gry
+		* Implements gameplay of the game.
 		
 		* Struktura projektu:
-			-> GameComponents/								// główny folder dla projektu zawierającego komponenty gry
+			-> GameComponents/
 			-> GameComponents/AsteroidsComponent.h
 			-> GameComponents/AsteroidsComponent.cpp
 			-> GamaComponents/PlayerComponent.h
@@ -104,44 +93,53 @@ README [PL]
 			-> GameComponents/ShootComponent.h
 			-> GameComponents/ShootComponent.cpp
 			-> GameComponents/Definitions.h
-			-> GameComponents/AsteroidsComponent/			// elementy (klasy) związane z komponentem 'Asteroids Component'
+			-> GameComponents/AsteroidsComponent/
 			-> GameComponents/AsteroidsComponent/Asteroid.h
 			-> GameComponents/AsteroidsComponent/Asteroid.cpp
-			-> GameComponents/PlayerComponent/				// elementy (klasy) związane z komponentem 'Player Component'
+			-> GameComponents/PlayerComponent/
 			-> GameComponents/PlayerComponent/Spaceship.h
 			-> GameComponents/PlayerComponent/Spaceship.cpp
-			-> GameComponents/ShootComponent/				// elementy (klasy) związane z komponentem 'Shoot Component'
+			-> GameComponents/ShootComponent/
 			-> GameComponents/ShootComponent/Bullet.h
 			-> GameComponents/ShootComponent/Bullet.cpp
 	
----------------------------------
-6) DODATKOWE INFORMACJE
----------------------------------
-	* Parametry gry (szybkość ruchu/ strzału, wielkości obiektów, itp.) są łatwo 
-		modyfikowalne z pliku 'GameComponents/Definitions.h'
+-------------------------------------------
+5) ADDITIONAL INFORMATION
+-------------------------------------------
+	* Game parameters (speed of movements/ shot, size of the objects, etc.) are easily
+		customizable from the file: 'GameComponents / Definitions.h'.
 	
-	* Ideologia poszczególnych elementów została wyjaśniona w kodzie
+	* The ideology of individual 'components' are explained in the code (comments).
 
-	* Komentarze w kodzie standardowo w języku Angielskim
-
----------------------------------
-7) KONFIGURACJA W VISUAL STUDIO
----------------------------------
-	Aby uruchomić grę w środowisku Visual Studio należy stworzyć pusty projekt C++ oraz przekopiować 
-	cały folder 'Code' do folderu utworzonego projektu i zmienić domyślne ustawienia projektu w VS:
+-------------------------------------------
+6) PROJECT CONFIGURATION ON VISUAL STUDIO
+-------------------------------------------
+	For execute the code in Visual Studio please create empty C++ project, 
+	copy "Code" folder to the folder of created project and change default settings:
 	
-	* Zalinkować bibliotekę OpenGL (przy założeniu że jest zainstalowana w systemie):
+	* Link up OpenGL library:
 		"Properties"\"Configuration Properties"\"Linker"\"Input"\"Additional Dependencies"
-		-> i dopisać do okienka: opengl32.lib (lub: opengl.lib)
+		+ write: opengl32.lib (or: opengl.lib)
 
-	* Ustawić widoczność zawartości folderu "Code" z dowolnego miejsca w projekcie:
+	* Set up the visibility of the contents of "Code" folder:
 		"Properties"\"Configuration Properties"\"C/C++"\"General"\"Additional Include Directories"
-		-> i w okienku wpisać: Code
+		+ write: Code
 
----------------------------------
-8) INFORMACJE KONTAKTOWE
----------------------------------
-	W razie jakichkolwiek niejasności proszę o kontakt mailowy.
+-------------------------------------------
+7) DEFAULT KEY BINDINGS
+-------------------------------------------
+	* LEFT ARROW - left move
+	
+	* RIGHT ARROW - right move
+	
+	* SPACE - shooting
+	
+	* ESC - exit
+	
+-------------------------------------------
+8) CONTACT INFORMATION
+-------------------------------------------
+	In case of any confusion, please contact me:
 	
 	* mail: tomasz.dziuba91@gmail.com
 	
